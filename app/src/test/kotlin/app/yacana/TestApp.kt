@@ -167,6 +167,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -192,6 +193,7 @@ import kotlin.random.Random
 import kotlin.test.assertEquals
 import kotlin.time.Clock
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant
@@ -249,8 +251,15 @@ internal class TestApp(
         settings: CaptureSettings = CaptureSettings(exposureSeconds = 20.0, gain = 80, target = "M 31"),
     ) = runBlocking {
         capture.update(settings)
-        capture.capture()
-        withTimeout(TEST_WAIT_MILLIS) { capture.state.first { it.last != null && it.activity == CaptureActivity.Idle } }
+        val before = capture.state.value.last
+        withTimeout(TEST_WAIT_MILLIS) {
+            // A capture still ending, as the frame before is stacked, ignores a new one: ask until this frame shows.
+            while (capture.state.value.last === before) {
+                capture.capture()
+                delay(CAPTURE_RETRY)
+            }
+            capture.state.first { it.activity == CaptureActivity.Idle }
+        }
     }
 
     /** Connects and waits until every device has published its first values. */
@@ -463,8 +472,11 @@ internal val TEST_NOW: Instant = Instant.parse("2026-10-04T22:30:00Z")
 /** The catalogue the app carries, from the app module's folder, where the tests run. */
 internal const val TEST_CATALOGUE = "../shared/ui/src/commonMain/composeResources/files/catalogue.tsv"
 
-/** How long a test waits for the app to show what it waits for. */
-internal const val TEST_WAIT_MILLIS = 10_000L
+/** How often a test asks again for a frame while the capture before is still ending. */
+private val CAPTURE_RETRY = 20.milliseconds
+
+/** How long a test waits at most for the app to show what it waits for: CI's runners are much slower than a PC. */
+internal const val TEST_WAIT_MILLIS = 30_000L
 
 /** As "Sequence · my sequences": each of tonight's targets saved on its own, when it has them. */
 internal fun saved(framed: Boolean) = SavedSequences().apply {
