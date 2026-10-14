@@ -1,0 +1,3 @@
+The Digitized Sky Surveys were produced at the Space Telescope Science Institute under U.S. Government grant NAG W-2166. The images of these surveys are based on photographic data obtained using the Oschin Schmidt Telescope on Palomar Mountain and the UK Schmidt Telescope. The plates were processed into the present compressed digital form with the permission of these institutions.
+
+N.I.N.A. distributes its full sky cache, made of these photos, with the permission of the Space Telescope Science Institute. Yacana does not carry it: it is downloaded from N.I.N.A.'s server or imported.

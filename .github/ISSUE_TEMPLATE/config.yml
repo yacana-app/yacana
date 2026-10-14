@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: User manual
+    url: https://github.com/yacana-app/yacana/blob/main/docs/manual/README.md
+    about: How every screen works, step by step, with troubleshooting and a glossary.
+  - name: Security problem
+    url: https://github.com/yacana-app/yacana/security/policy
+    about: Report it privately, not in a public issue.

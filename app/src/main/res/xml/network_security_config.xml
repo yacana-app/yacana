@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+    <!-- Alpaca is plain HTTP on the local network, and devices are found by IP address,
+         which this file cannot list as ranges (ARCHITECTURE.md). Downloads use HTTPS anyway. -->
+    <base-config
+        cleartextTrafficPermitted="true"
+        tools:ignore="InsecureBaseConfiguration" />
+</network-security-config>

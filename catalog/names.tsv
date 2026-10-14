@@ -1,0 +1,216 @@
+# Common names of well-known objects for Yacana's catalogue (catalog/build.py), beyond OpenNGC's own.
+# Each line: an object as Messier (M31), NGC (NGC7000), IC (IC1805) or OpenNGC's own name (B33, C14, Mel111…), a tab,
+# its English names, comma-separated, which go before OpenNGC's and the first of which is shown, a tab, and its Spanish name.
+# An object that is part of a named one, as NGC 2239 of the Rosette Nebula, takes that name. Many English names come from
+# Wikipedia's lists of Messier, NGC and Caldwell objects (https://en.wikipedia.org, CC BY-SA 4.0).
+M1		Nebulosa del Cangrejo
+M4	Spider Globular Cluster	
+M5	Rose Cluster	
+M6		Cúmulo de la Mariposa
+M7		Cúmulo de Ptolomeo
+M8		Nebulosa de la Laguna
+M11		Cúmulo del Pato Salvaje
+M13		Gran Cúmulo de Hércules
+M15	Great Pegasus Cluster	Gran Cúmulo de Pegaso
+M16		Nebulosa del Águila
+M17		Nebulosa Omega
+M18	Black Swan Cluster	
+M20		Nebulosa Trífida
+M21	Webb's Cross Cluster	
+M22	Great Sagittarius Cluster	Gran Cúmulo de Sagitario
+M24		Nube Estelar de Sagitario
+M27		Nebulosa de la Haltera
+M29	Cooling Tower Cluster	
+M30	Jellyfish Cluster	
+M31		Galaxia de Andrómeda
+M32	Andromeda Satellite	Satélite de Andrómeda
+M33		Galaxia del Triángulo
+M34	Spiral Cluster	
+M35	Shoe-Buckle Cluster	
+M36	Pinwheel Cluster	Cúmulo del Molinete
+M37	Salt and Pepper Cluster	
+M38	Starfish Cluster	Cúmulo de la Estrella de Mar
+M39	Pyramid Cluster	
+M40	Winnecke 4	Winnecke 4
+M41	Little Beehive Cluster	
+M42		Nebulosa de Orión
+M43		Nebulosa de De Mairan
+M44		Cúmulo del Pesebre
+M45		Pléyades
+M50	Heart-Shaped Cluster	
+M51		Galaxia del Remolino
+M52	Scorpion Cluster	
+M55	Specter Cluster	
+M57		Nebulosa del Anillo
+M61	Swelling Spiral Galaxy	
+M62	Flickering Globular	
+M63		Galaxia del Girasol
+M64		Galaxia del Ojo Negro
+M65	Leo Triplet	Triplete de Leo
+M66	Leo Triplet	Triplete de Leo
+M67	King Cobra Cluster,Golden Eye Cluster	
+M71	Angelfish Cluster	
+M74	Phantom Galaxy	Galaxia Fantasma
+M76		Pequeña Nebulosa de la Haltera
+M77	Cetus A,Squid Galaxy	Cetus A
+M81		Galaxia de Bode
+M82		Galaxia del Cigarro
+M83		Galaxia del Molinillo Austral
+M84	Markarian's Chain	Cadena de Markarian
+M86	Markarian's Chain	Cadena de Markarian
+M87		Virgo A
+M90	Carabin Galaxy	
+M93	Critter Cluster	
+M94	Crocodile Eye Galaxy,Cat's Eye Galaxy	
+M97		Nebulosa del Búho
+M100	Mirror Galaxy	
+M101	Pinwheel Galaxy	Galaxia del Molinete
+M104		Galaxia del Sombrero
+M107	Crucifix Cluster	
+M108	Surfboard Galaxy	Galaxia de la Tabla de Surf
+M109	Vacuum Cleaner Galaxy	
+M110	Andromeda Satellite	Satélite de Andrómeda
+NGC40		Nebulosa de la Pajarita
+NGC55	String of Pearls Galaxy	
+NGC104		47 Tucanae
+NGC188	Polarissima Cluster	
+NGC246	Skull Nebula	Nebulosa de la Calavera
+NGC253		Galaxia del Escultor
+NGC281	Pacman Nebula	Nebulosa Pac-Man
+NGC292		Pequeña Nube de Magallanes
+NGC457	E.T. Cluster	Cúmulo E.T.
+NGC891	Silver Sliver Galaxy	
+NGC896	Heart Nebula	Nebulosa del Corazón
+NGC1333	Embryo Nebula	Nebulosa del Embrión
+NGC1365	Great Barred Spiral Galaxy	
+NGC1432		Nebulosa de Maia
+NGC1435		Nebulosa de Mérope
+NGC1491	Fossil Footprint Nebula	
+NGC1499		Nebulosa California
+NGC1501	Oyster Nebula	Nebulosa de la Ostra
+NGC1514	Crystal Ball Nebula	Nebulosa de la Bola de Cristal
+NGC1535	Cleopatra's Eye	Ojo de Cleopatra
+NGC1555		Nebulosa Variable de Hind
+NGC1579	Northern Trifid Nebula	Trífida del Norte
+NGC1788	Cosmic Bat Nebula	Nebulosa del Murciélago Cósmico
+NGC1931	Fly Nebula	Nebulosa de la Mosca
+NGC1973	Running Man Nebula	Nebulosa del Corredor
+NGC1975	Running Man Nebula	Nebulosa del Corredor
+NGC1977		Nebulosa del Corredor
+NGC2024	Flame Nebula	Nebulosa de la Llama
+NGC2070		Nebulosa de la Tarántula
+NGC2169	"37" Cluster	Cúmulo «37»
+NGC2174		Nebulosa Cabeza de Mono
+NGC2175	Monkey Head Nebula	Nebulosa Cabeza de Mono
+NGC2237	Rosette Nebula	Nebulosa Roseta
+NGC2238		Nebulosa Roseta
+NGC2244	Satellite Cluster,Rosette Nebula	Cúmulo de la Roseta
+NGC2246	Rosette Nebula	Nebulosa Roseta
+NGC2261		Nebulosa Variable de Hubble
+NGC2264	Christmas Tree Cluster,Cone Nebula,Snowflake Cluster,Fox Fur Nebula	Cúmulo del Árbol de Navidad
+NGC2281	Broken Heart Cluster	
+NGC2327	Seagull Nebula	Nebulosa de la Gaviota
+NGC2359	Thor's Helmet	Casco de Thor
+NGC2360		Cúmulo de Carolina
+NGC2362	Tau Canis Majoris Cluster	
+NGC2392		Nebulosa del Esquimal
+NGC2419	Intergalactic Wanderer	
+NGC2467	Skull and Crossbones Nebula	
+NGC2516	Southern Beehive Cluster	
+NGC2683	UFO Galaxy	Galaxia OVNI
+NGC2736		Nebulosa del Lápiz
+NGC3132	Southern Ring Nebula	Nebulosa del Anillo Austral
+NGC3242		Fantasma de Júpiter
+NGC3324	Gabriela Mistral Nebula	Nebulosa Gabriela Mistral
+NGC3372		Nebulosa de Carina
+NGC3532		Cúmulo del Pozo de los Deseos
+NGC3576	Statue of Liberty Nebula	Nebulosa de la Estatua de la Libertad
+NGC3628	Hamburger Galaxy,Sarah's Galaxy,Leo Triplet	Galaxia Hamburguesa
+NGC4038		Galaxias Antena
+NGC4039		Galaxias Antena
+NGC4361	Lawn Sprinkler Nebula	
+NGC4435		Los Ojos
+NGC4438		Los Ojos
+NGC4490	Cocoon Galaxy	Galaxia del Capullo
+NGC4565		Galaxia de la Aguja
+NGC4567		Galaxias Siamesas
+NGC4568		Galaxias Siamesas
+NGC4631		Galaxia de la Ballena
+NGC4656	Hockey Stick Galaxy	Galaxia del Palo de Hockey
+NGC4676		Galaxias Ratones
+NGC4755	Jewel Box	Cúmulo del Joyero
+NGC5128		Centauro A
+NGC5139		Omega Centauri
+NGC5195	Whirlpool Galaxy	Galaxia del Remolino
+NGC5907	Splinter Galaxy,Knife Edge Galaxy	Galaxia de la Astilla
+NGC6302		Nebulosa del Insecto
+NGC6334	Cat's Paw Nebula	Nebulosa Pata de Gato
+NGC6357		Nebulosa Guerra y Paz
+NGC6530	Lagoon Nebula	Nebulosa de la Laguna
+NGC6537		Nebulosa de la Araña Roja
+NGC6543		Nebulosa Ojo de Gato
+NGC6729	R CrA Nebula	
+NGC6751	Glowing Eye Nebula	
+NGC6752	Great Peacock Globular	
+NGC6822		Galaxia de Barnard
+NGC6826		Nebulosa del Ojo Parpadeante
+NGC6888		Nebulosa Creciente
+NGC6946		Galaxia de los Fuegos Artificiales
+NGC6960		Velo occidental
+NGC6974	Veil Nebula	Velo central
+NGC6979	Pickering's Triangle	Triángulo de Pickering
+NGC6992		Velo oriental
+NGC6995		Velo oriental
+NGC7000		Nebulosa Norteamérica
+NGC7008	Fetus Nebula	Nebulosa del Feto
+NGC7009		Nebulosa Saturno
+NGC7023		Nebulosa del Iris
+NGC7293		Nebulosa de la Hélice
+NGC7317	Stephan's Quintet	Quinteto de Stephan
+NGC7318	Stephan's Quintet	Quinteto de Stephan
+NGC7319	Stephan's Quintet	Quinteto de Stephan
+NGC7320	Stephan's Quintet	Quinteto de Stephan
+NGC7380	Wizard Nebula	Nebulosa del Mago
+NGC7479	Superman Galaxy	
+NGC7635		Nebulosa de la Burbuja
+NGC7662		Bola de Nieve Azul
+NGC7789	Caroline's Rose Cluster	Rosa de Carolina
+IC59	Ghost of Cassiopeia	Fantasma de Casiopea
+IC63	Ghost of Cassiopeia	Fantasma de Casiopea
+IC342	Hidden Galaxy	Galaxia Oculta
+IC405		Nebulosa de la Estrella Llameante
+IC410	Tadpoles Nebula	Nebulosa de los Renacuajos
+IC417	Spider Nebula	Nebulosa de la Araña
+IC418	Spirograph Nebula	Nebulosa del Espirógrafo
+IC434	Horsehead Nebula	Nebulosa Cabeza de Caballo
+IC443	Jellyfish Nebula	Nebulosa de la Medusa
+IC1318	Sadr Region	Región de Sadr
+IC1396	Elephant's Trunk Nebula	Nebulosa de la Trompa de Elefante
+IC1795	Fish Head Nebula	Nebulosa Cabeza de Pez
+IC1805	Heart Nebula	Nebulosa del Corazón
+IC1848	Soul Nebula	Nebulosa del Alma
+IC1871	Soul Nebula	Nebulosa del Alma
+IC2118		Nebulosa Cabeza de Bruja
+IC2177	Seagull Nebula	Nebulosa de la Gaviota
+IC2944	Running Chicken Nebula	Nebulosa del Pollo Corredor
+IC3568	Lemon Slice Nebula	
+IC4406	Retina Nebula	
+IC4592	Blue Horsehead Nebula	Nebulosa Cabeza de Caballo Azul
+IC4603	rho Oph Nebula	Nebulosa de Rho Ophiuchi
+IC4604		Nebulosa de Rho Ophiuchi
+IC4628		Nebulosa de la Gamba
+IC4665	Summer Beehive Cluster	
+IC4703		Nebulosa del Águila
+IC5067	Pelican Nebula	Nebulosa del Pelícano
+IC5070		Nebulosa del Pelícano
+IC5146		Nebulosa del Capullo
+IC5148	Spare Tyre Nebula	
+B33		Nebulosa Cabeza de Caballo
+C9		Nebulosa de la Cueva
+C14		Doble Cúmulo de Perseo
+C41		Híades
+C99		Saco de Carbón
+Cl399		Cúmulo de la Percha
+ESO056-115		Gran Nube de Magallanes
+HCG92		Quinteto de Stephan
+Mel111		Cúmulo de Coma Berenices

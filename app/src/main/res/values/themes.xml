@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Only the window before Compose draws: the night background avoids a white flash. -->
+    <style name="Theme.Yacana" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/night_sky</item>
+    </style>
+
+    <color name="night_sky">#FF0B0F14</color>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_channel">Session de nuit</string>
+    <string name="session_connected">Appareils connectés : %1$d sur %2$d</string>
+    <string name="session_exposing">Pose de %1$s s · images enregistrées : %2$d</string>
+    <string name="session_downloading">Téléchargement d\'une image · images enregistrées : %1$d</string>
+    <string name="session_saved">Images enregistrées : %1$d</string>
+    <string name="session_reconnecting">Reconnexion après un redémarrage…</string>
+    <string name="session_stop">Déconnecter</string>
+    <string name="notify_channel_alerts">Alertes de la nuit</string>
+    <string name="notify_channel_events">Événements de la nuit</string>
+    <string name="notify_autofocus">Autofocus terminé · HFR %1$s px</string>
+    <plurals name="notify_finished">
+        <item quantity="one">Séquence terminée · %1$d image</item>
+        <item quantity="many">Séquence terminée · %1$d images</item>
+        <item quantity="other">Séquence terminée · %1$d images</item>
+    </plurals>
+    <string name="notify_failed">La séquence a échoué</string>
+    <string name="notify_lost">Liaison perdue avec %1$s</string>
+    <string name="notify_lost_text">Séquence en pause de sécurité ; l\'app réessaie.</string>
+    <string name="notify_lost_idle">L\'app se reconnecte.</string>
+    <string name="notify_back">Liaison rétablie avec %1$s</string>
+    <string name="notify_safe_stop">Arrêt de sécurité</string>
+    <string name="notify_why_lost">Sans liaison trop longtemps</string>
+    <string name="notify_why_failed">La séquence a échoué</string>
+    <string name="notify_why_battery">Batterie du téléphone faible</string>
+    <string name="notify_parked">monture parquée</string>
+    <string name="notify_tracking_stopped">suivi arrêté</string>
+    <string name="session_sequence">%1$s · image %2$d sur %3$d · %4$d %%</string>
+</resources>

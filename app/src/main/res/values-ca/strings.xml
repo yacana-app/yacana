@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_channel">Sessió de la nit</string>
+    <string name="session_connected">Dispositius connectats: %1$d de %2$d</string>
+    <string name="session_exposing">Exposant %1$s s · preses desades: %2$d</string>
+    <string name="session_downloading">Baixant una presa · preses desades: %1$d</string>
+    <string name="session_saved">Preses desades: %1$d</string>
+    <string name="session_reconnecting">Tornant a connectar després d\'un reinici…</string>
+    <string name="session_stop">Desconnecta</string>
+    <string name="notify_channel_alerts">Alertes de la nit</string>
+    <string name="notify_channel_events">Esdeveniments de la nit</string>
+    <string name="notify_autofocus">Autoenfocament acabat · HFR %1$s px</string>
+    <plurals name="notify_finished">
+        <item quantity="one">Seqüència acabada · %1$d presa</item>
+        <item quantity="many">Seqüència acabada · %1$d preses</item>
+        <item quantity="other">Seqüència acabada · %1$d preses</item>
+    </plurals>
+    <string name="notify_failed">La seqüència ha fallat</string>
+    <string name="notify_lost">Sense connexió amb %1$s</string>
+    <string name="notify_lost_text">Seqüència en pausa segura; l\'app ho torna a provar.</string>
+    <string name="notify_lost_idle">L\'app s\'està tornant a connectar.</string>
+    <string name="notify_back">Connexió recuperada amb %1$s</string>
+    <string name="notify_safe_stop">Aturada segura</string>
+    <string name="notify_why_lost">Sense connexió massa temps</string>
+    <string name="notify_why_failed">Ha fallat la seqüència</string>
+    <string name="notify_why_battery">Bateria baixa del mòbil</string>
+    <string name="notify_parked">muntura aparcada</string>
+    <string name="notify_tracking_stopped">seguiment aturat</string>
+    <string name="session_sequence">%1$s · presa %2$d de %3$d · %4$d %%</string>
+</resources>

@@ -1,0 +1,3 @@
+[bindings.kotlin]
+package_name = "app.yacana.engine.ffi"
+cdylib_name = "yacana_engine"

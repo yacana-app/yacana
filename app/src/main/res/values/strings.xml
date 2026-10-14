@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Yacana</string>
+    <string name="session_channel">Night session</string>
+    <string name="session_connected">Devices connected: %1$d of %2$d</string>
+    <string name="session_exposing">Exposing %1$s s · frames saved: %2$d</string>
+    <string name="session_downloading">Downloading a frame · frames saved: %1$d</string>
+    <string name="session_saved">Frames saved: %1$d</string>
+    <string name="session_reconnecting">Connecting again after a restart…</string>
+    <string name="session_stop">Disconnect</string>
+    <string name="notify_channel_alerts">Night alerts</string>
+    <string name="notify_channel_events">Night events</string>
+    <string name="notify_autofocus">Autofocus done · HFR %1$s px</string>
+    <plurals name="notify_finished">
+        <item quantity="one">Sequence finished · %1$d frame</item>
+        <item quantity="other">Sequence finished · %1$d frames</item>
+    </plurals>
+    <string name="notify_failed">The sequence failed</string>
+    <string name="notify_lost">No link with %1$s</string>
+    <string name="notify_lost_text">Sequence in a safe pause; the app retries.</string>
+    <string name="notify_lost_idle">The app is reconnecting.</string>
+    <string name="notify_back">Link back with %1$s</string>
+    <string name="notify_safe_stop">Safe stop</string>
+    <string name="notify_why_lost">No link for too long</string>
+    <string name="notify_why_failed">The sequence failed</string>
+    <string name="notify_why_battery">Phone\'s low battery</string>
+    <string name="notify_parked">mount parked</string>
+    <string name="notify_tracking_stopped">tracking stopped</string>
+    <string name="session_sequence">%1$s · frame %2$d of %3$d · %4$d %%</string>
+</resources>

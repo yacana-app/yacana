@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_channel">Sessione notturna</string>
+    <string name="session_connected">Dispositivi connessi: %1$d di %2$d</string>
+    <string name="session_exposing">In esposizione %1$s s · pose salvate: %2$d</string>
+    <string name="session_downloading">Download di una posa · pose salvate: %1$d</string>
+    <string name="session_saved">Pose salvate: %1$d</string>
+    <string name="session_reconnecting">Nuova connessione dopo un riavvio…</string>
+    <string name="session_stop">Disconnetti</string>
+    <string name="notify_channel_alerts">Avvisi della notte</string>
+    <string name="notify_channel_events">Eventi della notte</string>
+    <string name="notify_autofocus">Autofocus completato · HFR %1$s px</string>
+    <plurals name="notify_finished">
+        <item quantity="one">Sequenza terminata · %1$d posa</item>
+        <item quantity="many">Sequenza terminata · %1$d pose</item>
+        <item quantity="other">Sequenza terminata · %1$d pose</item>
+    </plurals>
+    <string name="notify_failed">La sequenza non è riuscita</string>
+    <string name="notify_lost">Nessun collegamento con %1$s</string>
+    <string name="notify_lost_text">Sequenza in pausa sicura; l\'app riprova.</string>
+    <string name="notify_lost_idle">L\'app si sta riconnettendo.</string>
+    <string name="notify_back">Collegamento ripristinato con %1$s</string>
+    <string name="notify_safe_stop">Arresto sicuro</string>
+    <string name="notify_why_lost">Senza collegamento troppo a lungo</string>
+    <string name="notify_why_failed">La sequenza non è riuscita</string>
+    <string name="notify_why_battery">Batteria del telefono scarica</string>
+    <string name="notify_parked">montatura parcheggiata</string>
+    <string name="notify_tracking_stopped">inseguimento fermato</string>
+    <string name="session_sequence">%1$s · posa %2$d di %3$d · %4$d %%</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The app's languages, for Android's per-app language in its settings: English first, the default. -->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en" />
+    <locale android:name="es" />
+    <locale android:name="ca" />
+    <locale android:name="eu" />
+    <locale android:name="gl" />
+    <locale android:name="de" />
+    <locale android:name="fr" />
+    <locale android:name="it" />
+    <locale android:name="pt" />
+    <locale android:name="pt-BR" />
+</locale-config>

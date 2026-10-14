@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_channel">Sessão da noite</string>
+    <string name="session_connected">Dispositivos conectados: %1$d de %2$d</string>
+    <string name="session_exposing">Expondo %1$s s · imagens salvas: %2$d</string>
+    <string name="session_downloading">Baixando uma imagem · imagens salvas: %1$d</string>
+    <string name="session_saved">Imagens salvas: %1$d</string>
+    <string name="session_reconnecting">Reconectando após um reinício…</string>
+    <string name="session_stop">Desconectar</string>
+    <string name="notify_channel_alerts">Alertas da noite</string>
+    <string name="notify_channel_events">Eventos da noite</string>
+    <string name="notify_autofocus">Autofoco concluído · HFR %1$s px</string>
+    <plurals name="notify_finished">
+        <item quantity="one">Sequência terminada · %1$d imagem</item>
+        <item quantity="many">Sequência terminada · %1$d imagens</item>
+        <item quantity="other">Sequência terminada · %1$d imagens</item>
+    </plurals>
+    <string name="notify_failed">A sequência falhou</string>
+    <string name="notify_lost">Sem conexão com %1$s</string>
+    <string name="notify_lost_text">Sequência em pausa segura; o app tenta de novo.</string>
+    <string name="notify_lost_idle">O app está se reconectando.</string>
+    <string name="notify_back">Conexão recuperada com %1$s</string>
+    <string name="notify_safe_stop">Parada segura</string>
+    <string name="notify_why_lost">Sem conexão por tempo demais</string>
+    <string name="notify_why_failed">A sequência falhou</string>
+    <string name="notify_why_battery">Bateria do celular fraca</string>
+    <string name="notify_parked">montagem estacionada</string>
+    <string name="notify_tracking_stopped">rastreamento parado</string>
+    <string name="session_sequence">%1$s · imagem %2$d de %3$d · %4$d %%</string>
+</resources>

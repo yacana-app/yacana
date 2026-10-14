@@ -1,0 +1,21 @@
+name: Idea or request
+description: Something Yacana could do, or do better.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What you want to do
+      description: The moment of the night and the task, more than the button. For example, "frame two targets in one mosaic".
+    validations:
+      required: true
+  - type: textarea
+    id: now
+    attributes:
+      label: How you do it now
+      description: In Yacana, in N.I.N.A. or in another app, if you do.
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
+      description: Equipment, screenshots or sketches that help.

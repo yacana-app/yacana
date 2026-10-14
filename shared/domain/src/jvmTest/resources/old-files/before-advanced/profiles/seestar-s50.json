@@ -1,0 +1,119 @@
+{
+    "kind": "profile",
+    "schemaVersion": 1,
+    "id": "seestar-s50",
+    "name": "Seestar S50",
+    "devices": {
+        "mount": {
+            "serverUrl": "http://10.0.0.1:32323",
+            "number": 0,
+            "uniqueId": "telescope-0",
+            "name": "Seestar S50 Telescope"
+        },
+        "camera": {
+            "serverUrl": "http://10.0.0.1:32323",
+            "number": 0,
+            "uniqueId": "camera-0",
+            "name": "Seestar S50 Camera"
+        },
+        "focuser": {
+            "serverUrl": "http://10.0.0.1:32323",
+            "number": 0,
+            "uniqueId": "focuser-0",
+            "name": "Seestar S50 Focuser"
+        },
+        "filterWheel": {
+            "serverUrl": "http://10.0.0.1:32323",
+            "number": 0,
+            "uniqueId": "filterwheel-0",
+            "name": "Seestar S50 Filter Wheel"
+        },
+        "switches": {
+            "serverUrl": "http://10.0.0.1:32323",
+            "number": 0,
+            "uniqueId": "switch-0",
+            "name": "Seestar S50 Switch"
+        },
+        "flatPanel": null,
+        "safetyMonitor": null,
+        "filterNames": [
+            "Dark",
+            "IR",
+            "LP"
+        ]
+    },
+    "optics": {
+        "focalLengthMm": 250.0,
+        "apertureMm": 50.0,
+        "measuredPixelScaleArcsec": null,
+        "sensorWidthPx": 1080,
+        "sensorHeightPx": 1920,
+        "pixelSizeMicrons": 2.9,
+        "measuredRotationDeg": null
+    },
+    "location": {
+        "latitude": 40.4,
+        "longitude": -3.7,
+        "elevationM": 650.0
+    },
+    "options": {
+        "sendTimeAndLocation": true,
+        "locationFromPhone": false,
+        "starDatabase": "D80",
+        "solver": {
+            "downsample": 2,
+            "searchRadiusDeg": 15.0,
+            "timeoutSeconds": 60,
+            "centringToleranceArcsec": 30.0,
+            "centringExposureSeconds": 5.0
+        },
+        "polarAlignment": {
+            "stepDeg": 30.0,
+            "east": true,
+            "rateDegPerSecond": 3.0,
+            "exposureSeconds": 1.0,
+            "binning": 2,
+            "toleranceArcmin": 0.0,
+            "refractionAdjustment": false,
+            "hintOnly": true
+        },
+        "autofocus": {
+            "stepSize": 30,
+            "offsetSteps": 4,
+            "exposureSeconds": 4.0,
+            "binning": 1,
+            "framesPerPoint": 1,
+            "fitting": "Parabolic",
+            "backlashIn": 0,
+            "backlashOut": 0,
+            "rSquaredThreshold": 0.7,
+            "attempts": 1,
+            "settleSeconds": 0.0,
+            "timeoutSeconds": 600,
+            "filterOffsets": {
+                "LP": -25
+            }
+        },
+        "minAltitudeDeg": 20.0,
+        "horizon": [
+            {
+                "azimuthDeg": 0.0,
+                "altitudeDeg": 10.0
+            },
+            {
+                "azimuthDeg": 180.0,
+                "altitudeDeg": 25.0
+            }
+        ],
+        "filePattern": "$$DATEMINUS12$$/$$TARGETNAME$$/$$IMAGETYPE$$/$$DATETIME$$_$$FILTER$$_$$EXPOSURETIME$$s_$$FRAMENR$$",
+        "dither": {
+            "pulseSeconds": 3.0,
+            "settleSeconds": 10.0
+        },
+        "safety": {
+            "park": false,
+            "waitMinutes": 2.0,
+            "lowBatteryPercent": 15
+        }
+    }
+}

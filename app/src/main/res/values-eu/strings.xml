@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_channel">Gaueko saioa</string>
+    <string name="session_connected">Konektatutako gailuak: %1$d / %2$d</string>
+    <string name="session_exposing">Esposatzen %1$s s · gordetako argazkiak: %2$d</string>
+    <string name="session_downloading">Argazki bat deskargatzen · gordetako argazkiak: %1$d</string>
+    <string name="session_saved">Gordetako argazkiak: %1$d</string>
+    <string name="session_reconnecting">Berriro konektatzen berrabiarazi ondoren…</string>
+    <string name="session_stop">Deskonektatu</string>
+    <string name="notify_channel_alerts">Gaueko abisuak</string>
+    <string name="notify_channel_events">Gaueko gertaerak</string>
+    <string name="notify_autofocus">Foku automatikoa eginda · HFR %1$s px</string>
+    <plurals name="notify_finished">
+        <item quantity="one">Sekuentzia amaituta · %1$d argazki</item>
+        <item quantity="other">Sekuentzia amaituta · %1$d argazki</item>
+    </plurals>
+    <string name="notify_failed">Sekuentziak huts egin du</string>
+    <string name="notify_lost">Loturarik ez honekin: %1$s</string>
+    <string name="notify_lost_text">Sekuentzia pausa seguruan; aplikazioa berriro saiatzen ari da.</string>
+    <string name="notify_lost_idle">Aplikazioa berriro konektatzen ari da.</string>
+    <string name="notify_back">Lotura berreskuratuta: %1$s</string>
+    <string name="notify_safe_stop">Gelditze segurua</string>
+    <string name="notify_why_lost">Loturarik gabe denbora luzeegian</string>
+    <string name="notify_why_failed">Sekuentziak huts egin du</string>
+    <string name="notify_why_battery">Mugikorraren bateria baxua</string>
+    <string name="notify_parked">muntura aparkatuta</string>
+    <string name="notify_tracking_stopped">jarraipena geldituta</string>
+    <string name="session_sequence">%1$s · argazkia %2$d / %3$d · %4$d %%</string>
+</resources>

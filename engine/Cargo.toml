@@ -1,0 +1,29 @@
+[package]
+name = "yacana-engine"
+version = "0.1.0"
+edition = "2024"
+license = "MPL-2.0"
+description = "Yacana pixel engine: image download, analysis, previews and file formats"
+publish = false
+
+[lib]
+name = "yacana_engine"
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+# Each crate the engine carries is in the app's open-source licences too (OpenSource.kt).
+uniffi = "0.32.2"
+# Every core for histograms, conversions and previews.
+rayon = "1.12.0"
+# An unconnected socket, to bind it to the equipment's network before connecting.
+socket2 = "0.6.5"
+# The live stack's JPG, to share it.
+jpeg-encoder = "0.7.1"
+
+[workspace]
+members = ["uniffi-bindgen"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = "debuginfo"

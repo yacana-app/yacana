@@ -1,0 +1,22 @@
+# Only the differences from detekt's default configuration.
+
+naming:
+  FunctionNaming:
+    # Composable functions are named like types.
+    ignoreAnnotated: ['Composable']
+
+style:
+  MaxLineLength:
+    # Same limit as ktlint (.editorconfig).
+    maxLineLength: 140
+  MagicNumber:
+    # Layout sizes and colors in the UI are clearer inline.
+    ignoreAnnotated: ['Composable']
+    excludes: ['**/test/**', '**/commonTest/**', '**/jvmTest/**', '**/theme/**']
+
+complexity:
+  # A screen reads top to bottom as the user sees it; splitting it to meet a line count hides that.
+  LongMethod:
+    ignoreAnnotated: ['Composable']
+  CyclomaticComplexMethod:
+    ignoreAnnotated: ['Composable']

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_channel">Sesión de la noche</string>
+    <string name="session_connected">Dispositivos conectados: %1$d de %2$d</string>
+    <string name="session_exposing">Exponiendo %1$s s · tomas guardadas: %2$d</string>
+    <string name="session_downloading">Descargando una toma · tomas guardadas: %1$d</string>
+    <string name="session_saved">Tomas guardadas: %1$d</string>
+    <string name="session_reconnecting">Conectando de nuevo tras un reinicio…</string>
+    <string name="session_stop">Desconectar</string>
+    <string name="notify_channel_alerts">Alertas de la noche</string>
+    <string name="notify_channel_events">Sucesos de la noche</string>
+    <string name="notify_autofocus">Autoenfoque terminado · HFR %1$s px</string>
+    <plurals name="notify_finished">
+        <item quantity="one">Secuencia terminada · %1$d toma</item>
+        <item quantity="many">Secuencia terminada · %1$d tomas</item>
+        <item quantity="other">Secuencia terminada · %1$d tomas</item>
+    </plurals>
+    <string name="notify_failed">La secuencia falló</string>
+    <string name="notify_lost">Sin conexión con %1$s</string>
+    <string name="notify_lost_text">Secuencia en pausa segura; la app reintenta.</string>
+    <string name="notify_lost_idle">La app está reconectando.</string>
+    <string name="notify_back">Conexión recuperada con %1$s</string>
+    <string name="notify_safe_stop">Parada segura</string>
+    <string name="notify_why_lost">Sin conexión demasiado tiempo</string>
+    <string name="notify_why_failed">Falló la secuencia</string>
+    <string name="notify_why_battery">Batería baja del móvil</string>
+    <string name="notify_parked">montura aparcada</string>
+    <string name="notify_tracking_stopped">seguimiento parado</string>
+    <string name="session_sequence">%1$s · toma %2$d de %3$d · %4$d %%</string>
+</resources>

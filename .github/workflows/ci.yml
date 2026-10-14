@@ -1,0 +1,135 @@
+# Builds and tests everything on every pull request and on main. Every pull request runs it, even one
+# that only touches Markdown, because main requires it to merge; on main, Markdown-only pushes skip it.
+# A pull request merges itself once it is green with GitHub's own auto-merge, turned on in the pull request.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths-ignore: ["**.md"]
+  workflow_dispatch:
+    inputs:
+      record_screenshots:
+        description: Record the reference screenshots on Linux and upload them, instead of verifying them
+        type: boolean
+        default: false
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # ASCOM Alpaca simulators for the integration tests.
+  OMNISIM_VERSION: v0.5.0
+  OMNISIM_SHA256: 5d9dd3ecdaefb3b36ffe17223172e656a7920c7830185f19390f5d84f051d625
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,x86_64-linux-android
+          components: clippy,rustfmt
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: engine
+
+      - name: Install cargo-ndk
+        run: cargo install cargo-ndk --locked --version 4.1.2
+
+      - name: Install the pinned NDK
+        run: |
+          ndk="$(grep '^android-ndk' gradle/libs.versions.toml | cut -d '"' -f 2)"
+          (yes || true) | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;${ndk}" > /dev/null
+          test -d "$ANDROID_HOME/ndk/${ndk}"
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Start OmniSim
+        run: |
+          curl -sSfL -o omnisim.tar.xz \
+            "https://github.com/ASCOMInitiative/ASCOM.Alpaca.Simulators/releases/download/${OMNISIM_VERSION}/ascom.alpaca.simulators.linux-x64.tar.xz"
+          echo "${OMNISIM_SHA256}  omnisim.tar.xz" | sha256sum --check -
+          mkdir -p "$RUNNER_TEMP/omnisim"
+          tar -xJf omnisim.tar.xz -C "$RUNNER_TEMP/omnisim"
+          rm omnisim.tar.xz
+          server="$(find "$RUNNER_TEMP/omnisim" -type f -name ascom.alpaca.simulators | head -n 1)"
+          chmod +x "$server"
+          cd "$(dirname "$server")"
+          nohup "$server" --urls=http://localhost:32323 > "$RUNNER_TEMP/omnisim.log" 2>&1 &
+          for _ in $(seq 1 60); do
+            curl -sf http://localhost:32323/management/apiversions && exit 0
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/omnisim.log"
+          exit 1
+
+      - name: Rust format, lint and tests
+        working-directory: engine
+        env:
+          OMNISIM_URL: http://localhost:32323
+        run: |
+          cargo fmt --all --check
+          cargo clippy --all-targets -- -D warnings
+          cargo test
+
+      - name: Gradle check, screenshots and APKs
+        env:
+          OMNISIM_URL: http://localhost:32323
+        run: |
+          if [ "${{ inputs.record_screenshots }}" = "true" ]; then screenshots=recordRoborazziDebug; else screenshots=verifyRoborazziDebug; fi
+          ./gradlew check ":app:${screenshots}" koverXmlReport koverHtmlReport assembleDebug assembleRelease
+
+      - name: Coverage and its floors
+        run: |
+          python3 tools/coverage_summary.py build/reports/kover/report.xml | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the recorded screenshots
+        if: inputs.record_screenshots
+        uses: actions/upload-artifact@v7
+        with:
+          name: screenshots
+          path: app/src/test/screenshots/
+          retention-days: 7
+
+      - name: Check 16 KB alignment of native libraries
+        run: >
+          python3 tools/check_16kb.py
+          app/build/outputs/apk/debug/app-debug.apk
+          app/build/outputs/apk/release/app-release-unsigned.apk
+
+      - name: Check the APK size budget
+        run: python3 tools/check_apk_size.py app/build/outputs/apk/release/app-release-unsigned.apk
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: yacana-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
+
+      - name: Upload reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: reports
+          path: |
+            **/build/reports/
+            **/build/test-results/
+            app/build/outputs/roborazzi/
+            ${{ runner.temp }}/omnisim.log
+          retention-days: 7

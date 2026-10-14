@@ -1,0 +1,5 @@
+OpenNGC, a licence-friendly database of the NGC and IC objects, by Mattia Verga: https://github.com/mattiaverga/OpenNGC
+
+It is distributed under the Creative Commons Attribution-ShareAlike 4.0 International licence: https://creativecommons.org/licenses/by-sa/4.0/
+
+Yacana's object catalogue is made from OpenNGC, with the names of the best-known objects added, and it is distributed under that same licence.

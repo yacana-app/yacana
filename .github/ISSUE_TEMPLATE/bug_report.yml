@@ -1,0 +1,41 @@
+name: Bug report
+description: Something in Yacana does not work as it should.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what the app did instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to make it happen again
+      placeholder: |
+        1. In Sky, open the map
+        2. Tap …
+  - type: input
+    id: version
+    attributes:
+      label: Yacana version
+      description: In Settings › About.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: phone
+    attributes:
+      label: Phone and Android version
+      placeholder: "Pixel 8, Android 16"
+  - type: input
+    id: equipment
+    attributes:
+      label: Equipment
+      placeholder: "Seestar S50 Pro in EQ mode, firmware …"
+  - type: textarea
+    id: log
+    attributes:
+      label: Log and screenshots
+      description: "For a problem during a night, attach the log from Settings › Export the log. Look through it before sharing: it may hold the site's location. Screenshots help too."

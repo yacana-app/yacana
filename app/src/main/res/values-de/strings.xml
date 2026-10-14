@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_channel">Nacht-Session</string>
+    <string name="session_connected">Geräte verbunden: %1$d von %2$d</string>
+    <string name="session_exposing">Belichtung %1$s s · Aufnahmen gespeichert: %2$d</string>
+    <string name="session_downloading">Lade eine Aufnahme · Aufnahmen gespeichert: %1$d</string>
+    <string name="session_saved">Aufnahmen gespeichert: %1$d</string>
+    <string name="session_reconnecting">Verbinde erneut nach einem Neustart…</string>
+    <string name="session_stop">Trennen</string>
+    <string name="notify_channel_alerts">Warnungen der Nacht</string>
+    <string name="notify_channel_events">Ereignisse der Nacht</string>
+    <string name="notify_autofocus">Autofokus fertig · HFR %1$s px</string>
+    <plurals name="notify_finished">
+        <item quantity="one">Sequenz beendet · %1$d Aufnahme</item>
+        <item quantity="other">Sequenz beendet · %1$d Aufnahmen</item>
+    </plurals>
+    <string name="notify_failed">Die Sequenz ist fehlgeschlagen</string>
+    <string name="notify_lost">Keine Verbindung zu %1$s</string>
+    <string name="notify_lost_text">Sequenz sicher pausiert; die App versucht es erneut.</string>
+    <string name="notify_lost_idle">Die App verbindet sich erneut.</string>
+    <string name="notify_back">Verbindung zu %1$s wieder da</string>
+    <string name="notify_safe_stop">Sicherer Stopp</string>
+    <string name="notify_why_lost">Zu lange keine Verbindung</string>
+    <string name="notify_why_failed">Die Sequenz ist fehlgeschlagen</string>
+    <string name="notify_why_battery">Akku des Handys schwach</string>
+    <string name="notify_parked">Montierung geparkt</string>
+    <string name="notify_tracking_stopped">Nachführung gestoppt</string>
+    <string name="session_sequence">%1$s · Aufnahme %2$d von %3$d · %4$d %%</string>
+</resources>

@@ -1,0 +1,35 @@
+# Gradle and Android
+.gradle/
+build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+
+# Kotlin
+.kotlin/
+
+# Android Studio and IntelliJ
+.idea/
+*.iml
+
+# Rust
+target/
+
+# MkDocs output
+/site/
+
+# Signing keys and secrets (never commit them)
+*.jks
+*.keystore
+keystore.properties
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/

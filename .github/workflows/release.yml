@@ -1,0 +1,96 @@
+# Builds the signed release APK from a tag such as v1.0.0 and attaches it to a GitHub Release.
+# The signing key and its passwords come from the repository's secrets.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Signed APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,x86_64-linux-android
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: engine
+
+      - name: Install cargo-ndk
+        run: cargo install cargo-ndk --locked --version 4.1.2
+
+      - name: Install the pinned NDK
+        run: |
+          ndk="$(grep '^android-ndk' gradle/libs.versions.toml | cut -d '"' -f 2)"
+          (yes || true) | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;${ndk}" > /dev/null
+          test -d "$ANDROID_HOME/ndk/${ndk}"
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Version from the tag
+        id: version
+        run: |
+          name="${GITHUB_REF_NAME#v}"
+          if ! [[ "$name" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "The tag must look like v1.2.3, not ${GITHUB_REF_NAME}" >&2
+            exit 1
+          fi
+          # Each release must have a higher versionCode, so that it installs over the previous one.
+          code=$(( BASH_REMATCH[1] * 10000 + BASH_REMATCH[2] * 100 + BASH_REMATCH[3] ))
+          echo "name=${name}" >> "$GITHUB_OUTPUT"
+          echo "code=${code}" >> "$GITHUB_OUTPUT"
+
+      - name: Write the signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "The KEYSTORE_BASE64 secret is missing: see CONTRIBUTING.md, Releases" >&2
+            exit 1
+          fi
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.jks"
+          {
+            echo "storeFile=$RUNNER_TEMP/release.jks"
+            echo "storePassword=$KEYSTORE_PASSWORD"
+            echo "keyAlias=$KEY_ALIAS"
+            echo "keyPassword=$KEY_PASSWORD"
+          } > keystore.properties
+
+      - name: Build the release APK
+        run: ./gradlew :app:assembleRelease -PversionName=${{ steps.version.outputs.name }} -PversionCode=${{ steps.version.outputs.code }}
+
+      - name: Check alignment, size and signature
+        run: |
+          apk=app/build/outputs/apk/release/app-release.apk
+          python3 tools/check_16kb.py "$apk"
+          python3 tools/check_apk_size.py "$apk"
+          "$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)/apksigner" verify --print-certs "$apk"
+
+      - name: Publish the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp app/build/outputs/apk/release/app-release.apk "yacana-${{ steps.version.outputs.name }}.apk"
+          gh release create "$GITHUB_REF_NAME" "yacana-${{ steps.version.outputs.name }}.apk" \
+            --title "Yacana ${{ steps.version.outputs.name }}" --generate-notes --prerelease
+
+      - name: Remove the signing key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.jks" keystore.properties
