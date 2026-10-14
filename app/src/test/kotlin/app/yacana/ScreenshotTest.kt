@@ -389,7 +389,7 @@ class ScreenshotTest(private val case: Case) {
                     services.capture,
                     CaptureSettings(exposureSeconds = 20.0, gain = 80, target = "M 31 Panel ${index + 1}", mosaic = mosaicPanel(index)),
                 )
-                compose.waitUntil(WAIT_MILLIS) { services.capture.stacking?.state?.value?.mosaic?.drawn?.contains(index) == true }
+                compose.waitUntil(MOSAIC_WAIT_MILLIS) { services.capture.stacking?.state?.value?.mosaic?.drawn?.contains(index) == true }
             }
             return
         }
@@ -1266,6 +1266,9 @@ private val MOSAIC_OFFSETS = listOf(-918.0 to -1632.0, 918.0 to -1632.0, -918.0 
 
 /** Steps of the screen's clock for the mosaic to be made and drawn. */
 private const val MOSAIC_SETTLE_STEPS = 6
+
+/** How long a panel of the mosaic may take to be drawn: a minute, as CI's runners are much slower than a PC. */
+private const val MOSAIC_WAIT_MILLIS = 60_000L
 
 /** The panels stacked in the screenshot: the third is the one growing. */
 private const val MOSAIC_STACKED = 3
