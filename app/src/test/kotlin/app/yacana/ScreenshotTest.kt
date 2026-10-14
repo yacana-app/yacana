@@ -405,10 +405,10 @@ class ScreenshotTest(private val case: Case) {
         val previews = if (scene.captured && !scene.stacked) 2 else 1
         compose.waitUntil(WAIT_MILLIS) { app.fakeFrame.previews >= previews }
         if (scene.stacked) compose.waitUntil(WAIT_MILLIS) { app.fakeStack.previews >= 1 }
-        // The mosaic's image is made off the screen's thread once its last panel is in, then drawn
-        // once the viewer rests: the screen's clock goes on meanwhile.
-        if (scene.mosaic) {
-            repeat(MOSAIC_SETTLE_STEPS) {
+        // The mosaic's image is made off the screen's thread once its last panel is in, and the cache's
+        // photo over a frame is placed once the viewer rests: both are drawn as the screen's clock goes on.
+        if (scene.mosaic || scene.skyPhotos) {
+            repeat(SETTLE_STEPS) {
                 Thread.sleep(VIEWER_SETTLE_MILLIS)
                 compose.mainClock.advanceTimeBy(VIEWER_SETTLE_MILLIS)
                 compose.waitForIdle()
@@ -1264,8 +1264,8 @@ private val ATLAS_FILTERED = AtlasFilters(maxMagnitude = 8.0, minSizeArcmin = 60
  */
 private val MOSAIC_OFFSETS = listOf(-918.0 to -1632.0, 918.0 to -1632.0, -918.0 to 1632.0, 918.0 to 1632.0)
 
-/** Steps of the screen's clock for the mosaic to be made and drawn. */
-private const val MOSAIC_SETTLE_STEPS = 6
+/** Steps of the screen's clock for the mosaic to be made and drawn, and for the cache's photo to be placed over a frame. */
+private const val SETTLE_STEPS = 6
 
 /** The panels stacked in the screenshot: the third is the one growing. */
 private const val MOSAIC_STACKED = 3
