@@ -463,8 +463,8 @@ internal val TEST_NOW: Instant = Instant.parse("2026-10-04T22:30:00Z")
 /** The catalogue the app carries, from the app module's folder, where the tests run. */
 internal const val TEST_CATALOGUE = "../shared/ui/src/commonMain/composeResources/files/catalogue.tsv"
 
-/** How long a test waits for the app to show what it waits for. */
-internal const val TEST_WAIT_MILLIS = 10_000L
+/** How long a test waits at most for the app to show what it waits for: CI's runners are much slower than a PC. */
+internal const val TEST_WAIT_MILLIS = 30_000L
 
 /** As "Sequence · my sequences": each of tonight's targets saved on its own, when it has them. */
 internal fun saved(framed: Boolean) = SavedSequences().apply {
