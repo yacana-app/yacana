@@ -1100,10 +1100,11 @@ La targeta **Regles** llista el que fa la nit a més de les preses. Un pla nou p
 - **Centrar en arribar:** cada objectiu, i cada panell d'un mosaic, es centra amb plate solving abans de les seves preses.
 - **Dithering cada 3 preses**, sense guiador.
 - **Autoenfocament si ΔT > 1 °C**, amb un enfocador.
+- **Recentrar si es desvia > 1′:** abans de cada presa de llum es resol l'anterior; si el camp s'ha desviat més d'1′ de l'objectiu, es torna a centrar. Substitueix el guiatge.
 - **Darks i bias al final**: 10 de cada, per a cada exposició, guany, offset i binning de les preses de llum.
 - **Aparcar al final**, i l'escalfador apagat.
 
-Dos botons de sota les canvien:
+Els botons de sota les canvien:
 
 - **Autoenfocament:** Abans de cada presa de llum, es fa un autoenfocament si se'n compleix alguna d'aquestes, com els disparadors de N.I.N.A.:
   - **Si la temperatura canvia** 0,5; 1; 2 o 5 °C;
@@ -1113,8 +1114,11 @@ Dos botons de sota les canvien:
 
   Si un autoenfocament falla, esperen les exposicions següents.
 - **Darks:** En començar, quan canvia la temperatura del sensor, en acabar amb el bias, i quantes cada vegada ([capítol 23](#calibration)).
+- **Recentratge:** activat o no, i quant es pot desviar el camp: 0,5′, 1′, 2′ o 5′. Amb una bona alineació polar recentra una o dues vegades per hora.
+- **Dithering:** activat o no, i cada 1, 3, 5 o 10 preses, per a les preses de llum de tots els objectius. Cada dithering espera que la muntura s'estabilitzi.
+- **Escalfador**, si l'equip connectat en té un: encès o no durant la nit, i la seva potència si es pot regular. Gasta bateria: apaga'l les nits seques i temperades.
 
-Per a altres regles, com ara fer dithering cada un altre nombre de preses, recentrar quan l'objectiu es desvia, esperar que un objectiu pugi o repetir fins a una hora, obre el pla a l'editor avançat.
+Per a altres regles, com esperar que pugi un objectiu o repetir fins a una hora, obre el pla a l'editor avançat.
 
 ### Desar i començar
 
@@ -1122,6 +1126,8 @@ El menú **⋮** té **Desa a les meves seqüències**. **Comença**, a baix, in
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="El full de regles d'autoenfocament: canvi de temperatura d'1 °C activat"><br><sub><b>Regles d'autoenfocament.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="El full de Recentratge: activat, 1′"><br><sub><b>Recentratge.</b> A menys d'1′ de l'objectiu.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="El full de Dithering: cada 3 preses"><br><sub><b>Dithering.</b> Cada 3 preses.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

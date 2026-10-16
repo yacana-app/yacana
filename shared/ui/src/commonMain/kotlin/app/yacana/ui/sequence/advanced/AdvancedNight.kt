@@ -27,6 +27,7 @@ import app.yacana.domain.sequence.asAreas
 import app.yacana.domain.sequence.asBlock
 import app.yacana.domain.sequence.darkRules
 import app.yacana.domain.sequence.dewHeater
+import app.yacana.domain.sequence.planTriggers
 import app.yacana.domain.sequence.review
 import app.yacana.domain.sequence.simpleTargets
 import app.yacana.domain.sky.Night
@@ -126,10 +127,11 @@ internal fun rememberTonight(services: AppServices): Tonight {
     val list by services.targets.targets.collectAsState()
     val triggers by services.targets.triggers.collectAsState()
     val darks by services.targets.darks.collectAsState()
+    val heater by services.targets.heater.collectAsState()
     val canUndo by services.targets.canUndo.collectAsState()
     val equipment by services.equipment.state.collectAsState()
     val run = runState?.takeIf { it.status == RunStatus.Running || it.status == RunStatus.Paused }
-    val sequence = run?.sequence ?: advanced ?: tonightSequence(list, triggers, equipment, darks)
+    val sequence = run?.sequence ?: advanced ?: tonightSequence(list, triggers, equipment, darks, heater)
     val connected = (equipment.connection as? Connection.Connected)?.equipment
     val profile = equipment.active
     val filters = connected?.filterWheel?.names ?: profile?.devices?.filterNames.orEmpty()
@@ -181,13 +183,13 @@ internal fun AppServices.saveTonight(tree: Block, name: String) {
     // Without a focuser the plan keeps its autofocus triggers, which tonight's sequence leaves out.
     val focuser = state.active?.devices?.focuser != null
     val triggers = if (focuser) {
-        sequence.root.triggers
+        sequence.planTriggers()
     } else {
         targets.triggers.value.filter { it.autofocus() != null } +
-            sequence.root.triggers
+            sequence.planTriggers()
     }
     val darks = sequence.darkRules()
-    val simple = sequence.simpleTargets()?.takeIf { tonightSequence(it, triggers, state, darks) == sequence }
+    val simple = sequence.simpleTargets()?.takeIf { tonightSequence(it, triggers, state, darks, targets.heater.value) == sequence }
     if (simple != null) targets.replace(simple, triggers, darks) else targets.setAdvanced(sequence)
     val status = this.sequence.state.value?.status
     if (status == RunStatus.Running || status == RunStatus.Paused) this.sequence.update(sequence)

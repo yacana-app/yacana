@@ -1100,10 +1100,11 @@ Orriak helburu baten esposizioen errenkada bat ezartzen du: **Iragazkia**, **Den
 - **Zentratu iristean:** helburu bakoitza, eta mosaiko bateko panel bakoitza, plate solving bidez zentratzen da bere argazkien aurretik.
 - **Dithering, 3 argazkiz behin**, gidaririk gabe.
 - **Foku automatikoa ΔT > 1 °C bada**, fokatzaile batekin.
+- **Berriro zentratu > 1′ desbideratzen bada:** light argazki bakoitzaren aurretik aurrekoa ebazten da; eremua helburutik 1′ baino gehiago desbideratu bada, berriro zentratzen da. Gidaketaren ordez dabil.
 - **Darkak eta biasak amaieran**: bakoitzetik 10, argi-argazkien esposizio, irabazi, offset eta binning bakoitzerako.
 - **Aparkatu amaieran**, eta berogailua itzalita.
 
-Azpiko bi botoiek aldatzen dituzte:
+Azpiko botoiek aldatzen dituzte:
 
 - **Foku automatikoa:** Argi-argazki bakoitzaren aurretik, foku automatiko bat exekutatzen da hauetako bat betetzen bada, N.I.N.A.-ren abiarazleen antzera:
   - **Tenperatura aldatzen denean** 0,5, 1, 2 edo 5 °C;
@@ -1113,8 +1114,11 @@ Azpiko bi botoiek aldatzen dituzte:
 
   Foku automatiko batek huts egiten badu, hurrengo esposizioen zain geratzen dira.
 - **Darkak:** Hastean, sentsorearen tenperatura aldatzen denean, amaitzean biasarekin, eta zenbat aldi bakoitzean ([23. kapitulua](#calibration)).
+- **Berriro zentratzea:** aktibatuta edo ez, eta eremua zenbat desbidera daitekeen: 0,5′, 1′, 2′ edo 5′. Lerrokatze polar onarekin orduko behin edo bitan zentratzen du berriro.
+- **Dithering:** aktibatuta edo ez, eta 1, 3, 5 edo 10 argazkiz behin, helburu guztien light argazkietarako. Dithering bakoitzak muntaia egonkortu arte itxaroten du.
+- **Ihintz-berogailua**, konektatutako ekipoak badu: piztuta edo ez gauean zehar, eta bere potentzia erregulagarria bada. Bateria kontsumitzen du: itzali gau lehor eta epeletan.
 
-Beste arau batzuetarako, hala nola beste argazki kopuru batez behin dithering egitea, helburua desbideratzen denean berriro zentratzea, helburu bat igo arte itxarotea edo ordu batera arte errepikatzea, ireki plana editore aurreratuan.
+Beste arau batzuetarako, hala nola helburu bat igo arte itxarotea edo ordu batera arte errepikatzea, ireki plana editore aurreratuan.
 
 ### Gorde eta hasi
 
@@ -1122,6 +1126,8 @@ Beste arau batzuetarako, hala nola beste argazki kopuru batez behin dithering eg
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="Foku automatikoaren arauen orria: 1 °C-ko tenperatura-aldaketa aktibatuta"><br><sub><b>Foku automatikoaren arauak.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="Berriro zentratzearen orria: aktibatuta, 1′"><br><sub><b>Berriro zentratzea.</b> Helburutik 1′ baino gutxiagora.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="Dithering-aren orria: 3 argazkiz behin"><br><sub><b>Dithering.</b> 3 argazkiz behin.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

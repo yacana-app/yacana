@@ -5,6 +5,7 @@
 package app.yacana.flows
 
 import app.yacana.domain.sequence.DarkRules
+import app.yacana.domain.sequence.HeaterRule
 import app.yacana.domain.sequence.TONIGHT_CALIBRATION
 import app.yacana.domain.sequence.Trigger
 import app.yacana.ui.Section
@@ -43,6 +44,44 @@ class SimpleEditorTest : FlowTest() {
         assertTrue(appears("The live stack uses the set of the closest temperature.", substring = true))
         tap("5 °C")
         assertTrue(Trigger.DarksAfterTemperature(5.0, TONIGHT_CALIBRATION) in services.targets.triggers.value)
+    }
+
+    @Test
+    fun aNewPlanRecentresAndItsSheetSetsHowFarOrTurnsItOff() {
+        val services = show(Section.Sequence, Screen.SequenceTonight)
+        assertTrue(appears("Recentre if it drifts > 1′"))
+
+        tap("Recentring")
+        tap("2′")
+        assertTrue(Trigger.RecentreAfterDrift(2.0) in services.targets.triggers.value)
+        toggle(0)
+
+        assertTrue(services.targets.triggers.value.none { it is Trigger.RecentreAfterDrift })
+    }
+
+    @Test
+    fun theDitherSheetSetsEveryTargetsLights() {
+        val services = show(Section.Sequence, Screen.SequenceTonight)
+
+        tap("Dither")
+        tap("Every 5")
+
+        assertEquals(5, services.targets.dither.value)
+        assertTrue(services.targets.targets.value.flatMap { it.exposures }.all { it.ditherEvery == 5 })
+        assertTrue(appears("Dither every 5 frames"))
+    }
+
+    @Test
+    fun theDewHeaterSheetLeavesItOffWithTheEquipmentConnected() {
+        val services = show(Section.Sequence, Screen.SequenceTonight, connected = true)
+        assertTrue(appears("Dew heater on"))
+
+        tap("Dew heater")
+        toggle(0)
+
+        assertEquals(HeaterRule(on = false), services.targets.heater.value)
+        settle()
+        assertTrue(!shows("Dew heater on"), "the rule leaves the plan")
     }
 
     @Test
