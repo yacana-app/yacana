@@ -17,6 +17,9 @@ object ProfilePresets {
     /** The Seestar's devices start their names with the model, such as `Seestar S50 Pro_… Telescope`. */
     fun isSeestarS50Pro(server: AlpacaServer): Boolean = server.devices.any { it.name.startsWith(SEESTAR_S50_PRO) }
 
+    /** Whether [device] is a Seestar's, of any model, by its name. */
+    fun isSeestar(device: DeviceRef): Boolean = device.name.startsWith(SEESTAR)
+
     /**
      * A profile for [server]: the Seestar S50 Pro profile if it is one, or else the device
      * with the lowest number in each role. The site is left for the phone to fill in.
@@ -95,6 +98,7 @@ object ProfilePresets {
 
     private fun ConfiguredDevice.ref(serverUrl: String) = DeviceRef(serverUrl, number, uniqueId, name)
 
-    private const val SEESTAR_S50_PRO = "Seestar S50 Pro"
+    private const val SEESTAR = "Seestar"
+    private const val SEESTAR_S50_PRO = "$SEESTAR S50 Pro"
     private const val WIDE_ANGLE = 1
 }

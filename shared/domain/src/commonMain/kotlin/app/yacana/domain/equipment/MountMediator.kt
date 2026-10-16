@@ -35,7 +35,16 @@ class MountMediator internal constructor(
     private val limit: HorizonLimit,
     scope: CoroutineScope,
     clock: Clock,
+    seestar: Boolean = false,
 ) {
+    /**
+     * Whether a dither moves the mount by guide pulses, or else by a small GoTo ([Dither]). Not a
+     * Seestar's: the lights of a night, plate solved, showed its pulses north and south rounded to
+     * whole seconds at about ten times the guide rate, losing about 37″ on turning back, and those
+     * east and west not moving it at all; its GoTos land within about 15″.
+     */
+    val dithersByPulses: Boolean = capabilities.canPulseGuide && !seestar
+
     private val moving = MutableStateFlow(emptySet<TelescopeAxis>())
     private var wasAllowed = true
     private val poller = Poller(scope, clock) { read().also { stopAtTheHorizon(it) } }

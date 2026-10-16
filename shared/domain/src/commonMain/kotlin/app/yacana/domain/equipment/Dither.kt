@@ -31,34 +31,50 @@ data class DitherOffset(val eastPixels: Double, val northPixels: Double)
 class Dither(private val random: Random = Random) {
     private var previous = DitherOffset(0.0, 0.0)
 
+    /** Where the field began in the mount's coordinates, for dithers by GoTo; null until the first. */
+    private var origin: SkyPosition? = null
+
     /** Where the field is now becomes the centre the next offsets are drawn around. */
     fun reset() {
         previous = DitherOffset(0.0, 0.0)
+        origin = null
     }
 
     /**
      * Moves [mount] to a new offset for [options], with [pixelScaleArcsec] of the camera: the guide
-     * pulses at half the sidereal rate, or for a mount that cannot pulse guide a slew as far; then
-     * the settle time. Returns the new offset.
+     * pulses at half the sidereal rate from the last offset, or for a mount that dithers by GoTo
+     * ([MountMediator.dithersByPulses]) a slew to where the field began plus the offset, so where
+     * one slew lands does not add up with the next; then the settle time. Returns the new offset.
      */
     suspend fun move(mount: MountMediator, options: DitherOptions, pixelScaleArcsec: Double): DitherOffset {
         val target = offset(previous, options)
-        val east = (target.eastPixels - previous.eastPixels) * pixelScaleArcsec / GUIDE_RATE
-        val north = (target.northPixels - previous.northPixels) * pixelScaleArcsec / GUIDE_RATE
-        if (mount.capabilities.canPulseGuide) {
+        if (mount.dithersByPulses) {
+            val east = (target.eastPixels - previous.eastPixels) * pixelScaleArcsec / GUIDE_RATE
+            val north = (target.northPixels - previous.northPixels) * pixelScaleArcsec / GUIDE_RATE
             if (east != 0.0) mount.pulseGuide(if (east > 0) GuideDirection.East else GuideDirection.West, abs(east).seconds)
             if (north != 0.0 && !options.raOnly) {
                 mount.pulseGuide(if (north > 0) GuideDirection.North else GuideDirection.South, abs(north).seconds)
             }
         } else {
             val here = mount.position()
-            val decDeg = here.decDeg + north * GUIDE_RATE / ARCSEC_PER_DEGREE
-            val raHours = here.raHours + east * GUIDE_RATE / ARCSEC_PER_DEGREE / DEGREES_PER_HOUR / cos(here.decDeg * PI / HALF_TURN)
-            mount.goToAndWait(SkyPosition(raHours.mod(HOURS), decDeg))
+            // A mount moved elsewhere since, as by a GoTo of its own, dithers around where it is now.
+            val farthest = SPREAD * options.pixels * pixelScaleArcsec + GOTO_SLACK_ARCSEC
+            val start =
+                origin?.takeIf { separationArcsec(it.moved(previous, pixelScaleArcsec), here) <= farthest }
+                    ?: here.moved(DitherOffset(-previous.eastPixels, -previous.northPixels), pixelScaleArcsec)
+            origin = start
+            mount.goToAndWait(start.moved(target, pixelScaleArcsec))
         }
         delay(options.settleSeconds.seconds)
         previous = target
         return target
+    }
+
+    /** This position moved by [offset], of pixels of [pixelScaleArcsec], east and north on the sky. */
+    private fun SkyPosition.moved(offset: DitherOffset, pixelScaleArcsec: Double): SkyPosition {
+        val eastDeg = offset.eastPixels * pixelScaleArcsec / ARCSEC_PER_DEGREE
+        val raHours = raHours + eastDeg / DEGREES_PER_HOUR / cos(decDeg * PI / HALF_TURN)
+        return SkyPosition(raHours.mod(HOURS), decDeg + offset.northPixels * pixelScaleArcsec / ARCSEC_PER_DEGREE)
     }
 
     /**
@@ -115,5 +131,8 @@ class Dither(private val random: Random = Random) {
 
         /** Offsets stay within three standard deviations of the centre. */
         const val SPREAD = 3.0
+
+        /** How far from where it was sent a GoTo may land, and the mount still be where it dithers: a Seestar's lands within about 15″. */
+        const val GOTO_SLACK_ARCSEC = 60.0
     }
 }

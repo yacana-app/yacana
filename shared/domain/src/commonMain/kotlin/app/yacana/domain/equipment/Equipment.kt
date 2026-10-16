@@ -21,6 +21,7 @@ import app.yacana.domain.profile.DeviceRole
 import app.yacana.domain.profile.Location
 import app.yacana.domain.profile.Profile
 import app.yacana.domain.profile.ProfileDevices
+import app.yacana.domain.profile.ProfilePresets
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -74,7 +75,7 @@ class EquipmentConnector(private val http: HttpClient, private val discovery: Al
             role(DeviceRole.Mount) { ref ->
                 val telescope = Telescope(client(ref), ref.number).also { it.connect() }.also(connected::add)
                 val limit = HorizonLimit(resolved.options.minAltitudeDeg, resolved.options.horizon)
-                MountMediator(telescope, telescope.capabilities(), limit, devicesScope, clock)
+                MountMediator(telescope, telescope.capabilities(), limit, devicesScope, clock, ProfilePresets.isSeestar(ref))
             }
         val camera =
             role(DeviceRole.Camera) { ref ->
