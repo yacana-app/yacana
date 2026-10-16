@@ -1519,6 +1519,7 @@
     <string name="recentre_intro">Abans de cada presa de llum es resol l'anterior; si el camp s'ha desviat de l'objectiu més que això, la muntura el torna a centrar.</string>
     <string name="recentre_switch">Si es desvia de l'objectiu</string>
     <string name="recentre_note">Substitueix el guiatge quan l'equip no en té, així l'apilat manté el camp tota la nit. Amb una bona alineació polar recentra una o dues vegades per hora, menys d'un minut cada vegada.</string>
+    <string name="recentre_floor">Amb aquesta càmera només recentra a partir de %1$s′ (%2$d px): menys és el que mou un dithering.</string>
     <string name="rules_dither">Dithering</string>
     <string name="dither_switch">Entre preses de llum</string>
     <string name="dither_every_frame">Cada presa</string>

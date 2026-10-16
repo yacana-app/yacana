@@ -1114,7 +1114,7 @@ Les boutons en dessous les modifient :
 
   Si un autofocus échoue, ces règles attendent les poses suivantes.
 - **Darks:** Au début, quand la température du capteur change, à la fin avec le bias, et combien à chaque fois ([chapitre 23](#calibration)).
-- **Recentrage:** activé ou non, et de combien le champ peut dériver : 0,5′, 1′, 2′ ou 5′. Avec une bonne mise en station, il recentre une ou deux fois par heure.
+- **Recentrage:** activé ou non, et de combien le champ peut dériver : 1′, 2′, 5′ ou 10′, chacun aussi en pixels de la caméra connectée. Il ne recentre jamais pour moins de 20 px, ce que peut déplacer un dithering ; avec une caméra grand angle, c'est plus que tous les choix, et la feuille le signale. Avec une bonne mise en station, il recentre une ou deux fois par heure.
 - **Dithering:** activé ou non, et toutes les 1, 3, 5 ou 10 images, pour les lights de toutes les cibles. Chaque dithering attend que la monture se stabilise.
 - **Résistance chauffante**, si l'équipement connecté en a une : allumée ou non pendant la nuit, et sa puissance si elle est réglable. Elle consomme de la batterie : éteignez-la par nuits sèches et douces.
 
@@ -1186,7 +1186,7 @@ Le catalogue a une zone de recherche et des boutons par type : caméra, monture
 | **Conteneur** | Cible | Une cible depuis Ciel, avec son cadrage ; vient avec « Aller et centrer » |
 | **Conteneur** | Séquentiel · Parallèle | Ses instructions l'une après l'autre, ou en même temps, comme attendre une heure pendant que la caméra refroidit |
 | **Déclencheur** | Autofocus si la température change · périodique · au changement de filtre · si le HFR augmente | Un autofocus avant la prochaine image quand sa condition est remplie |
-| **Déclencheur** | Recentrer en cas de dérive | Résout et corrige quand la cible dérive de plus de 0,5′ à 5′ |
+| **Déclencheur** | Recentrer en cas de dérive | Résout et corrige quand la cible dérive de plus de 1′ à 10′ (20 px au moins) |
 | **Déclencheur** | Darks si la température change | Des darks avec le filtre opaque quand le capteur change de 2, 3 ou 5 °C, pour l'empilement en direct |
 | **Condition** | Répéter N fois · Répéter jusqu'à une heure · Répéter tant qu'elle est haute | Répète tout le conteneur |
 | **Modèle** | Cible avec autofocus · les vôtres | Une cible depuis Ciel avec aller et centrer, autofocus et poses ; ou tout bloc que vous avez enregistré comme modèle |

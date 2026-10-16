@@ -1114,7 +1114,7 @@ Buttons below change them:
 
   If an autofocus fails, they wait for the next exposures.
 - **Darks:** At the start, when the sensor's temperature changes, at the end with the bias, and how many each time ([chapter 23](#calibration)).
-- **Recentring:** on or off, and how far the field may drift: 0.5′, 1′, 2′ or 5′. With a good polar alignment it recentres once or twice an hour.
+- **Recentring:** on or off, and how far the field may drift: 1′, 2′, 5′ or 10′, each also in pixels of the connected camera. It never recentres for less than 20 px, about what a dither moves; with a wide-angle camera that is more than any choice, and the sheet says so. With a good polar alignment it recentres once or twice an hour.
 - **Dither:** on or off, and every 1, 3, 5 or 10 frames, for every target's lights. Each dither waits for the mount to settle.
 - **Dew heater**, when the connected equipment has one: on or off during the night, and its power for a heater that takes a value. It uses battery: turn it off on dry, warm nights.
 
@@ -1186,7 +1186,7 @@ The catalogue has a search box and buttons by kind: camera, mount, focus, filter
 | **Container** | Target | A target from Sky, with its framing; it comes with “Go to and centre” |
 | **Container** | Sequential · Parallel | Its instructions one after another, or at once, such as waiting for a time while the camera cools |
 | **Trigger** | Autofocus if the temperature changes · every so often · when the filter changes · if the HFR grows | An autofocus before the next frame when its condition holds |
-| **Trigger** | Recentre if it drifts | Solves and corrects when the target drifts more than 0.5′ to 5′ |
+| **Trigger** | Recentre if it drifts | Solves and corrects when the target drifts more than 1′ to 10′ (20 px at least) |
 | **Trigger** | Darks if the temperature changes | Darks with the dark filter when the sensor changes 2, 3 or 5 °C, for the live stack |
 | **Condition** | Repeat N times · Repeat until a time · Repeat while it is high | Repeats the whole container |
 | **Template** | Target with autofocus · your own | A target from Sky with go to and centre, autofocus and exposures; or any block you saved as a template |

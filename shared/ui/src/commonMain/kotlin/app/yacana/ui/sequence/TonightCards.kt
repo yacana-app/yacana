@@ -282,7 +282,7 @@ internal fun AddTarget(onClick: () -> Unit) {
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun Rules(sequence: Sequence, open: RuleSheets?) {
+internal fun Rules(sequence: Sequence, open: RuleSheets?, pixelScale: Double?) {
     val all = sequence.root.flatten()
     val start = (sequence.root.items.firstOrNull() as? Block)?.items.orEmpty()
     val end = (sequence.root.items.lastOrNull() as? Block)?.items.orEmpty()
@@ -295,7 +295,7 @@ internal fun Rules(sequence: Sequence, open: RuleSheets?) {
             all.firstNotNullOfOrNull { (it as? Exposures)?.ditherEvery?.takeIf { every -> every > 0 } }?.let {
                 stringResource(Res.string.rule_dither, it)
             },
-        ) + sequence.planTriggers().filterNot { it is Trigger.DarksAfterTemperature }.map { trigger -> triggerText(trigger) } +
+        ) + sequence.planTriggers().filterNot { it is Trigger.DarksAfterTemperature }.map { trigger -> triggerText(trigger, pixelScale) } +
             listOfNotNull(
                 darksRule(sequence),
                 stringResource(Res.string.rule_calibration).takeIf { end.any { it is Exposures && !it.type.needsLight } },
@@ -322,9 +322,9 @@ internal fun Rules(sequence: Sequence, open: RuleSheets?) {
     }
 }
 
-/** A trigger as its rule: "Autofocus if ΔT > 1 °C". */
+/** A trigger as its rule: "Autofocus if ΔT > 1 °C"; recentring's with the camera's [pixelScale], as the night runs it. */
 @Composable
-private fun triggerText(trigger: Trigger): String {
+private fun triggerText(trigger: Trigger, pixelScale: Double?): String {
     val comma = decimalComma()
     return when (trigger) {
         is Trigger.AutofocusAfterTemperature ->
@@ -352,21 +352,7 @@ private fun triggerText(trigger: Trigger): String {
                 ),
             )
 
-        is Trigger.RecentreAfterDrift ->
-            stringResource(
-                Res.string.rule_recentre,
-                formatDecimal(
-                    trigger.arcminutes,
-                    if (trigger.arcminutes % 1.0 ==
-                        0.0
-                    ) {
-                        0
-                    } else {
-                        1
-                    },
-                    comma,
-                ),
-            )
+        is Trigger.RecentreAfterDrift -> stringResource(Res.string.rule_recentre, arcminutesText(trigger.limitArcmin(pixelScale), comma))
     }
 }
 

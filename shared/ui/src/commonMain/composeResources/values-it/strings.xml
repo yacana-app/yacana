@@ -1518,6 +1518,7 @@
     <string name="recentre_intro">Prima di ogni posa light si risolve la precedente; se il campo si è spostato dal target più di così, la montatura lo ricentra.</string>
     <string name="recentre_switch">Se deriva dal target</string>
     <string name="recentre_note">Sostituisce la guida quando l'attrezzatura non ce l'ha, così lo stack mantiene il campo tutta la notte. Con un buon allineamento polare ricentra una o due volte all'ora, ogni volta in meno di un minuto.</string>
+    <string name="recentre_floor">Con questa fotocamera ricentra solo oltre %1$s′ (%2$d px): meno è quanto sposta un dithering.</string>
     <string name="rules_dither">Dithering</string>
     <string name="dither_switch">Tra le pose light</string>
     <string name="dither_every_frame">Ogni posa</string>

@@ -1114,7 +1114,7 @@ Os botóns de debaixo cámbianas:
 
   Se un autoenfoque falla, agardan ás seguintes exposicións.
 - **Darks:** Ao comezar, cando cambia a temperatura do sensor, ao rematar co bias, e cantos cada vez ([capítulo 23](#calibration)).
-- **Recentrado:** activado ou non, e canto pode desviarse o campo: 0,5′, 1′, 2′ ou 5′. Cun bo aliñamento polar recentra unha ou dúas veces por hora.
+- **Recentrado:** activado ou non, e canto pode desviarse o campo: 1′, 2′, 5′ ou 10′, cada un tamén en píxeles da cámara conectada. Nunca recentra por menos de 20 px, o que pode mover un dither; cunha cámara gran angular iso é máis ca calquera opción, e a folla avísao. Cun bo aliñamento polar recentra unha ou dúas veces por hora.
 - **Dither:** activado ou non, e cada 1, 3, 5 ou 10 tomas, para as tomas de luz de todos os obxectivos. Cada dither agarda a que a montura se asente.
 - **Quentador**, se o equipo conectado ten un: acendido ou non durante a noite, e a súa potencia se é regulable. Gasta batería: apágao en noites secas e temperadas.
 
@@ -1186,7 +1186,7 @@ O catálogo ten unha caixa de busca e botóns por tipo: cámara, montura, enfoqu
 | **Contedor** | Obxectivo | Un obxectivo de Ceo, co seu encadramento; vén con «Ir e centrar» |
 | **Contedor** | Secuencial · Paralelo | As súas instrucións unha tras outra, ou á vez, como agardar a unha hora mentres arrefría a cámara |
 | **Disparador** | Autoenfoque se cambia a temperatura · cada certo tempo · ao cambiar de filtro · se sobe o HFR | Un autoenfoque antes da seguinte toma cando se cumpre a súa condición |
-| **Disparador** | Recentrar se se desvía | Resolve e corrixe cando o obxectivo se desvía máis de 0,5′ a 5′ |
+| **Disparador** | Recentrar se se desvía | Resolve e corrixe cando o obxectivo se desvía máis de 1′ a 10′ (20 px como mínimo) |
 | **Disparador** | Darks se cambia a temperatura | Darks co filtro escuro cando o sensor cambia 2, 3 ou 5 °C, para o apilado en directo |
 | **Condición** | Repetir N veces · Repetir ata a hora · Repetir mentres estea alto | Repite o contedor enteiro |
 | **Modelo** | Obxectivo con autoenfoque · os teus propios | Un obxectivo de Ceo con ir e centrar, autoenfoque e exposicións; ou calquera bloque que gardases como modelo |

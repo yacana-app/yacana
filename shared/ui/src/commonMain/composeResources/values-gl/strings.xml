@@ -1518,6 +1518,7 @@
     <string name="recentre_intro">Antes de cada toma de luz resólvese a anterior; se o campo se desviou do obxectivo máis ca isto, a montura vólveo centrar.</string>
     <string name="recentre_switch">Se se desvía do obxectivo</string>
     <string name="recentre_note">Substitúe o guiado cando o equipo non o ten, así o apilado mantén o seu campo toda a noite. Cun bo aliñamento polar recentra unha ou dúas veces por hora, menos dun minuto cada vez.</string>
+    <string name="recentre_floor">Con esta cámara só recentra a partir de %1$s′ (%2$d px): menos é o que move un dither.</string>
     <string name="rules_dither">Dither</string>
     <string name="dither_switch">Entre tomas de luz</string>
     <string name="dither_every_frame">Cada toma</string>

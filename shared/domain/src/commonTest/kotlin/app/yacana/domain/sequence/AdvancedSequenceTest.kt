@@ -9,6 +9,7 @@ import app.yacana.domain.profile.Location
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.io.files.Path
 import kotlin.test.Test
@@ -188,6 +189,42 @@ class AdvancedSequenceTest : RunnerFixture() {
         assertEquals(RunStatus.Finished, run.status, run.error)
         // Before the second light: the first one is solved, and is too far.
         assertEquals(1, events.count { it.first == "sequence_recentre" })
+    }
+
+    /** How many times a light block recentres when the solver finds its frames [arcsec] south of its target, with a limit of 0.25′. */
+    private suspend fun TestScope.recentresAfter(arcsec: Double): Int {
+        val target = SkyTarget("M 31", 0.712, 41.27 + arcsec / 3600)
+        val m31 =
+            Block(
+                "M 31",
+                listOf(Exposures(count = 2, exposureSeconds = 10.0)),
+                target = target,
+                triggers = listOf(Trigger.RecentreAfterDrift(0.25)),
+            )
+
+        val run = runner().runToTheEnd(night(m31))
+
+        assertEquals(RunStatus.Finished, run.status, run.error)
+        return events.count { it.first == "sequence_recentre" }
+    }
+
+    @Test
+    fun aDriftNoFurtherThanADitherMovesTheFieldIsNoReasonToRecentre() = runTest {
+        // More than 0.25′, but under 20 pixels of the camera's 2″.
+        assertEquals(0, recentresAfter(30.0))
+    }
+
+    @Test
+    fun aDriftFurtherThanADitherMovesTheFieldRecentres() = runTest {
+        assertEquals(1, recentresAfter(50.0))
+    }
+
+    @Test
+    fun theLimitIsNeverUnderTwentyPixelsOfTheCamera() {
+        // The Seestar's main camera, and its wide angle, whose 20 pixels are 18.5′.
+        assertEquals(1.0, Trigger.RecentreAfterDrift(1.0).limitArcmin(2.248))
+        assertEquals(18.5, Trigger.RecentreAfterDrift(1.0).limitArcmin(55.5), 1e-9)
+        assertEquals(5.0, Trigger.RecentreAfterDrift(5.0).limitArcmin(null))
     }
 
     @Test

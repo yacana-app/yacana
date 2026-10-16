@@ -1114,7 +1114,7 @@ Los botones de debajo las cambian:
 
   Si un autoenfoque falla, esperan a las siguientes exposiciones.
 - **Darks:** Al empezar, cuando cambia la temperatura del sensor, al terminar con el bias, y cuántos cada vez ([capítulo 23](#calibration)).
-- **Recentrado:** activado o no, y cuánto puede desviarse el campo: 0,5′, 1′, 2′ o 5′. Con buena alineación polar recentra una o dos veces por hora.
+- **Recentrado:** activado o no, y cuánto puede desviarse el campo: 1′, 2′, 5′ o 10′, cada uno también en píxeles de la cámara conectada. Nunca recentra por menos de 20 px, lo que puede mover un dither; con una cámara gran angular eso es más que cualquier opción, y la hoja lo avisa. Con buena alineación polar recentra una o dos veces por hora.
 - **Dither:** activado o no, y cada 1, 3, 5 o 10 tomas, para las tomas de luz de todos los objetivos. Cada dither espera a que la montura se asiente.
 - **Calentador**, si el equipo conectado tiene uno: encendido o no durante la noche, y su potencia si es regulable. Gasta batería: apágalo en noches secas y templadas.
 
@@ -1186,7 +1186,7 @@ El catálogo tiene un buscador y botones por tipo: cámara, montura, enfoque, fi
 | **Contenedor** | Objetivo | Un objetivo de Cielo, con su encuadre; viene con «Ir y centrar» |
 | **Contenedor** | Secuencial · Paralelo | Sus instrucciones una tras otra, o a la vez, como esperar a una hora mientras se enfría la cámara |
 | **Disparador** | Autoenfoque si cambia la temperatura · cada cierto tiempo · al cambiar de filtro · si sube el HFR | Un autoenfoque antes de la siguiente toma cuando se cumple su condición |
-| **Disparador** | Recentrar si se desvía | Resuelve y corrige cuando el objetivo se desvía más de 0,5′ a 5′ |
+| **Disparador** | Recentrar si se desvía | Resuelve y corrige cuando el objetivo se desvía más de 1′ a 10′ (20 px como mínimo) |
 | **Disparador** | Darks si cambia la temperatura | Darks con el filtro oscuro cuando el sensor cambia 2, 3 o 5 °C, para el apilado en vivo |
 | **Condición** | Repetir N veces · Repetir hasta la hora · Repetir mientras esté alto | Repite el contenedor entero |
 | **Plantilla** | Objetivo con autoenfoque · las tuyas | Un objetivo de Cielo con ir y centrar, autoenfoque y exposiciones; o cualquier bloque que guardaste como plantilla |

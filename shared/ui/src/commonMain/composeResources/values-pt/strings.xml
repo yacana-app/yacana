@@ -1518,6 +1518,7 @@
     <string name="recentre_intro">Antes de cada light resolve-se a anterior; se o campo se desviou do alvo mais do que isto, a montagem volta a centrá-lo.</string>
     <string name="recentre_switch">Se se desviar do alvo</string>
     <string name="recentre_note">Substitui a guiagem quando o equipamento não a tem, para que o empilhamento mantenha o campo toda a noite. Com um bom alinhamento polar, recentra uma ou duas vezes por hora, menos de um minuto de cada vez.</string>
+    <string name="recentre_floor">Com esta câmara só recentra a partir de %1$s′ (%2$d px): menos é o que um dithering move.</string>
     <string name="rules_dither">Dithering</string>
     <string name="dither_switch">Entre lights</string>
     <string name="dither_every_frame">Cada imagem</string>

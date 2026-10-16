@@ -292,7 +292,7 @@ private val PERIODS = listOf(15.0, 30.0, 60.0, 120.0)
 
 private val PERCENTS = listOf(5.0, 10.0, 15.0, 20.0, 30.0)
 
-private val ARCMINUTES = listOf(0.5, 1.0, 2.0, 5.0)
+private val ARCMINUTES = listOf(1.0, 2.0, 5.0, 10.0)
 
 /** The darks trigger's choices, as the simple editor's: degrees of the sensor, and darks each time. */
 internal val DARK_DEGREES = listOf(2.0, 3.0, 5.0)

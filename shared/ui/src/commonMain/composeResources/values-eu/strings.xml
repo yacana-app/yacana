@@ -1503,6 +1503,7 @@
     <string name="recentre_intro">Light argazki bakoitzaren aurretik aurrekoa ebazten da; eremua helburutik hau baino gehiago desbideratu bada, muntaiak berriro zentratzen du.</string>
     <string name="recentre_switch">Helburutik desbideratzen bada</string>
     <string name="recentre_note">Gidaketaren ordez dabil ekipoak gidaketarik ez duenean, eta horrela pilaketak bere eremua mantentzen du gau osoan. Lerrokatze polar onarekin orduko behin edo bitan zentratzen du berriro, minutu bat baino gutxiago aldi bakoitzean.</string>
+    <string name="recentre_floor">Kamera honekin %1$s′-tik (%2$d px) aurrera bakarrik zentratzen du berriro: gutxiago dithering batek mugitzen duena da.</string>
     <string name="rules_dither">Dithering</string>
     <string name="dither_switch">Light argazkien artean</string>
     <string name="dither_every_frame">Argazki bakoitzean</string>

@@ -1114,7 +1114,7 @@ Os botões abaixo as alteram:
 
   Se um autofoco falhar, elas esperam as exposições seguintes.
 - **Darks:** Ao começar, quando a temperatura do sensor muda, no fim com o bias, e quantos a cada vez ([capítulo 23](#calibration)).
-- **Recentralização:** ativada ou não, e quanto o campo pode se desviar: 0,5′, 1′, 2′ ou 5′. Com um bom alinhamento polar, recentraliza uma ou duas vezes por hora.
+- **Recentralização:** ativada ou não, e quanto o campo pode se desviar: 1′, 2′, 5′ ou 10′, cada um também em pixels da câmera conectada. Nunca recentraliza por menos de 20 px, o que um dithering pode mover; com uma câmera grande angular isso é mais do que qualquer opção, e a folha avisa. Com um bom alinhamento polar, recentraliza uma ou duas vezes por hora.
 - **Dithering:** ativado ou não, e a cada 1, 3, 5 ou 10 imagens, para os lights de todos os alvos. Cada dithering espera a montagem estabilizar.
 - **Aquecedor antiorvalho**, se o equipamento conectado tiver um: ligado ou não durante a noite, e sua potência se for regulável. Gasta bateria: desligue em noites secas e amenas.
 
@@ -1186,7 +1186,7 @@ O catálogo tem uma caixa de pesquisa e botões por tipo: câmera, montagem, foc
 | **Contêiner** | Alvo | Um alvo de Céu, com seu enquadramento; vem com «Ir e centralizar» |
 | **Contêiner** | Sequencial · Paralelo | Suas instruções uma após a outra, ou ao mesmo tempo, como esperar um horário enquanto a câmera resfria |
 | **Gatilho** | Autofoco se a temperatura mudar · de tempos em tempos · ao trocar de filtro · se o HFR subir | Um autofoco antes da próxima imagem quando sua condição se cumpre |
-| **Gatilho** | Recentralizar se desviar | Resolve e corrige quando o alvo se desvia mais de 0,5′ a 5′ |
+| **Gatilho** | Recentralizar se desviar | Resolve e corrige quando o alvo se desvia mais de 1′ a 10′ (no mínimo 20 px) |
 | **Gatilho** | Darks se a temperatura mudar | Darks com o filtro escuro quando o sensor muda 2, 3 ou 5 °C, para o empilhamento ao vivo |
 | **Condição** | Repetir N vezes · Repetir até um horário · Repetir enquanto estiver alto | Repete o contêiner inteiro |
 | **Modelo** | Alvo com autofoco · os seus | Um alvo de Céu com ir e centralizar, autofoco e exposições; ou qualquer bloco que você salvou como modelo |
