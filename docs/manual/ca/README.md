@@ -897,7 +897,7 @@ El **⋮** de dalt les obre:
 - **Tipus de presa:** Light, dark, flat o bias. Va al nom del fitxer i a la capçalera FITS.
 - **Objectiu, per al nom del fitxer:** El nom de la carpeta i dels fitxers, com ara *M 31*. Sense objectiu, les preses s'anomenen *Snapshot*.
 - **Desar les preses soltes:** El bucle sempre desa.
-- **Dithering en bucles de lights, cada:** *No*, *3* (d'inici), *5* o *10* preses. Entre preses la muntura rep una petita empenta, com la dona el guiatge directe de N.I.N.A.: el camp es mou uns quants píxels (5 per defecte) al voltant d'on va començar el bucle, perquè el patró del sensor no s'acumuli en ratlles a l'apilat. Els darks, flats i bias no fan mai dithering.
+- **Dithering en bucles de lights, cada:** *No*, *3* (d'inici), *5* o *10* preses. Entre preses la muntura rep una petita empenta, com la dona el guiatge directe de N.I.N.A.: el camp es mou uns quants píxels (5 per defecte) al voltant d'on va començar el bucle, perquè el patró del sensor no s'acumuli en ratlles a l'apilat. Els darks, flats i bias no fan mai dithering. Amb un Seestar, els polsos de guiatge del qual no van on s'envien, salta en canvi amb petits GoTo entre els 9 punts d'una graella separats 27″.
 - **Offset:** Si la càmera en té.
 - **Estirament automàtic:** Activat per defecte, com el de N.I.N.A. Si està desactivat, dos controls lliscants fixen les **Ombres** i els **Tons mitjans**.
 - **Marcar les estrelles:** Dibuixa un requadre i l'HFR a les estrelles més brillants, com fa N.I.N.A.; **Quantes**, de 10 a 500.

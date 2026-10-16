@@ -49,6 +49,26 @@ class DitherTest {
     }
 
     @Test
+    fun aDitherByGoToGoesToAnotherPointOfTheGridEachTime() {
+        val centre = Dither.Cell(0, 0)
+        val points = generateSequence(centre) { dither.nextCell(it, emptySet(), raOnly = false) }.take(500).toList()
+
+        assertTrue(points.zipWithNext().all { (a, b) -> a != b }, "each one moves")
+        assertEquals(9, points.distinct().size, "all of the 3 × 3 grid")
+        // Not those tried already; in its row in right ascension alone; none when all were tried.
+        assertEquals(
+            Dither.Cell(1, 1),
+            dither.nextCell(
+                centre,
+                (-1..1).flatMap { e -> (-1..0).map { Dither.Cell(e, it) } }.toSet() + Dither.Cell(-1, 1) + Dither.Cell(0, 1),
+                false,
+            ),
+        )
+        assertTrue(List(50) { dither.nextCell(Dither.Cell(1, -1), emptySet(), raOnly = true) }.all { it?.north == -1 })
+        assertEquals(null, dither.nextCell(centre, points.toSet(), raOnly = false))
+    }
+
+    @Test
     fun aDitherOfNoPixelsLeavesTheFieldWhereItIs() {
         val none = dither.offset(DitherOffset(0.0, 0.0), DitherOptions(pixels = 0.0, minimumPixels = 3.0))
 
