@@ -4,9 +4,11 @@
 
 package app.yacana.domain.sequence
 
-import app.yacana.domain.equipment.separationArcsec
 import app.yacana.ports.SkyPosition
 import kotlinx.coroutines.test.runTest
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.round
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -72,31 +74,65 @@ class SequenceStepsTest : RunnerFixture() {
         assertTrue(sent("telescope/0/slewtocoordinatesasync").size >= 2, seestar.puts.map { it.first }.toString())
     }
 
-    @Test
-    fun aSeestarDithersByAGoToAroundWhereTheFieldBegan() = runTest {
-        // Each slew lands 20″ north of where it was sent, as the Seestar's within about 15″.
+    /**
+     * Makes each slew land 20″ north of where it was sent, as a Seestar's within about 15″, but
+     * those numbered in [undone], which leave it where it was.
+     */
+    private fun landing(undone: Set<Int> = emptySet()) {
         val camera = seestar.onPut
+        var slews = 0
         seestar.onPut = { member, form ->
             camera(member, form)
-            if (member == "telescope/0/slewtocoordinatesasync") {
+            if (member == "telescope/0/slewtocoordinatesasync" && ++slews !in undone) {
                 seestar.values["telescope/0/rightascension"] = form.getValue("RightAscension")
                 seestar.values["telescope/0/declination"] = (form.getValue("Declination").toDouble() + 20.0 / 3600).toString()
             }
         }
+    }
+
+    private fun slews() = sent("telescope/0/slewtocoordinatesasync").map {
+        SkyPosition(it.getValue("RightAscension").toDouble(), it.getValue("Declination").toDouble())
+    }
+
+    /** Steps of 27″ east and north of [began], to a thousandth. */
+    private fun steps(at: SkyPosition, began: SkyPosition): Pair<Double, Double> {
+        val east = (at.raHours - began.raHours) * 15 * 3600 * cos(began.decDeg * PI / 180) / 27
+        val north = (at.decDeg - began.decDeg) * 3600 / 27
+        return round(east * 1000) / 1000 to round(north * 1000) / 1000
+    }
+
+    @Test
+    fun aSeestarDithersByAGoToBetweenThePointsOfAGridAroundWhereTheFieldBegan() = runTest {
+        landing()
         val target = Block("M 31", listOf(GoToTarget(centre = false), Exposures(6, 10.0, ditherEvery = 1)), target = m31)
 
         val run = runner().runToTheEnd(night(target))
 
         assertEquals(RunStatus.Finished, run.status, run.error)
         assertTrue(sent("telescope/0/pulseguide").isEmpty(), "its pulses go astray")
-        val slews = sent("telescope/0/slewtocoordinatesasync").map {
-            SkyPosition(it.getValue("RightAscension").toDouble(), it.getValue("Declination").toDouble())
-        }
-        val dithers = slews.drop(1)
-        assertEquals(5, dithers.size)
-        assertEquals(5, dithers.distinct().size)
-        // Within 3 × 5 pixels of 2″ of where the GoTo to M 31 landed: the slews' 20″ do not add up.
+        val slews = slews()
         val began = slews.first().let { SkyPosition(it.raHours, it.decDeg + 20.0 / 3600) }
-        assertTrue(dithers.all { separationArcsec(it, began) <= 30.0 + 1e-6 }, dithers.map { separationArcsec(it, began) }.toString())
+        val points = slews.drop(1).map { steps(it, began) }
+        // Whole steps of 27″ within one of where the GoTo to M 31 landed, as a Seestar does them: the slews' 20″ do not add up.
+        assertEquals(5, points.size)
+        assertTrue(points.all { (east, north) -> east in setOf(-1.0, 0.0, 1.0) && north in setOf(-1.0, 0.0, 1.0) }, points.toString())
+        assertTrue((listOf(0.0 to 0.0) + points).zipWithNext().all { (a, b) -> a != b }, "each moves: $points")
+        assertEquals(List(5) { "1" }, events.filter { it.first == "sequence_dither" }.map { it.second["goTos"].toString() })
+    }
+
+    @Test
+    fun aGoToThatLeavesTheSeestarWhereItWasIsTriedAtAnotherPoint() = runTest {
+        // The GoTo to M 31 is done, the first dither's not.
+        landing(undone = setOf(2))
+        val target = Block("M 31", listOf(GoToTarget(centre = false), Exposures(3, 10.0, ditherEvery = 1)), target = m31)
+
+        val run = runner().runToTheEnd(night(target))
+
+        assertEquals(RunStatus.Finished, run.status, run.error)
+        val began = slews().first().let { SkyPosition(it.raHours, it.decDeg + 20.0 / 3600) }
+        val points = slews().drop(1).map { steps(it, began) }
+        assertEquals(3, points.size, "two dithers, the first in two GoTos")
+        assertTrue(points[0] != points[1], points.toString())
+        assertEquals(listOf("2", "1"), events.filter { it.first == "sequence_dither" }.map { it.second["goTos"].toString() })
     }
 }

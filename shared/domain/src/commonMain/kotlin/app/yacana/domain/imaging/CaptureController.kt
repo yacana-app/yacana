@@ -509,6 +509,7 @@ class CaptureController(
                 "loop_dither",
                 "east" to at.eastPixels,
                 "north" to at.northPixels,
+                "goTos" to at.goTos,
                 "pixels" to options.pixels,
                 "settle" to options.settleSeconds,
             )

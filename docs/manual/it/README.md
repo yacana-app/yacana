@@ -897,7 +897,7 @@ Il **⋮** in alto le apre:
 - **Tipo di posa:** Light, dark, flat o bias. Va nel nome del file e nell'intestazione FITS.
 - **Oggetto, per il nome del file:** Il nome della cartella e dei file, ad esempio *M 31*. Senza, le pose si chiamano *Snapshot*.
 - **Salva le pose singole:** Il loop salva sempre.
-- **Dithering nei loop di light, ogni:** *No*, *3* (all'inizio), *5* o *10* pose. Tra una posa e l'altra la montatura riceve una piccola spinta, come la dà il guider diretto di N.I.N.A.: il campo si sposta di qualche pixel (5 di default) intorno a dove è iniziato il loop, perché il motivo del sensore non si accumuli in strisce nello stack. Dark, flat e bias non fanno mai dithering.
+- **Dithering nei loop di light, ogni:** *No*, *3* (all'inizio), *5* o *10* pose. Tra una posa e l'altra la montatura riceve una piccola spinta, come la dà il guider diretto di N.I.N.A.: il campo si sposta di qualche pixel (5 di default) intorno a dove è iniziato il loop, perché il motivo del sensore non si accumuli in strisce nello stack. Dark, flat e bias non fanno mai dithering. Con un Seestar, i cui impulsi di guida non vanno dove vengono inviati, salta invece con piccoli GoTo tra i 9 punti di una griglia distanti 27″.
 - **Offset:** Se la camera ne ha uno.
 - **Stretching automatico:** Attivo come predefinito, come quello di N.I.N.A. Se è spento, due cursori impostano le **Ombre** e i **Mezzitoni**.
 - **Segna le stelle:** Disegna un riquadro e l'HFR sulle stelle più luminose, come fa N.I.N.A.; **Quante**, da 10 a 500.

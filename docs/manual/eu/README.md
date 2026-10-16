@@ -897,7 +897,7 @@ Goiko **⋮** ikurrak irekitzen ditu:
 - **Argazki mota:** Light, dark, flat edo bias. Fitxategi-izenean eta FITS goiburuan sartzen da.
 - **Helburua, fitxategiaren izenerako:** Karpetaren eta fitxategien izena, adibidez *M 31*. Halakorik gabe, argazkiek *Snapshot* izena dute.
 - **Gorde bakarkako argazkiak:** Begiztek beti gordetzen dute.
-- **Dithering-a light-begiztetan, zenbat argazkiro:** *Ez*, *3* (hasieran), *5* edo *10* argazki. Argazkien artean munturak bultzada txiki bat jasotzen du, N.I.N.A.ren gidatze zuzenak ematen duen bezala: eremua pixel batzuk mugitzen da (5 lehenespenez) begizta hasi zen tokiaren inguruan, sentsorearen patroia pilaketan marra gisa meta ez dadin. Darkek, flatek eta biasek ez dute inoiz dithering-ik egiten.
+- **Dithering-a light-begiztetan, zenbat argazkiro:** *Ez*, *3* (hasieran), *5* edo *10* argazki. Argazkien artean munturak bultzada txiki bat jasotzen du, N.I.N.A.ren gidatze zuzenak ematen duen bezala: eremua pixel batzuk mugitzen da (5 lehenespenez) begizta hasi zen tokiaren inguruan, sentsorearen patroia pilaketan marra gisa meta ez dadin. Darkek, flatek eta biasek ez dute inoiz dithering-ik egiten. Seestar batekin, haren gidaketa-pultsuak ez baitoaz bidaltzen diren lekura, GoTo txikiekin jauzi egiten du 27″-ko tartea duen sare bateko 9 puntuen artean.
 - **Offset:** Kamerak badu.
 - **Luzatze automatikoa:** Aktibatuta lehenetsita, N.I.N.A.-rena bezala. Desaktibatuta, bi graduatzailek **Itzalak** eta **Tarteko tonuak** ezartzen dituzte.
 - **Markatu izarrak:** Lauki bat eta HFRa marrazten ditu izar distiratsuenetan, N.I.N.A.-k bezala; **Zenbat**, 10 eta 500 artean.

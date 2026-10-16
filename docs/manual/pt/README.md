@@ -897,7 +897,7 @@ O **⋮** no topo abre-as:
 - **Tipo de imagem:** Light, dark, flat ou bias. Vai para o nome do ficheiro e para o cabeçalho FITS.
 - **Alvo, para o nome do ficheiro:** O nome da pasta e dos ficheiros, como *M 31*. Sem ele, as imagens chamam-se *Snapshot*.
 - **Guardar imagens avulsas:** O ciclo guarda sempre.
-- **Dithering em ciclos de lights, a cada:** *Não*, *3* (de início), *5* ou *10* imagens. Entre imagens a montagem recebe um pequeno empurrão, como o dá o guiamento direto do N.I.N.A.: o campo move-se alguns píxeis (5 por omissão) em torno de onde o ciclo começou, para que o padrão do sensor não se acumule em riscas no empilhamento. Darks, flats e bias nunca fazem dithering.
+- **Dithering em ciclos de lights, a cada:** *Não*, *3* (de início), *5* ou *10* imagens. Entre imagens a montagem recebe um pequeno empurrão, como o dá o guiamento direto do N.I.N.A.: o campo move-se alguns píxeis (5 por omissão) em torno de onde o ciclo começou, para que o padrão do sensor não se acumule em riscas no empilhamento. Darks, flats e bias nunca fazem dithering. Com um Seestar, cujos impulsos de guiagem não vão para onde são enviados, salta antes com pequenos GoTo entre os 9 pontos de uma grelha afastados 27″.
 - **Offset:** Se a câmara o tiver.
 - **Stretch automático:** Ativado por predefinição, como o do N.I.N.A. Desativado, dois controlos deslizantes definem as **Sombras** e os **Tons médios**.
 - **Marcar as estrelas:** Desenha uma caixa e o HFR nas estrelas mais brilhantes, como faz o N.I.N.A.; **Quantas**, de 10 a 500.
