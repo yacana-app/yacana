@@ -344,7 +344,7 @@ fun ImagingScreen(
 
             Sheet.Binning -> BottomSheet(close) { BinningChoice(capture, camera.info, close) }
 
-            Sheet.Filter -> BottomSheet(close) { FilterChoice(equipment, close) }
+            Sheet.Filter -> BottomSheet(close) { FilterChoice(equipment, scope, close) }
 
             Sheet.LastFrame -> last?.let { frame -> BottomSheet(close) { LastFrameDetails(frame, state.stars, stretch) } }
 
