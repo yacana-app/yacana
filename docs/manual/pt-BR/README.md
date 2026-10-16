@@ -1100,10 +1100,11 @@ O cartão **Regras** lista o que a noite faz além das imagens. Um plano novo ve
 - **Centralizar ao chegar:** cada alvo, e cada painel de um mosaico, é centralizado com plate solving antes das suas imagens.
 - **Dithering a cada 3 imagens**, sem guiador.
 - **Autofoco se ΔT > 1 °C**, com um focalizador.
+- **Recentralizar se desviar > 1′:** antes de cada light, a anterior é resolvida; se o campo se desviou mais de 1′ do alvo, ele é recentralizado. Substitui o guiamento.
 - **Darks e bias no fim**: 10 de cada, para cada exposição, ganho, offset e binning dos lights.
 - **Estacionar no fim**, e o aquecedor desligado.
 
-Dois botões abaixo as alteram:
+Os botões abaixo as alteram:
 
 - **Autofoco:** Antes de cada imagem de luz, um autofoco é executado se alguma destas se cumprir, como os gatilhos do N.I.N.A.:
   - **Quando a temperatura muda** 0,5, 1, 2 ou 5 °C;
@@ -1113,8 +1114,11 @@ Dois botões abaixo as alteram:
 
   Se um autofoco falhar, elas esperam as exposições seguintes.
 - **Darks:** Ao começar, quando a temperatura do sensor muda, no fim com o bias, e quantos a cada vez ([capítulo 23](#calibration)).
+- **Recentralização:** ativada ou não, e quanto o campo pode se desviar: 0,5′, 1′, 2′ ou 5′. Com um bom alinhamento polar, recentraliza uma ou duas vezes por hora.
+- **Dithering:** ativado ou não, e a cada 1, 3, 5 ou 10 imagens, para os lights de todos os alvos. Cada dithering espera a montagem estabilizar.
+- **Aquecedor antiorvalho**, se o equipamento conectado tiver um: ligado ou não durante a noite, e sua potência se for regulável. Gasta bateria: desligue em noites secas e amenas.
 
-Para outras regras, como dithering a cada outro número de imagens, recentralizar quando o alvo se desvia, esperar um alvo subir ou repetir até um horário, abra o plano no editor avançado.
+Para outras regras, como esperar um alvo subir ou repetir até um horário, abra o plano no editor avançado.
 
 ### Salvar e iniciar
 
@@ -1122,6 +1126,8 @@ O menu **⋮** tem **Salvar nas minhas sequências**. **Iniciar**, na parte infe
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="A folha de regras de Autofoco: variação de temperatura de 1 °C ativada"><br><sub><b>Regras de autofoco.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="A folha de Recentralização: ativada, 1′"><br><sub><b>Recentralização.</b> A menos de 1′ do alvo.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="A folha de Dithering: a cada 3 imagens"><br><sub><b>Dithering.</b> A cada 3 imagens.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

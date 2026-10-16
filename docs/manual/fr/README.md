@@ -1100,10 +1100,11 @@ La carte **Règles** liste ce que fait la nuit en plus des images. Un nouveau pl
 - **Centrer à l'arrivée :** chaque cible, et chaque panneau d'une mosaïque, est centré par plate solving avant ses images.
 - **Dithering toutes les 3 images**, sans guidage.
 - **Autofocus si ΔT > 1 °C**, avec un focuser.
+- **Recentrer si dérive > 1′:** avant chaque light, l'image précédente est résolue ; si le champ a dérivé de plus de 1′ par rapport à la cible, elle est recentrée. Cela remplace l'autoguidage.
 - **Darks et bias à la fin** : 10 de chaque, pour chaque pose, gain, offset et binning des lights.
 - **Parquer à la fin**, et la résistance éteinte.
 
-Deux boutons en dessous les modifient :
+Les boutons en dessous les modifient :
 
 - **Autofocus:** Avant chaque image de lumière, un autofocus se lance si l'une de ces conditions est remplie, comme les déclencheurs de N.I.N.A. :
   - **Quand la température change** de 0,5, 1, 2 ou 5 °C ;
@@ -1113,8 +1114,11 @@ Deux boutons en dessous les modifient :
 
   Si un autofocus échoue, ces règles attendent les poses suivantes.
 - **Darks:** Au début, quand la température du capteur change, à la fin avec le bias, et combien à chaque fois ([chapitre 23](#calibration)).
+- **Recentrage:** activé ou non, et de combien le champ peut dériver : 0,5′, 1′, 2′ ou 5′. Avec une bonne mise en station, il recentre une ou deux fois par heure.
+- **Dithering:** activé ou non, et toutes les 1, 3, 5 ou 10 images, pour les lights de toutes les cibles. Chaque dithering attend que la monture se stabilise.
+- **Résistance chauffante**, si l'équipement connecté en a une : allumée ou non pendant la nuit, et sa puissance si elle est réglable. Elle consomme de la batterie : éteignez-la par nuits sèches et douces.
 
-Pour d'autres règles, comme un dithering selon un autre nombre d'images, le recentrage quand la cible dérive, l'attente qu'une cible monte ou la répétition jusqu'à une heure, ouvrez le plan dans l'éditeur avancé.
+Pour d'autres règles, comme attendre qu'une cible se lève ou répéter jusqu'à une heure, ouvrez le plan dans l'éditeur avancé.
 
 ### Enregistrer et démarrer
 
@@ -1122,6 +1126,8 @@ Le menu **⋮** contient **Enregistrer dans mes séquences**. **Démarrer**, en 
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="La feuille des règles d'autofocus : variation de température de 1 °C activée"><br><sub><b>Règles d'autofocus.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="La feuille Recentrage : activé, 1′"><br><sub><b>Recentrage.</b> À moins de 1′ de la cible.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="La feuille Dithering : toutes les 3 images"><br><sub><b>Dithering.</b> Toutes les 3 images.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

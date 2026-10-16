@@ -1100,10 +1100,11 @@ La scheda **Regole** elenca ciò che la notte fa oltre alle pose. Un nuovo piano
 - **Centra all'arrivo:** ogni oggetto, e ogni pannello di un mosaico, viene centrato con il plate solving prima delle sue pose.
 - **Dithering ogni 3 pose**, senza autoguida.
 - **Autofocus se ΔT > 1 °C**, con un focheggiatore.
+- **Ricentra se deriva > 1′:** prima di ogni posa light si risolve la precedente; se il campo si è spostato di più di 1′ dal target, viene ricentrato. Sostituisce la guida.
 - **Dark e bias alla fine**: 10 di ciascuno, per ogni esposizione, guadagno, offset e binning dei light.
 - **Parcheggia alla fine**, e la fascia spenta.
 
-Due pulsanti sotto le cambiano:
+I pulsanti sotto le cambiano:
 
 - **Autofocus:** Prima di ogni posa light, si esegue un autofocus se vale una di queste condizioni, come i trigger di N.I.N.A.:
   - **Quando cambia la temperatura** di 0,5; 1; 2 o 5 °C;
@@ -1113,8 +1114,11 @@ Due pulsanti sotto le cambiano:
 
   Se un autofocus fallisce, aspettano le esposizioni successive.
 - **Dark:** All'inizio, quando cambia la temperatura del sensore, alla fine con il bias, e quanti ogni volta ([capitolo 23](#calibration)).
+- **Ricentraggio:** attivo o no, e di quanto può derivare il campo: 0,5′, 1′, 2′ o 5′. Con un buon allineamento polare ricentra una o due volte all'ora.
+- **Dithering:** attivo o no, e ogni 1, 3, 5 o 10 pose, per le pose light di tutti i target. Ogni dithering aspetta che la montatura si stabilizzi.
+- **Fascia anticondensa**, se l'attrezzatura collegata ne ha una: accesa o no durante la notte, e la sua potenza se è regolabile. Consuma batteria: spegnila nelle notti secche e miti.
 
-Per altre regole, come il dithering con un altro numero di pose, ricentrare quando l'oggetto deriva, attendere che un oggetto salga o ripetere fino a un'ora, apri il piano nell'editor avanzato.
+Per altre regole, come aspettare che un target sorga o ripetere fino a un'ora, apri il piano nell'editor avanzato.
 
 ### Salvare e avviare
 
@@ -1122,6 +1126,8 @@ Il menu **⋮** ha **Salva nelle mie sequenze**. **Avvia**, in basso, avvia la n
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="La finestra delle regole di autofocus: variazione di temperatura di 1 °C attiva"><br><sub><b>Regole di autofocus.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="Il foglio Ricentraggio: attivo, 1′"><br><sub><b>Ricentraggio.</b> Entro 1′ dal target.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="Il foglio Dithering: ogni 3 pose"><br><sub><b>Dithering.</b> Ogni 3 pose.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

@@ -45,6 +45,33 @@ class TonightTest {
     }
 
     @Test
+    fun aNewPlanRecentresInEachTargetsBlockAndReadsItBack() {
+        val sequence = tonight(listOf(m31, m33), heater, focuser = true)
+
+        val (mosaic, single) = sequence.root.items.drop(1).dropLast(1).map { it as Block }
+        // A target's trigger, as the advanced editor and N.I.N.A. have it: the mosaic's panels go by it too.
+        assertEquals(listOf(Trigger.RecentreAfterDrift(1.0)), mosaic.triggers)
+        assertEquals(listOf(Trigger.RecentreAfterDrift(1.0)), single.triggers)
+        assertEquals(DEFAULT_TRIGGERS, sequence.planTriggers())
+        assertEquals(emptyList(), sequence.review(Kit()), "nothing to say about it")
+    }
+
+    @Test
+    fun theDewHeaterIsLeftOffOrTurnedToItsPower() {
+        val off = tonight(listOf(m33), heater, focuser = true, heaterRule = HeaterRule(on = false)).root
+        assertTrue(off.items.flatMap { (it as Block).items }.none { it is SetSwitch }, "neither on at the start nor off at the end")
+
+        // A heater that takes a value goes to that share of its range, on its steps.
+        val strip = SwitchInfo(1, "Dew heater", "", canWrite = true, min = 0.0, max = 100.0, step = 10.0)
+        val half = tonight(listOf(m33), strip, focuser = true, heaterRule = HeaterRule(power = 0.47)).root
+        assertEquals(SetSwitch("Dew heater", 50.0), (half.items.first() as Block).items[1])
+        assertEquals(SetSwitch("Dew heater", 0.0), (half.items.last() as Block).items.last())
+        // On and off only, it is on whatever the power.
+        val seestar = tonight(listOf(m33), heater, focuser = true, heaterRule = HeaterRule(power = 0.25)).root
+        assertEquals(SetSwitch("Dew heater", 1.0), (seestar.items.first() as Block).items[1])
+    }
+
+    @Test
     fun theDarksAndBiasKeepEachSettingOfTheLights() {
         val end = tonight(listOf(m31, m33), null, focuser = false).root.items.last() as Block
 

@@ -108,9 +108,9 @@ internal fun DarksSheet(
     )
 }
 
-/** A rule's switch, with what it does; off and greyed when it can't be. */
+/** A rule's switch, with what it does; off and greyed when it can't be. Every rule sheet's. */
 @Composable
-private fun Toggle(text: String, on: Boolean, enabled: Boolean = true, onToggle: (Boolean) -> Unit) {
+internal fun Toggle(text: String, on: Boolean, enabled: Boolean = true, onToggle: (Boolean) -> Unit) {
     Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(
             text,

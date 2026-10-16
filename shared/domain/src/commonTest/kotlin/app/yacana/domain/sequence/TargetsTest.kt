@@ -74,6 +74,30 @@ class TargetsTest {
     }
 
     @Test
+    fun theDitherAndTheDewHeaterAreKeptAndUndoneWithThePlan() {
+        Targets(file).apply {
+            assertEquals(DITHER_EVERY, dither.value)
+            assertEquals(HeaterRule(), heater.value)
+            add(m33)
+            setDither(5)
+            setHeater(HeaterRule(on = false))
+        }
+
+        val again = Targets(file)
+
+        assertEquals(5, again.dither.value)
+        assertEquals(listOf(5), again.targets.value.single().exposures.map { it.ditherEvery })
+        assertEquals(HeaterRule(on = false), again.heater.value)
+        // A target added later dithers as the plan says, and never is 0.
+        again.setDither(0)
+        again.add(m33.copy(name = "M 74"))
+        assertEquals(listOf(0, 0), again.targets.value.map { it.exposures.single().ditherEvery })
+        again.undo()
+        again.undo()
+        assertEquals(5, again.dither.value)
+    }
+
+    @Test
     fun theDarkRulesAndTheirTriggerAreKeptAndUndoneWithThePlan() {
         Targets(file).apply {
             assertEquals(DarkRules(), darks.value)

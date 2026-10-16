@@ -1100,10 +1100,11 @@ Die Kachel **Regeln** listet, was die Nacht außer den Aufnahmen tut. Ein neuer 
 - **Bei Ankunft zentrieren:** Jedes Ziel und jedes Panel eines Mosaiks wird vor seinen Aufnahmen per Plate Solving zentriert.
 - **Dithering alle 3 Aufnahmen**, ohne Guider.
 - **Autofokus bei ΔT > 1 °C**, mit einem Fokussierer.
+- **Neu zentrieren bei Drift > 1′:** Vor jeder Light-Aufnahme wird die vorige gelöst; ist das Feld mehr als 1′ vom Ziel abgedriftet, wird es neu zentriert. Es ersetzt die Nachführkontrolle.
 - **Darks und Bias am Ende**: je 10, für jede Belichtung, jedes Gain, jeden Offset und jedes Binning der Lights.
 - **Am Ende parken**, und die Heizung aus.
 
-Zwei Schaltflächen darunter ändern sie:
+Die Schaltflächen darunter ändern sie:
 
 - **Autofokus:** Vor jeder Light-Aufnahme läuft ein Autofokus, wenn eines davon zutrifft, wie die Trigger von N.I.N.A.:
   - **Wenn sich die Temperatur ändert**, um 0,5 °C, 1 °C, 2 °C oder 5 °C;
@@ -1113,8 +1114,11 @@ Zwei Schaltflächen darunter ändern sie:
 
   Schlägt ein Autofokus fehl, warten sie auf die nächsten Belichtungen.
 - **Darks:** Am Anfang, wenn sich die Sensortemperatur ändert, am Ende mit dem Bias, und wie viele jedes Mal ([Kapitel 23](#calibration)).
+- **Neu zentrieren:** an oder aus, und wie weit das Feld driften darf: 0,5′, 1′, 2′ oder 5′. Mit guter Polausrichtung zentriert es ein- oder zweimal pro Stunde neu.
+- **Dithering:** an oder aus, und alle 1, 3, 5 oder 10 Aufnahmen, für die Lights aller Ziele. Jedes Dithering wartet, bis die Montierung zur Ruhe kommt.
+- **Tauheizung**, wenn die verbundene Ausrüstung eine hat: an oder aus während der Nacht, und ihre Leistung, wenn sie regelbar ist. Sie verbraucht Akku: In trockenen, milden Nächten ausschalten.
 
-Für andere Regeln, etwa Dithering nach einer anderen Anzahl Aufnahmen, Neuzentrieren, wenn das Ziel driftet, Warten, bis ein Ziel aufgeht, oder Wiederholen bis zu einer Uhrzeit, öffne den Plan im erweiterten Editor.
+Für andere Regeln, etwa auf das Aufgehen eines Ziels warten oder bis zu einer Uhrzeit wiederholen, öffne den Plan im erweiterten Editor.
 
 ### Speichern und starten
 
@@ -1122,6 +1126,8 @@ Das Menü **⋮** hat **In meinen Sequenzen speichern**. **Starten** unten start
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="Das Fenster der Autofokus-Regeln: Temperaturänderung von 1 °C an"><br><sub><b>Autofokus-Regeln.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="Das Blatt Neu zentrieren: an, 1′"><br><sub><b>Neu zentrieren.</b> Innerhalb von 1′ vom Ziel.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="Das Blatt Dithering: alle 3 Aufnahmen"><br><sub><b>Dithering.</b> Alle 3 Aufnahmen.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

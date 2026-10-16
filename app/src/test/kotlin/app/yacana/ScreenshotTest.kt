@@ -924,6 +924,39 @@ class ScreenshotTest(private val case: Case) {
                         site = Location(37.2236, -2.5463, 2168.0),
                         click = "Darks",
                     ),
+                    // As "Sequence · recentring".
+                    Scene(
+                        "sequence_recentring",
+                        section = Section.Sequence,
+                        screens = listOf(Screen.SequenceTonight),
+                        framed = true,
+                        profile = true,
+                        connected = true,
+                        site = Location(37.2236, -2.5463, 2168.0),
+                        click = "Recentring",
+                    ),
+                    // As "Sequence · dither".
+                    Scene(
+                        "sequence_dither",
+                        section = Section.Sequence,
+                        screens = listOf(Screen.SequenceTonight),
+                        framed = true,
+                        profile = true,
+                        connected = true,
+                        site = Location(37.2236, -2.5463, 2168.0),
+                        click = "Dither",
+                    ),
+                    // As "Sequence · dew heater".
+                    Scene(
+                        "sequence_heater",
+                        section = Section.Sequence,
+                        screens = listOf(Screen.SequenceTonight),
+                        framed = true,
+                        profile = true,
+                        connected = true,
+                        site = Location(37.2236, -2.5463, 2168.0),
+                        click = "Dew heater",
+                    ),
                     // As "Sequence · edit exposures": M 31's first exposures, for each panel.
                     Scene(
                         "sequence_exposures",

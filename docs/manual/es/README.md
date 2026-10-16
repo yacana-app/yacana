@@ -1100,10 +1100,11 @@ La tarjeta **Reglas** muestra lo que hace la noche además de las tomas. Un plan
 - **Centrar al llegar:** cada objetivo, y cada panel de un mosaico, se centra con plate solving antes de sus tomas.
 - **Dither cada 3 tomas**, sin guiado.
 - **Autoenfoque si ΔT > 1 °C**, con un enfocador.
+- **Recentrar si se desvía > 1′:** antes de cada toma de luz se resuelve la anterior; si el campo se ha desviado más de 1′ del objetivo, se vuelve a centrar. Sustituye al guiado.
 - **Darks y bias al final**: 10 de cada, para cada exposición, ganancia, offset y binning de las tomas de luz.
 - **Aparcar al final**, y el calentador apagado.
 
-Dos botones debajo las cambian:
+Los botones de debajo las cambian:
 
 - **Autoenfoque:** Antes de cada toma de luz, se hace un autoenfoque si se cumple alguna de estas, como los disparadores de N.I.N.A.:
   - **Si la temperatura cambia** 0,5; 1; 2 o 5 °C;
@@ -1113,8 +1114,11 @@ Dos botones debajo las cambian:
 
   Si un autoenfoque falla, esperan a las siguientes exposiciones.
 - **Darks:** Al empezar, cuando cambia la temperatura del sensor, al terminar con el bias, y cuántos cada vez ([capítulo 23](#calibration)).
+- **Recentrado:** activado o no, y cuánto puede desviarse el campo: 0,5′, 1′, 2′ o 5′. Con buena alineación polar recentra una o dos veces por hora.
+- **Dither:** activado o no, y cada 1, 3, 5 o 10 tomas, para las tomas de luz de todos los objetivos. Cada dither espera a que la montura se asiente.
+- **Calentador**, si el equipo conectado tiene uno: encendido o no durante la noche, y su potencia si es regulable. Gasta batería: apágalo en noches secas y templadas.
 
-Para otras reglas, como hacer dither con otra frecuencia de tomas, recentrar cuando el objetivo se desvía, esperar a que suba un objetivo o repetir hasta una hora, abre el plan en el editor avanzado.
+Para otras reglas, como esperar a que suba un objetivo o repetir hasta una hora, abre el plan en el editor avanzado.
 
 ### Guardar y empezar
 
@@ -1122,6 +1126,8 @@ El menú **⋮** tiene **Guardar en mis secuencias**. **Empezar**, abajo, inicia
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="La hoja de reglas de Autoenfoque: cambio de temperatura de 1 °C activado"><br><sub><b>Reglas de autoenfoque.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="La hoja de Recentrado: activado, 1′"><br><sub><b>Recentrado.</b> A menos de 1′ del objetivo.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="La hoja de Dither: cada 3 tomas"><br><sub><b>Dither.</b> Cada 3 tomas.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

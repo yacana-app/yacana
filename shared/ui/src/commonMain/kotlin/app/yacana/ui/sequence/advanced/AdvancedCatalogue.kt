@@ -208,7 +208,11 @@ fun AdvancedCatalogue(path: List<Int>, category: String?, services: AppServices,
         }
     }
     picking?.let { mode ->
-        TargetPicker(services, tonight, mode, onClose = { picking = null }) { picked -> add(Draft.OfItem(picked.block)) }
+        // A new target recentres as the plan's targets do, so a night the simple editor made stays its.
+        val recentre = services.targets.triggers.value.filterIsInstance<Trigger.RecentreAfterDrift>()
+        TargetPicker(services, tonight, mode, onClose = {
+            picking = null
+        }) { picked -> add(Draft.OfItem(picked.block.copy(triggers = recentre))) }
     }
 }
 

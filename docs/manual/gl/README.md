@@ -1100,10 +1100,11 @@ A tarxeta **Regras** lista o que fai a noite ademais das tomas. Un plan novo vé
 - **Centrar ao chegar:** cada obxectivo, e cada panel dun mosaico, céntrase con plate solving antes das súas tomas.
 - **Dither cada 3 tomas**, sen guiador.
 - **Autoenfoque se ΔT > 1 °C**, cun enfocador.
+- **Recentrar se se desvía > 1′:** antes de cada toma de luz resólvese a anterior; se o campo se desviou máis de 1′ do obxectivo, vólvese centrar. Substitúe o guiado.
 - **Darks e bias ao final**: 10 de cada, para cada exposición, ganancia, offset e binning das tomas de luz.
 - **Aparcar ao final**, e o quentador apagado.
 
-Dous botóns de debaixo cámbianas:
+Os botóns de debaixo cámbianas:
 
 - **Autoenfoque:** Antes de cada toma de luz, faise un autoenfoque se se cumpre algunha destas, como os disparadores de N.I.N.A.:
   - **Se a temperatura cambia** 0,5, 1, 2 ou 5 °C;
@@ -1113,8 +1114,11 @@ Dous botóns de debaixo cámbianas:
 
   Se un autoenfoque falla, agardan ás seguintes exposicións.
 - **Darks:** Ao comezar, cando cambia a temperatura do sensor, ao rematar co bias, e cantos cada vez ([capítulo 23](#calibration)).
+- **Recentrado:** activado ou non, e canto pode desviarse o campo: 0,5′, 1′, 2′ ou 5′. Cun bo aliñamento polar recentra unha ou dúas veces por hora.
+- **Dither:** activado ou non, e cada 1, 3, 5 ou 10 tomas, para as tomas de luz de todos os obxectivos. Cada dither agarda a que a montura se asente.
+- **Quentador**, se o equipo conectado ten un: acendido ou non durante a noite, e a súa potencia se é regulable. Gasta batería: apágao en noites secas e temperadas.
 
-Para outras regras, como facer dither cada outro número de tomas, recentrar cando o obxectivo se desvía, agardar a que suba un obxectivo ou repetir ata unha hora, abre o plan no editor avanzado.
+Para outras regras, como agardar a que suba un obxectivo ou repetir ata unha hora, abre o plan no editor avanzado.
 
 ### Gardar e comezar
 
@@ -1122,6 +1126,8 @@ O menú **⋮** ten **Gardar nas miñas secuencias**. **Comezar**, na parte infe
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="A folla de regras de Autoenfoque: cambio de temperatura de 1 °C activado"><br><sub><b>Regras de autoenfoque.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="A folla de Recentrado: activado, 1′"><br><sub><b>Recentrado.</b> A menos de 1′ do obxectivo.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="A folla de Dither: cada 3 tomas"><br><sub><b>Dither.</b> Cada 3 tomas.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

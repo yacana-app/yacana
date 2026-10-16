@@ -108,6 +108,7 @@ fun NightScreen(services: AppServices, open: (Screen) -> Unit) {
     val targets by services.targets.targets.collectAsState()
     val triggers by services.targets.triggers.collectAsState()
     val darks by services.targets.darks.collectAsState()
+    val heater by services.targets.heater.collectAsState()
     val advanced by services.targets.advanced.collectAsState()
     val polar by services.polarAlignment.state.collectAsState()
     val lastPolar by services.polarAlignment.last.collectAsState()
@@ -206,7 +207,7 @@ fun NightScreen(services: AppServices, open: (Screen) -> Unit) {
             ended != null -> SummaryButtons(onDiary = { open(Screen.NightDiary) }, onExport = { services.logExport.export() })
 
             current == null && profile != null -> AccentButton(
-                onClick = { runner.start(advanced ?: tonightSequence(targets, triggers, state, darks)) },
+                onClick = { runner.start(advanced ?: tonightSequence(targets, triggers, state, darks, heater)) },
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp).heightIn(min = Touch.Main),
                 enabled = state.connection is Connection.Connected && (advanced != null || targets.any { it.exposures.isNotEmpty() }),
             ) {

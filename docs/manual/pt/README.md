@@ -1100,10 +1100,11 @@ O cartão **Regras** lista o que a noite faz além das imagens. Um plano novo ve
 - **Centrar à chegada:** cada alvo, e cada painel de um mosaico, é centrado com plate solving antes das suas imagens.
 - **Dithering a cada 3 imagens**, sem guiador.
 - **Autofoco se ΔT > 1 °C**, com um focador.
+- **Recentrar se se desviar > 1′:** antes de cada light resolve-se a anterior; se o campo se desviou mais de 1′ do alvo, volta a ser centrado. Substitui a guiagem.
 - **Darks e bias no fim**: 10 de cada, para cada exposição, ganho, offset e binning dos lights.
 - **Estacionar no fim**, e a resistência desligada.
 
-Dois botões por baixo alteram-nas:
+Os botões por baixo alteram-nas:
 
 - **Autofoco:** Antes de cada imagem de luz, executa-se um autofoco se se cumprir alguma destas condições, como os gatilhos do N.I.N.A.:
   - **Quando a temperatura muda** 0,5, 1, 2 ou 5 °C;
@@ -1113,8 +1114,11 @@ Dois botões por baixo alteram-nas:
 
   Se um autofoco falhar, esperam pelas exposições seguintes.
 - **Darks:** Ao começar, quando a temperatura do sensor muda, no fim com o bias, e quantos de cada vez ([capítulo 23](#calibration)).
+- **Recentragem:** ativada ou não, e quanto o campo se pode desviar: 0,5′, 1′, 2′ ou 5′. Com um bom alinhamento polar, recentra uma ou duas vezes por hora.
+- **Dithering:** ativado ou não, e a cada 1, 3, 5 ou 10 imagens, para os lights de todos os alvos. Cada dithering espera que a montagem estabilize.
+- **Resistência anti-orvalho**, se o equipamento ligado tiver uma: ligada ou não durante a noite, e a sua potência se for regulável. Gasta bateria: desliga-a em noites secas e amenas.
 
-Para outras regras, como fazer dithering com outro número de imagens, recentrar quando o alvo se desvia, esperar que um alvo suba ou repetir até uma hora, abra o plano no editor avançado.
+Para outras regras, como esperar que um alvo suba ou repetir até uma hora, abre o plano no editor avançado.
 
 ### Guardar e iniciar
 
@@ -1122,6 +1126,8 @@ O menu **⋮** tem **Guardar nas minhas sequências**. **Iniciar**, em baixo, in
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="A folha das regras de autofoco: variação de temperatura de 1 °C ativada"><br><sub><b>Regras de autofoco.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="A folha de Recentragem: ativada, 1′"><br><sub><b>Recentragem.</b> A menos de 1′ do alvo.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="A folha de Dithering: a cada 3 imagens"><br><sub><b>Dithering.</b> A cada 3 imagens.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>

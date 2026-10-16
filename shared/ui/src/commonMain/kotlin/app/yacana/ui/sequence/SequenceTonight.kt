@@ -31,6 +31,7 @@ import app.yacana.domain.imaging.FrameType
 import app.yacana.domain.profile.DitherOptions
 import app.yacana.domain.sequence.Block
 import app.yacana.domain.sequence.DarkRules
+import app.yacana.domain.sequence.HeaterRule
 import app.yacana.domain.sequence.NightPlan
 import app.yacana.domain.sequence.RunStatus
 import app.yacana.domain.sequence.SavedSequences
@@ -118,11 +119,17 @@ fun SequenceTonight(
     val triggers by targets.triggers.collectAsState()
     val darks by targets.darks.collectAsState()
     val advanced by targets.advanced.collectAsState()
-    val sequence = advanced ?: tonightSequence(list, triggers, equipmentState, darks)
+    val ditherEvery by targets.dither.collectAsState()
+    val heaterRule by targets.heater.collectAsState()
+    val sequence = advanced ?: tonightSequence(list, triggers, equipmentState, darks, heaterRule)
+    val heater = connected?.switches?.switches?.let(::dewHeater)
     // The profile's focuser runs the triggers, connected or not yet.
     val focuser = profile?.devices?.focuser != null
     var autofocusOpen by remember { mutableStateOf(false) }
     var darksOpen by remember { mutableStateOf(false) }
+    var recentreOpen by remember { mutableStateOf(false) }
+    var ditherOpen by remember { mutableStateOf(false) }
+    var heaterOpen by remember { mutableStateOf(false) }
     var editing by remember { mutableStateOf<Pair<Int, Int>?>(null) }
     var savedAs by remember { mutableStateOf<String?>(null) }
 
@@ -163,17 +170,13 @@ fun SequenceTonight(
                 if (list.isNotEmpty()) {
                     Rules(
                         sequence,
-                        if (running) null else ({ autofocusOpen = true }),
-                        if (running) {
-                            null
-                        } else {
-                            (
-                                {
-                                    darksOpen =
-                                        true
-                                }
-                                )
-                        },
+                        RuleSheets(
+                            autofocus = { autofocusOpen = true },
+                            darks = { darksOpen = true },
+                            recentre = { recentreOpen = true },
+                            dither = { ditherOpen = true },
+                            heater = heater?.let { { heaterOpen = true } },
+                        ).takeUnless { running },
                     )
                 }
                 if (!running) AddTarget { open(Screen.Root(Section.Sky)) }
@@ -208,6 +211,18 @@ fun SequenceTonight(
         val temperature = triggers.filterIsInstance<Trigger.DarksAfterTemperature>().firstOrNull()?.amount
         val light = list.flatMap { it.exposures }.firstOrNull { it.type == FrameType.Light }?.exposureSeconds
         BottomSheet({ darksOpen = false }) { DarksSheet(darks, temperature, darkFilter, light, targets::setDarks) }
+    }
+
+    if (recentreOpen) {
+        BottomSheet({ recentreOpen = false }) { RecentringSheet(triggers, targets::setTriggers) }
+    }
+
+    if (ditherOpen) {
+        BottomSheet({ ditherOpen = false }) { DitherSheet(ditherEvery, targets::setDither) }
+    }
+
+    if (heaterOpen) {
+        BottomSheet({ heaterOpen = false }) { HeaterSheet(heaterRule, heater?.isOnOff == false, targets::setHeater) }
     }
 
     if (menuOpen) {
@@ -256,17 +271,19 @@ fun SequenceTonight(
 private fun Sequence.targetNames() = root.items.drop(1).dropLast(1).mapNotNull { (it as? Block)?.name }
 
 /**
- * Tonight's sequence from the plan's [targets] and [triggers], with the connected dew heater; the
- * profile's focuser runs the triggers, connected or not yet.
+ * Tonight's sequence from the plan's [targets] and [triggers], with the connected dew heater as
+ * [heater] says; the profile's focuser runs the triggers, connected or not yet.
  */
 internal fun tonightSequence(
     targets: List<Target>,
     triggers: List<Trigger>,
     state: EquipmentState,
     darks: DarkRules = DarkRules(),
+    heater: HeaterRule = HeaterRule(),
 ): Sequence {
     val connected = (state.connection as? Connection.Connected)?.equipment
-    return tonight(targets, connected?.switches?.switches?.let(::dewHeater), state.active?.devices?.focuser != null, triggers, darks)
+    val switch = connected?.switches?.switches?.let(::dewHeater)
+    return tonight(targets, switch, state.active?.devices?.focuser != null, triggers, darks, heater)
 }
 
 /** What the run is doing now, or how it ended. */
