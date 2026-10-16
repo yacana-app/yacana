@@ -45,6 +45,7 @@ import app.yacana.domain.sequence.SetSwitch
 import app.yacana.domain.sequence.Target
 import app.yacana.domain.sequence.Trigger
 import app.yacana.domain.sequence.Unpark
+import app.yacana.domain.sequence.planTriggers
 import app.yacana.ui.YacanaIcons
 import app.yacana.ui.design.SectionCard
 import app.yacana.ui.equipment.decimalComma
@@ -67,6 +68,9 @@ import app.yacana.ui.resources.rule_heater
 import app.yacana.ui.resources.rule_park
 import app.yacana.ui.resources.rule_recentre
 import app.yacana.ui.resources.rule_unpark
+import app.yacana.ui.resources.rules_dither
+import app.yacana.ui.resources.rules_heater
+import app.yacana.ui.resources.rules_recentre
 import app.yacana.ui.resources.sequence_add_exposures
 import app.yacana.ui.resources.sequence_add_target
 import app.yacana.ui.resources.sequence_done
@@ -272,12 +276,13 @@ internal fun AddTarget(onClick: () -> Unit) {
 }
 
 /**
- * "Rules": what the sequence does besides the frames, as the design's buttons; [onAutofocus] opens
- * its autofocus triggers, and [onDarks] when it takes darks.
+ * "Rules": what the sequence does besides the frames, as the design's buttons; under them, the
+ * buttons that open each kind of rule's sheet in [open], those it has: autofocus, darks, recentring,
+ * dither and the dew heater. While the night runs there are none.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun Rules(sequence: Sequence, onAutofocus: (() -> Unit)?, onDarks: (() -> Unit)? = null) {
+internal fun Rules(sequence: Sequence, open: RuleSheets?) {
     val all = sequence.root.flatten()
     val start = (sequence.root.items.firstOrNull() as? Block)?.items.orEmpty()
     val end = (sequence.root.items.lastOrNull() as? Block)?.items.orEmpty()
@@ -290,7 +295,7 @@ internal fun Rules(sequence: Sequence, onAutofocus: (() -> Unit)?, onDarks: (() 
             all.firstNotNullOfOrNull { (it as? Exposures)?.ditherEvery?.takeIf { every -> every > 0 } }?.let {
                 stringResource(Res.string.rule_dither, it)
             },
-        ) + sequence.root.triggers.filterNot { it is Trigger.DarksAfterTemperature }.map { trigger -> triggerText(trigger) } +
+        ) + sequence.planTriggers().filterNot { it is Trigger.DarksAfterTemperature }.map { trigger -> triggerText(trigger) } +
             listOfNotNull(
                 darksRule(sequence),
                 stringResource(Res.string.rule_calibration).takeIf { end.any { it is Exposures && !it.type.needsLight } },
@@ -305,18 +310,13 @@ internal fun Rules(sequence: Sequence, onAutofocus: (() -> Unit)?, onDarks: (() 
         ) {
             rules.forEach { Tag(it) }
         }
-        Row {
-            onAutofocus?.let { open ->
-                TextButton(onClick = open) {
-                    Icon(YacanaIcons.Adjustments, contentDescription = null, modifier = Modifier.size(18.dp))
-                    Text(stringResource(Res.string.autofocus_rules), modifier = Modifier.padding(start = 4.dp))
-                }
-            }
-            onDarks?.let { open ->
-                TextButton(onClick = open) {
-                    Icon(YacanaIcons.Adjustments, contentDescription = null, modifier = Modifier.size(18.dp))
-                    Text(stringResource(Res.string.darks_rules), modifier = Modifier.padding(start = 4.dp))
-                }
+        open?.let { sheets ->
+            FlowRow {
+                RuleButton(stringResource(Res.string.autofocus_rules), sheets.autofocus)
+                RuleButton(stringResource(Res.string.darks_rules), sheets.darks)
+                RuleButton(stringResource(Res.string.rules_recentre), sheets.recentre)
+                RuleButton(stringResource(Res.string.rules_dither), sheets.dither)
+                sheets.heater?.let { RuleButton(stringResource(Res.string.rules_heater), it) }
             }
         }
     }

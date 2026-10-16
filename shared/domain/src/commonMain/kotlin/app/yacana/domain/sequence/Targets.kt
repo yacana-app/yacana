@@ -5,6 +5,7 @@
 package app.yacana.domain.sequence
 
 import app.yacana.domain.imaging.DARK_FILTER
+import app.yacana.domain.imaging.FrameType
 import app.yacana.domain.sky.Framing
 import app.yacana.ports.SkyPosition
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -73,12 +74,16 @@ fun newTargetExposures(filters: List<String>) = listOf(
     ),
 )
 
-/** With a focuser, tonight's autofocus runs when the temperature changes by 1 °C, as the design's rule, until it is changed. */
-val DEFAULT_TRIGGERS: List<Trigger> = listOf(Trigger.AutofocusAfterTemperature(1.0))
+/**
+ * A new plan's triggers, until they are changed: with a focuser, autofocus when the temperature
+ * changes by 1 °C; and recentring when the field drifts more than 1′, which stands in for guiding.
+ */
+val DEFAULT_TRIGGERS: List<Trigger> = listOf(Trigger.AutofocusAfterTemperature(1.0), Trigger.RecentreAfterDrift(1.0))
 
 /**
- * Tonight's plan as kept: its targets, the autofocus triggers of the whole sequence, and the night
- * as the advanced editor left it, when it has what the simple editor can't show.
+ * Tonight's plan as kept: its targets, the triggers of the whole sequence, the night as the
+ * advanced editor left it, when it has what the simple editor can't show, its darks, how often its
+ * lights dither ([dither] frames, 0 for never) and its dew heater.
  */
 @Serializable
 private data class Plan(
@@ -86,6 +91,8 @@ private data class Plan(
     val triggers: List<Trigger> = DEFAULT_TRIGGERS,
     val advanced: Sequence? = null,
     val darks: DarkRules = DarkRules(),
+    val dither: Int = DITHER_EVERY,
+    val heater: HeaterRule = HeaterRule(),
 )
 
 /**
@@ -110,6 +117,14 @@ class Targets(private val file: Path? = null) {
 
     /** When tonight's plan takes darks. */
     val darks: StateFlow<DarkRules> = mutableDarks.asStateFlow()
+    private val mutableDither = MutableStateFlow(plan.value.dither)
+
+    /** Every how many frames tonight's lights dither; 0 for never. */
+    val dither: StateFlow<Int> = mutableDither.asStateFlow()
+    private val mutableHeater = MutableStateFlow(plan.value.heater)
+
+    /** Whether tonight's plan turns the dew heater on, and how much. */
+    val heater: StateFlow<HeaterRule> = mutableHeater.asStateFlow()
 
     /**
      * Tonight as the advanced editor left it, when it has what the simple editor can't show, as
@@ -125,10 +140,16 @@ class Targets(private val file: Path? = null) {
     /** Whether the next target added fills the night, as the template "One target all night" asks. */
     val fillTheNight: StateFlow<Boolean> = mutableFillTheNight.asStateFlow()
 
-    /** Adds [target] to the plan, and at the end of the targets of tonight's advanced sequence, if there is one. */
+    /**
+     * Adds [target] to the plan, its lights dithering as the plan's do, and at the end of the targets
+     * of tonight's advanced sequence, if there is one.
+     */
     fun add(target: Target) {
         mutableFillTheNight.value = false
-        change { it.copy(targets = it.targets + target, advanced = it.advanced?.withTarget(target)) }
+        change {
+            val dithering = target.dithering(it.dither)
+            it.copy(targets = it.targets + dithering, advanced = it.advanced?.withTarget(dithering))
+        }
     }
 
     /** Tonight becomes [sequence], as the advanced editor leaves it; null goes back to the simple editor's plan. */
@@ -136,7 +157,7 @@ class Targets(private val file: Path? = null) {
 
     /** Tonight's plan becomes [targets] with [triggers] and [darks], as a saved sequence opens; it can be undone. */
     fun replace(targets: List<Target>, triggers: List<Trigger> = this.triggers.value, darks: DarkRules = this.darks.value) =
-        change { Plan(targets, triggers, darks = darks) }
+        change { Plan(targets, triggers, darks = darks, dither = targets.dither() ?: it.dither, heater = it.heater) }
 
     /** Tonight becomes [sequence], as a saved one opens: in the simple editor's plan if it is one, or as an advanced sequence. */
     fun open(sequence: Sequence) {
@@ -145,7 +166,13 @@ class Targets(private val file: Path? = null) {
             if (targets !=
                 null
             ) {
-                Plan(targets, sequence.root.triggers.ifEmpty { it.triggers }, darks = sequence.darkRules())
+                Plan(
+                    targets,
+                    sequence.planTriggers().ifEmpty { it.triggers },
+                    darks = sequence.darkRules(),
+                    dither = targets.dither() ?: it.dither,
+                    heater = it.heater,
+                )
             } else {
                 it.copy(advanced = sequence)
             }
@@ -173,6 +200,12 @@ class Targets(private val file: Path? = null) {
         plan.copy(darks = rules, triggers = others + listOfNotNull(temperature?.let { Trigger.DarksAfterTemperature(it, rules.count) }))
     }
 
+    /** Tonight's lights dither every [frames], every target's and those of the targets added later; 0 for never. */
+    fun setDither(frames: Int) = change { plan -> plan.copy(dither = frames, targets = plan.targets.map { it.dithering(frames) }) }
+
+    /** Tonight's plan turns the dew heater on, or not, as [rule] says. */
+    fun setHeater(rule: HeaterRule) = change { it.copy(heater = rule) }
+
     /** Goes back to before the last change. */
     fun undo() {
         val last = before.removeLastOrNull() ?: return
@@ -196,6 +229,8 @@ class Targets(private val file: Path? = null) {
         mutableTriggers.value = next.triggers
         mutableAdvanced.value = next.advanced
         mutableDarks.value = next.darks
+        mutableDither.value = next.dither
+        mutableHeater.value = next.heater
     }
 
     private fun write() {
@@ -214,6 +249,13 @@ class Targets(private val file: Path? = null) {
         val targets = text?.let { runCatching { JSON.decodeFromString(ListSerializer(Target.serializer()), it) }.getOrNull() }
         return plan ?: targets?.let { Plan(it) } ?: Plan()
     }
+
+    /** The target with its lights dithering every [frames]. */
+    private fun Target.dithering(frames: Int) =
+        copy(exposures = exposures.map { if (it.type == FrameType.Light) it.copy(ditherEvery = frames) else it })
+
+    /** How often the lights of these targets dither, as the first of them does; null without lights. */
+    private fun List<Target>.dither(): Int? = flatMap { it.exposures }.firstOrNull { it.type == FrameType.Light }?.ditherEvery
 
     /** Tonight with [target] at the end of its targets' area. */
     private fun Sequence.withTarget(target: Target): Sequence =

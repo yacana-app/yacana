@@ -22,6 +22,7 @@ import app.yacana.ui.navigation.Screen
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -130,25 +131,27 @@ class AdvancedItemsTest : FlowTest() {
         tap("30 min")
         tap("Add")
 
-        assertEquals(listOf<Trigger>(Trigger.AutofocusAfterTime(30.0)), services.m33()?.triggers)
+        assertEquals(listOf(Trigger.RecentreAfterDrift(1.0), Trigger.AutofocusAfterTime(30.0)), services.m33()?.triggers)
         assertTrue(appears("Every 30 min"))
     }
 
     @Test
-    fun aRecentreTriggerIsAddedAndDeleted() {
+    fun aRecentreTriggerIsDeletedAndAddedAgain() {
         val services = atM33()
+        assertTrue(appears("If M 33 drifts > 1′", substring = true), "the plan recentres each target, in the target's own block")
+
+        tap("If M 33 drifts > 1′", substring = true)
+        tap("Delete")
+        assertFalse(shows("If M 33 drifts > 1′", substring = true))
+        assertNotNull(services.targets.advanced.value, "only M 31 recentres now, which the simple editor can't show")
+
         tap("Trigger")
         tap("Recentre if it drifts")
-        tap("2′")
+        tap("1′")
         tap("Add")
-        assertEquals(listOf<Trigger>(Trigger.RecentreAfterDrift(2.0)), services.m33()?.triggers)
 
-        tap("If M 33 drifts > 2′", substring = true)
-        tap("Delete")
-
-        // Without it, tonight is the simple plan again.
+        // With it again, tonight is the simple plan again.
         assertNull(services.targets.advanced.value)
-        assertFalse(shows("If M 33 drifts > 2′", substring = true))
     }
 
     @Test

@@ -144,12 +144,3 @@ internal fun AutofocusSheet(triggers: List<Trigger>, focuser: Boolean, onChange:
     }
     Muted(stringResource(Res.string.autofocus_rules_note), Modifier.padding(top = 8.dp))
 }
-
-/** A trigger's switch, with what it does. */
-@Composable
-private fun Toggle(text: String, on: Boolean, onToggle: (Boolean) -> Unit) {
-    Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-        Text(text, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
-        Switch(checked = on, onCheckedChange = onToggle)
-    }
-}

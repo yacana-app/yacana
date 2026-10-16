@@ -1100,10 +1100,11 @@ The **Rules** card lists what the night does besides the frames. A new plan come
 - **Centre on arrival:** each target, and each panel of a mosaic, is centred with plate solving before its frames.
 - **Dither every 3 frames**, without a guider.
 - **Autofocus if ΔT > 1 °C**, with a focuser.
+- **Recentre if it drifts > 1′:** before each light frame, the frame before is solved; if the field has drifted more than 1′ from the target, it is centred again. It stands in for guiding.
 - **Darks and bias at the end**: 10 of each, for each exposure, gain, offset and binning of the lights.
 - **Park at the end**, and the heater off.
 
-Two buttons below change them:
+Buttons below change them:
 
 - **Autofocus:** Before each light frame, an autofocus runs if any of these holds, as N.I.N.A.'s triggers:
   - **When the temperature changes** by 0.5, 1, 2 or 5 °C;
@@ -1113,8 +1114,11 @@ Two buttons below change them:
 
   If an autofocus fails, they wait for the next exposures.
 - **Darks:** At the start, when the sensor's temperature changes, at the end with the bias, and how many each time ([chapter 23](#calibration)).
+- **Recentring:** on or off, and how far the field may drift: 0.5′, 1′, 2′ or 5′. With a good polar alignment it recentres once or twice an hour.
+- **Dither:** on or off, and every 1, 3, 5 or 10 frames, for every target's lights. Each dither waits for the mount to settle.
+- **Dew heater**, when the connected equipment has one: on or off during the night, and its power for a heater that takes a value. It uses battery: turn it off on dry, warm nights.
 
-For other rules, such as dithering every other number of frames, recentring when the target drifts, waiting for a target to rise or repeating until a time, open the plan in the advanced editor.
+For other rules, such as waiting for a target to rise or repeating until a time, open the plan in the advanced editor.
 
 ### Save and start
 
@@ -1122,6 +1126,8 @@ The **⋮** menu has **Save in my sequences**. **Start**, at the bottom, starts 
 
 <table><tr>
 <td valign="top" width="240"><img src="images/sequence_autofocus.webp" width="230" alt="The Autofocus rules sheet: temperature change of 1 °C on"><br><sub><b>Autofocus rules.</b></sub></td>
+<td valign="top" width="240"><img src="images/sequence_recentring.webp" width="230" alt="The Recentring sheet: on, 1′"><br><sub><b>Recentring.</b> Within 1′ of the target.</sub></td>
+<td valign="top" width="240"><img src="images/sequence_dither.webp" width="230" alt="The Dither sheet: every 3 frames"><br><sub><b>Dither.</b> Every 3 frames.</sub></td>
 </tr></table>
 
 <a id="advanced"></a>
