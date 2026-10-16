@@ -1114,7 +1114,7 @@ Els botons de sota les canvien:
 
   Si un autoenfocament falla, esperen les exposicions següents.
 - **Darks:** En començar, quan canvia la temperatura del sensor, en acabar amb el bias, i quantes cada vegada ([capítol 23](#calibration)).
-- **Recentratge:** activat o no, i quant es pot desviar el camp: 0,5′, 1′, 2′ o 5′. Amb una bona alineació polar recentra una o dues vegades per hora.
+- **Recentratge:** activat o no, i quant es pot desviar el camp: 1′, 2′, 5′ o 10′, cadascun també en píxels de la càmera connectada. Mai no recentra per menys de 20 px, el que pot moure un dithering; amb una càmera gran angular això és més que qualsevol opció, i el full ho avisa. Amb una bona alineació polar recentra una o dues vegades per hora.
 - **Dithering:** activat o no, i cada 1, 3, 5 o 10 preses, per a les preses de llum de tots els objectius. Cada dithering espera que la muntura s'estabilitzi.
 - **Escalfador**, si l'equip connectat en té un: encès o no durant la nit, i la seva potència si es pot regular. Gasta bateria: apaga'l les nits seques i temperades.
 
@@ -1186,7 +1186,7 @@ El catàleg té un quadre de cerca i botons per tipus: càmera, muntura, enfocam
 | **Contenidor** | Objectiu | Un objectiu de Cel, amb el seu enquadrament; ve amb «Anar i centrar» |
 | **Contenidor** | Seqüencial · Paral·lel | Les seves instruccions una rere l'altra, o alhora, com ara esperar fins a una hora mentre la càmera es refreda |
 | **Disparador** | Autoenfocament si canvia la temperatura · cada cert temps · en canviar de filtre · si puja l'HFR | Un autoenfocament abans de la presa següent quan es compleix la seva condició |
-| **Disparador** | Recentrar si es desvia | Resol i corregeix quan l'objectiu es desvia més de 0,5′ a 5′ |
+| **Disparador** | Recentrar si es desvia | Resol i corregeix quan l'objectiu es desvia més d'1′ a 10′ (20 px com a mínim) |
 | **Disparador** | Darks si canvia la temperatura | Darks amb el filtre fosc quan el sensor canvia 2, 3 o 5 °C, per a l'apilat en directe |
 | **Condició** | Repetir N vegades · Repetir fins a una hora · Repetir mentre sigui alt | Repeteix tot el contenidor |
 | **Plantilla** | Objectiu amb autoenfocament · les teves | Un objectiu de Cel amb anar i centrar, autoenfocament i exposicions; o qualsevol bloc que hagis desat com a plantilla |

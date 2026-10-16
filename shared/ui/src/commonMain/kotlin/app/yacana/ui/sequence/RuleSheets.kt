@@ -4,17 +4,22 @@
 
 package app.yacana.ui.sequence
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.yacana.domain.sequence.DITHER_EVERY
@@ -32,6 +37,7 @@ import app.yacana.ui.resources.heater_intro
 import app.yacana.ui.resources.heater_note
 import app.yacana.ui.resources.heater_switch
 import app.yacana.ui.resources.imaging_dither_hint
+import app.yacana.ui.resources.recentre_floor
 import app.yacana.ui.resources.recentre_intro
 import app.yacana.ui.resources.recentre_note
 import app.yacana.ui.resources.recentre_switch
@@ -41,20 +47,31 @@ import app.yacana.ui.resources.rules_recentre
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
 
-/** The design's choices: how far the field may drift, every how many frames the lights dither, the heater's power. */
-private val ARCMINUTES = listOf(0.5, 1.0, 2.0, 5.0)
+/**
+ * The design's choices: how far the field may drift, from 1′ (N.I.N.A.'s default is 10′, and 0.5′
+ * is less than a dither moves a Seestar's field), every how many frames the lights dither, the heater's power.
+ */
+private val ARCMINUTES = listOf(1.0, 2.0, 5.0, 10.0)
 private val FRAMES = listOf(1, DITHER_EVERY, 5, 10)
 private val POWERS = listOf(0.25, 0.5, 0.75, 1.0)
 private const val PERCENT = 100
+private const val ARCSEC_PER_ARCMIN = 60.0
+private const val WHOLE_FROM = 10.0
+
+/** Arcminutes as the rules show them: "1", "1,5", and whole from 10, as "19". */
+internal fun arcminutesText(arcminutes: Double, comma: Boolean): String =
+    formatDecimal(arcminutes, if (arcminutes >= WHOLE_FROM || arcminutes % 1.0 == 0.0) 0 else 1, comma)
 
 /**
  * The design "Sequence · recentring": whether tonight's plan recentres when the field drifts from
- * the target, and how far it may drift; the other [triggers] stay as they are. Each change is the
- * plan's, so "Undo" undoes it.
+ * the target, and how far it may drift, in pixels too with the connected camera's [pixelScale], as
+ * N.I.N.A. shows it; when that is under the 20 pixels a dither may move the field, it says the
+ * night waits for those. The other [triggers] stay as they are. Each change is the plan's, so
+ * "Undo" undoes it.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun RecentringSheet(triggers: List<Trigger>, onChange: (List<Trigger>) -> Unit) {
+internal fun RecentringSheet(triggers: List<Trigger>, pixelScale: Double?, onChange: (List<Trigger>) -> Unit) {
     val comma = decimalComma()
     val recentre = triggers.filterIsInstance<Trigger.RecentreAfterDrift>().firstOrNull()
 
@@ -67,15 +84,38 @@ internal fun RecentringSheet(triggers: List<Trigger>, onChange: (List<Trigger>) 
     Text(stringResource(Res.string.rules_recentre), style = MaterialTheme.typography.titleMedium)
     Muted(stringResource(Res.string.recentre_intro))
     Toggle(stringResource(Res.string.recentre_switch), recentre != null) { on ->
-        setting(if (on) Trigger.RecentreAfterDrift(ARCMINUTES[1]) else null)
+        setting(if (on) Trigger.RecentreAfterDrift() else null)
     }
     recentre?.let { current ->
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ARCMINUTES.forEach { arcminutes ->
+            (ARCMINUTES + current.arcminutes).distinct().sorted().forEach { arcminutes ->
+                val pixels = pixelScale?.let { " · ${(arcminutes * ARCSEC_PER_ARCMIN / it).roundToInt()} px" }.orEmpty()
                 FilterChip(
                     selected = current.arcminutes == arcminutes,
                     onClick = { setting(Trigger.RecentreAfterDrift(arcminutes)) },
-                    label = { Text("${formatDecimal(arcminutes, if (arcminutes % 1.0 == 0.0) 0 else 1, comma)}′") },
+                    label = { Text("${arcminutesText(arcminutes, comma)}′$pixels") },
+                )
+            }
+        }
+        val limit = current.limitArcmin(pixelScale)
+        if (limit > current.arcminutes) {
+            Row(
+                Modifier
+                    .padding(top = 4.dp)
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.surfaceContainerHigh, RoundedCornerShape(10.dp))
+                    .padding(10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(YacanaIcons.Info, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(18.dp))
+                Text(
+                    stringResource(
+                        Res.string.recentre_floor,
+                        arcminutesText(limit, comma),
+                        Trigger.RecentreAfterDrift.MIN_PIXELS.roundToInt(),
+                    ),
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(start = 8.dp),
                 )
             }
         }

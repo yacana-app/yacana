@@ -453,7 +453,7 @@ class SequenceRunner(
      */
     private suspend fun recentre(scope: Scope) {
         val target = scope.target
-        val limit = scope.recentre.minOfOrNull { it.arcminutes }
+        val limit = scope.recentre.minOfOrNull { it.limitArcmin(steps.pixelScale) }
         if (target == null || limit == null) return
         // The last light is on screen once it is saved.
         capture.sequenceSaved()
@@ -461,7 +461,7 @@ class SequenceRunner(
         solved = last
         val off = centring.driftArcmin(last, target.position)
         if (off != null && off > limit) {
-            journal.log("sequence_recentre", "target" to target.name, "off" to off)
+            journal.log("sequence_recentre", "target" to target.name, "off" to off, "limit" to limit)
             goTo(GoToTarget(centre = true), target)
         }
     }

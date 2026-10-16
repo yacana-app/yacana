@@ -123,6 +123,8 @@ fun SequenceTonight(
     val heaterRule by targets.heater.collectAsState()
     val sequence = advanced ?: tonightSequence(list, triggers, equipmentState, darks, heaterRule)
     val heater = connected?.switches?.switches?.let(::dewHeater)
+    // The connected camera's scale, so recentring says its pixels as the night will run it.
+    val pixelScale = connected?.camera?.info?.let { connected.profile.optics.pixelScaleArcsec(it.pixelSizeX) }
     // The profile's focuser runs the triggers, connected or not yet.
     val focuser = profile?.devices?.focuser != null
     var autofocusOpen by remember { mutableStateOf(false) }
@@ -177,6 +179,7 @@ fun SequenceTonight(
                             dither = { ditherOpen = true },
                             heater = heater?.let { { heaterOpen = true } },
                         ).takeUnless { running },
+                        pixelScale,
                     )
                 }
                 if (!running) AddTarget { open(Screen.Root(Section.Sky)) }
@@ -214,7 +217,7 @@ fun SequenceTonight(
     }
 
     if (recentreOpen) {
-        BottomSheet({ recentreOpen = false }) { RecentringSheet(triggers, targets::setTriggers) }
+        BottomSheet({ recentreOpen = false }) { RecentringSheet(triggers, pixelScale, targets::setTriggers) }
     }
 
     if (ditherOpen) {

@@ -1114,7 +1114,7 @@ Os botões por baixo alteram-nas:
 
   Se um autofoco falhar, esperam pelas exposições seguintes.
 - **Darks:** Ao começar, quando a temperatura do sensor muda, no fim com o bias, e quantos de cada vez ([capítulo 23](#calibration)).
-- **Recentragem:** ativada ou não, e quanto o campo se pode desviar: 0,5′, 1′, 2′ ou 5′. Com um bom alinhamento polar, recentra uma ou duas vezes por hora.
+- **Recentragem:** ativada ou não, e quanto o campo se pode desviar: 1′, 2′, 5′ ou 10′, cada um também em píxeis da câmara ligada. Nunca recentra por menos de 20 px, o que um dithering pode mover; com uma câmara grande angular isso é mais do que qualquer opção, e a folha avisa. Com um bom alinhamento polar, recentra uma ou duas vezes por hora.
 - **Dithering:** ativado ou não, e a cada 1, 3, 5 ou 10 imagens, para os lights de todos os alvos. Cada dithering espera que a montagem estabilize.
 - **Resistência anti-orvalho**, se o equipamento ligado tiver uma: ligada ou não durante a noite, e a sua potência se for regulável. Gasta bateria: desliga-a em noites secas e amenas.
 
@@ -1186,7 +1186,7 @@ O catálogo tem uma caixa de pesquisa e botões por tipo: câmara, montagem, foc
 | **Contentor** | Alvo | Um alvo de Céu, com o seu enquadramento; vem com «Ir e centrar» |
 | **Contentor** | Sequencial · Paralelo | As suas instruções uma após outra, ou ao mesmo tempo, como esperar por uma hora enquanto a câmara arrefece |
 | **Gatilho** | Autofoco se a temperatura mudar · de tempos a tempos · ao mudar de filtro · se o HFR subir | Um autofoco antes da imagem seguinte quando a sua condição se cumpre |
-| **Gatilho** | Recentrar se se desviar | Resolve e corrige quando o alvo se desvia mais de 0,5′ a 5′ |
+| **Gatilho** | Recentrar se se desviar | Resolve e corrige quando o alvo se desvia mais de 1′ a 10′ (20 px no mínimo) |
 | **Gatilho** | Darks se a temperatura mudar | Darks com o filtro escuro quando o sensor muda 2, 3 ou 5 °C, para o empilhamento ao vivo |
 | **Condição** | Repetir N vezes · Repetir até uma hora · Repetir enquanto estiver alto | Repete o contentor inteiro |
 | **Modelo** | Alvo com autofoco · os seus | Um alvo de Céu com ir e centrar, autofoco e exposições; ou qualquer bloco que tenha guardado como modelo |

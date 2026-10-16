@@ -1503,6 +1503,7 @@
     <string name="recentre_intro">Vor jeder Light-Aufnahme wird die vorige gelöst; ist das Feld weiter als das vom Ziel abgedriftet, zentriert die Montierung es neu.</string>
     <string name="recentre_switch">Bei Drift vom Ziel</string>
     <string name="recentre_note">Es ersetzt die Nachführkontrolle, wenn die Ausrüstung keine hat, damit der Stack die ganze Nacht sein Feld behält. Mit guter Polausrichtung zentriert es ein- oder zweimal pro Stunde neu, jedes Mal in weniger als einer Minute.</string>
+    <string name="recentre_floor">Mit dieser Kamera wird erst ab %1$s′ (%2$d px) neu zentriert: Weniger bewegt schon ein Dithering.</string>
     <string name="rules_dither">Dithering</string>
     <string name="dither_switch">Zwischen Light-Aufnahmen</string>
     <string name="dither_every_frame">Jede Aufnahme</string>

@@ -1114,7 +1114,7 @@ I pulsanti sotto le cambiano:
 
   Se un autofocus fallisce, aspettano le esposizioni successive.
 - **Dark:** All'inizio, quando cambia la temperatura del sensore, alla fine con il bias, e quanti ogni volta ([capitolo 23](#calibration)).
-- **Ricentraggio:** attivo o no, e di quanto può derivare il campo: 0,5′, 1′, 2′ o 5′. Con un buon allineamento polare ricentra una o due volte all'ora.
+- **Ricentraggio:** attivo o no, e di quanto può derivare il campo: 1′, 2′, 5′ o 10′, ognuno anche in pixel della fotocamera collegata. Non ricentra mai per meno di 20 px, quanto può spostare un dithering; con una fotocamera grandangolare è più di qualsiasi scelta, e il foglio lo segnala. Con un buon allineamento polare ricentra una o due volte all'ora.
 - **Dithering:** attivo o no, e ogni 1, 3, 5 o 10 pose, per le pose light di tutti i target. Ogni dithering aspetta che la montatura si stabilizzi.
 - **Fascia anticondensa**, se l'attrezzatura collegata ne ha una: accesa o no durante la notte, e la sua potenza se è regolabile. Consuma batteria: spegnila nelle notti secche e miti.
 
@@ -1186,7 +1186,7 @@ Il catalogo ha una casella di ricerca e pulsanti per tipo: camera, montatura, fu
 | **Contenitore** | Oggetto | Un oggetto da Cielo, con la sua inquadratura; arriva con «Vai e centra» |
 | **Contenitore** | Sequenziale · Parallelo | Le sue istruzioni una dopo l'altra, oppure insieme, come attendere un'ora mentre la camera si raffredda |
 | **Trigger** | Autofocus se cambia la temperatura · ogni tanto · al cambio filtro · se l'HFR cresce | Un autofocus prima della posa successiva quando vale la sua condizione |
-| **Trigger** | Ricentra se deriva | Risolve e corregge quando l'oggetto deriva oltre una soglia da 0,5′ a 5′ |
+| **Trigger** | Ricentra se deriva | Risolve e corregge quando l'oggetto deriva oltre una soglia da 1′ a 10′ (almeno 20 px) |
 | **Trigger** | Dark se cambia la temperatura | Dark con il filtro scuro quando il sensore cambia di 2, 3 o 5 °C, per lo stack dal vivo |
 | **Condizione** | Ripeti N volte · Ripeti fino a un'ora · Ripeti finché è alto | Ripete l'intero contenitore |
 | **Modello** | Oggetto con autofocus · i tuoi | Un oggetto da Cielo con vai e centra, autofocus ed esposizioni; oppure qualsiasi blocco salvato come modello |

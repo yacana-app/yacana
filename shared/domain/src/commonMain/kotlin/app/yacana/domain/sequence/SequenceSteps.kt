@@ -132,6 +132,9 @@ internal class SequenceSteps(private val equipment: EquipmentController, private
     /** The sequence's dithers, around where each target was framed: reset as it goes to one. */
     val dithers = Dither(random)
 
+    /** The camera's scale in arcseconds per pixel, from the profile's optics, or 2″ without them. */
+    val pixelScale: Double get() = connected().pixelScale()
+
     /** Dithers without a guider, as N.I.N.A.'s direct guider; returns where the field is now, around where it began. */
     suspend fun dither(options: DitherOptions): DitherOffset = dithers.move(mount(), options, connected().pixelScale())
 

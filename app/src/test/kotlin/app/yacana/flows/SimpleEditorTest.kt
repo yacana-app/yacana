@@ -12,6 +12,7 @@ import app.yacana.ui.Section
 import app.yacana.ui.navigation.Screen
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 /** "Sequence · simple editor" as it is touched: a target's exposures, removing and undoing, saving tonight. */
@@ -57,6 +58,18 @@ class SimpleEditorTest : FlowTest() {
         toggle(0)
 
         assertTrue(services.targets.triggers.value.none { it is Trigger.RecentreAfterDrift })
+    }
+
+    @Test
+    fun theRecentringSheetSaysItsChoicesInPixelsOfTheConnectedCamera() {
+        show(Section.Sequence, Screen.SequenceTonight, connected = true)
+
+        tap("Recentring")
+
+        // The Seestar's main camera, 2.248″ a pixel, as N.I.N.A.'s Center After Drift says them.
+        assertTrue(appears("1′ · 27 px"))
+        assertTrue(appears("10′ · 267 px"))
+        assertFalse(shows("With this camera", substring = true), "its 1′ is more than the 20 px a dither moves")
     }
 
     @Test

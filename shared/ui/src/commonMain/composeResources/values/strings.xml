@@ -1505,6 +1505,7 @@
     <string name="recentre_intro">Before each light frame, the frame before is solved; if the field has drifted further than this from the target, the mount centres it again.</string>
     <string name="recentre_switch">If it drifts from the target</string>
     <string name="recentre_note">It stands in for guiding when the equipment has none, so the stack keeps its field all night. With a good polar alignment it recentres once or twice an hour, each time under a minute.</string>
+    <string name="recentre_floor">With this camera it recentres only past %1$s′ (%2$d px): less is what a dither moves.</string>
     <string name="rules_dither">Dither</string>
     <string name="dither_switch">Between light frames</string>
     <string name="dither_every_frame">Every frame</string>

@@ -220,7 +220,20 @@ sealed interface Trigger {
      */
     @Serializable
     @SerialName("recentre")
-    data class RecentreAfterDrift(val arcminutes: Double = 1.0) : Trigger
+    data class RecentreAfterDrift(val arcminutes: Double = 1.0) : Trigger {
+        /**
+         * How far it lets the field drift with a camera of [pixelScaleArcsec]: [arcminutes], but
+         * never under [MIN_PIXELS], about the most a dither moves the field. A wide-angle camera's
+         * pixels are of about a minute, so its arcminute would recentre after each dither.
+         */
+        fun limitArcmin(pixelScaleArcsec: Double?): Double = maxOf(arcminutes, (pixelScaleArcsec ?: 0.0) * MIN_PIXELS / ARCSEC_PER_ARCMIN)
+
+        companion object {
+            /** N.I.N.A.'s dither reaches 3 × 5 pixels, and a Seestar's grid 17 of its main camera. */
+            const val MIN_PIXELS = 20.0
+            private const val ARCSEC_PER_ARCMIN = 60.0
+        }
+    }
 
     /**
      * Before a light frame, [count] darks with its exposure, gain, offset and binning, behind the

@@ -1114,7 +1114,7 @@ Azpiko botoiek aldatzen dituzte:
 
   Foku automatiko batek huts egiten badu, hurrengo esposizioen zain geratzen dira.
 - **Darkak:** Hastean, sentsorearen tenperatura aldatzen denean, amaitzean biasarekin, eta zenbat aldi bakoitzean ([23. kapitulua](#calibration)).
-- **Berriro zentratzea:** aktibatuta edo ez, eta eremua zenbat desbidera daitekeen: 0,5′, 1′, 2′ edo 5′. Lerrokatze polar onarekin orduko behin edo bitan zentratzen du berriro.
+- **Berriro zentratzea:** aktibatuta edo ez, eta eremua zenbat desbidera daitekeen: 1′, 2′, 5′ edo 10′, bakoitza konektatutako kameraren pixeletan ere bai. Ez du inoiz berriro zentratzen 20 px baino gutxiagogatik, dithering batek mugi dezakeena; angelu zabaleko kamera batekin hori edozein aukera baino gehiago da, eta orriak abisatzen du. Lerrokatze polar onarekin orduko behin edo bitan zentratzen du berriro.
 - **Dithering:** aktibatuta edo ez, eta 1, 3, 5 edo 10 argazkiz behin, helburu guztien light argazkietarako. Dithering bakoitzak muntaia egonkortu arte itxaroten du.
 - **Ihintz-berogailua**, konektatutako ekipoak badu: piztuta edo ez gauean zehar, eta bere potentzia erregulagarria bada. Bateria kontsumitzen du: itzali gau lehor eta epeletan.
 
@@ -1186,7 +1186,7 @@ Katalogoak bilaketa-koadro bat eta motaren araberako botoiak ditu: kamera, muntu
 | **Edukiontzia** | Helburua | Zerua ataleko helburu bat, bere enkoadraketarekin; «Joan eta zentratu» dakar |
 | **Edukiontzia** | Sekuentziala · Paraleloa | Bere aginduak bata bestearen atzetik, edo aldi berean, adibidez ordu baten zain egotea kamera hozten den bitartean |
 | **Abiarazlea** | Foku automatikoa tenperatura aldatzean · noizean behin · iragazkia aldatzean · HFRa handitzen bada | Foku automatiko bat hurrengo argazkiaren aurretik, bere baldintza betetzen denean |
-| **Abiarazlea** | Berriro zentratu desbideratzen bada | Ebatzi eta zuzendu egiten du helburua 0,5′ eta 5′ arteko balio bat baino gehiago desbideratzen denean |
+| **Abiarazlea** | Berriro zentratu desbideratzen bada | Ebatzi eta zuzendu egiten du helburua 1′ eta 10′ arteko balio bat baino gehiago (gutxienez 20 px) desbideratzen denean |
 | **Abiarazlea** | Darkak tenperatura aldatzen bada | Darkak iragazki ilunarekin sentsorea 2, 3 edo 5 °C aldatzen denean, zuzeneko pilaketarako |
 | **Baldintza** | Errepikatu N aldiz · Errepikatu ordu batera arte · Errepikatu altu dagoen bitartean | Edukiontzi osoa errepikatzen du |
 | **Txantiloia** | Helburua foku automatikoarekin · zureak | Zerua ataleko helburu bat, joan eta zentratu, foku automatikoa eta esposizioekin; edo txantiloi gisa gorde duzun edozein bloke |
