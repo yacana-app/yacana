@@ -41,7 +41,6 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -135,6 +134,7 @@ import app.yacana.ui.resources.type_dark
 import app.yacana.ui.resources.type_flat
 import app.yacana.ui.resources.type_light
 import app.yacana.ui.theme.LocalPhotoFilter
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -234,13 +234,16 @@ internal fun BinningChoice(capture: CaptureController, info: CameraInfo, close: 
     }
 }
 
-/** The filter wheel's filters; the chip shows the wheel's live position, so it shows whether it moved. */
+/**
+ * The filter wheel's filters; the chip shows the wheel's live position, so it shows whether it
+ * moved. The wheel turns in [scope], the screen's: the sheet closes at once, and a Seestar slow to
+ * answer would otherwise never be told.
+ */
 @Composable
-internal fun FilterChoice(equipment: EquipmentController, close: () -> Unit) {
+internal fun FilterChoice(equipment: EquipmentController, scope: CoroutineScope, close: () -> Unit) {
     val state by equipment.state.collectAsState()
     val wheel = (state.connection as? Connection.Connected)?.equipment?.filterWheel ?: return
     val position by wheel.position.collectAsState()
-    val scope = rememberCoroutineScope()
     Text(stringResource(Res.string.imaging_filter), style = MaterialTheme.typography.titleMedium)
     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         wheel.names.forEachIndexed { index, name ->

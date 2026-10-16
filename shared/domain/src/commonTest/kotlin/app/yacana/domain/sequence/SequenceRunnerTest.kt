@@ -137,9 +137,10 @@ class SequenceRunnerTest : RunnerFixture() {
             assertTrue(path.startsWith("2026-10-04/M 31/LIGHT/"), path)
             assertEquals("LP", headers.text("FILTER"))
         }
-        // After the second frame, not after the last.
+        // After the second frame, not after the last; the Seestar's by a slew, not by its pulses.
         assertEquals(1, events.count { it.first == "sequence_dither" })
-        assertTrue(seestar.puts.any { it.first == "telescope/0/pulseguide" })
+        assertTrue(seestar.puts.none { it.first == "telescope/0/pulseguide" })
+        assertTrue(seestar.puts.any { it.first == "telescope/0/slewtocoordinatesasync" })
     }
 
     @Test

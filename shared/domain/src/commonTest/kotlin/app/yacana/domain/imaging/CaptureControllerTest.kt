@@ -119,6 +119,7 @@ class CaptureControllerTest {
         location: Location? = null,
         focuser: Boolean = false,
         stacking: LiveStacking? = null,
+        mount: String = "Seestar Telescope",
     ): CaptureController {
         val http = fakeHttp(StandardTestDispatcher(testScheduler), seestar)
         val platform =
@@ -139,7 +140,7 @@ class CaptureControllerTest {
                 name = "Seestar S50 Pro",
                 devices =
                 ProfileDevices(
-                    mount = DeviceRef(seestar.url, 0, "mount-1", "Seestar Telescope"),
+                    mount = DeviceRef(seestar.url, 0, "mount-1", mount),
                     camera = DeviceRef(seestar.url, 0, "camera-0", "Seestar Telephoto Camera"),
                     filterWheel = if (wheel) DeviceRef(seestar.url, 0, "filterwheel-0", "Seestar Filter Wheel") else null,
                     focuser = if (focuser) DeviceRef(seestar.url, 0, "focuser-0", "Seestar Focuser") else null,
@@ -729,7 +730,8 @@ class CaptureControllerTest {
 
     @Test
     fun aLoopOfLightsDithersEveryThreeFramesAndOneOfDarksNever() = runTest {
-        val capture = connected()
+        // A mount whose guide pulses go where they are sent: the Seestar's dither by a GoTo.
+        val capture = connected(mount = "Telescope Simulator")
         capture.update(CaptureSettings(exposureSeconds = 5.0))
 
         capture.startLoop()

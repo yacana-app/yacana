@@ -4,6 +4,8 @@
 
 package app.yacana.domain.sequence
 
+import app.yacana.domain.equipment.separationArcsec
+import app.yacana.ports.SkyPosition
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -11,7 +13,7 @@ import kotlin.test.assertTrue
 
 /**
  * The equipment's instructions of a sequence: the cooler, a switch by its name, and
- * dithering with a mount that cannot pulse guide.
+ * dithering with a mount that cannot pulse guide or a Seestar, whose pulses go astray.
  */
 class SequenceStepsTest : RunnerFixture() {
     private fun night(vararg items: SequenceItem) = Sequence("Tonight", Block("Tonight", items.toList()))
@@ -68,5 +70,33 @@ class SequenceStepsTest : RunnerFixture() {
         assertTrue(sent("telescope/0/pulseguide").isEmpty())
         // The GoTo to M 31, then a slew to dither after each frame but the last.
         assertTrue(sent("telescope/0/slewtocoordinatesasync").size >= 2, seestar.puts.map { it.first }.toString())
+    }
+
+    @Test
+    fun aSeestarDithersByAGoToAroundWhereTheFieldBegan() = runTest {
+        // Each slew lands 20″ north of where it was sent, as the Seestar's within about 15″.
+        val camera = seestar.onPut
+        seestar.onPut = { member, form ->
+            camera(member, form)
+            if (member == "telescope/0/slewtocoordinatesasync") {
+                seestar.values["telescope/0/rightascension"] = form.getValue("RightAscension")
+                seestar.values["telescope/0/declination"] = (form.getValue("Declination").toDouble() + 20.0 / 3600).toString()
+            }
+        }
+        val target = Block("M 31", listOf(GoToTarget(centre = false), Exposures(6, 10.0, ditherEvery = 1)), target = m31)
+
+        val run = runner().runToTheEnd(night(target))
+
+        assertEquals(RunStatus.Finished, run.status, run.error)
+        assertTrue(sent("telescope/0/pulseguide").isEmpty(), "its pulses go astray")
+        val slews = sent("telescope/0/slewtocoordinatesasync").map {
+            SkyPosition(it.getValue("RightAscension").toDouble(), it.getValue("Declination").toDouble())
+        }
+        val dithers = slews.drop(1)
+        assertEquals(5, dithers.size)
+        assertEquals(5, dithers.distinct().size)
+        // Within 3 × 5 pixels of 2″ of where the GoTo to M 31 landed: the slews' 20″ do not add up.
+        val began = slews.first().let { SkyPosition(it.raHours, it.decDeg + 20.0 / 3600) }
+        assertTrue(dithers.all { separationArcsec(it, began) <= 30.0 + 1e-6 }, dithers.map { separationArcsec(it, began) }.toString())
     }
 }
