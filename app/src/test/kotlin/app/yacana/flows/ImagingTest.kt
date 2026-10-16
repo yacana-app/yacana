@@ -65,6 +65,8 @@ class ImagingTest : FlowTest() {
     @Test
     fun theFilterSheetTurnsTheWheel() {
         imaging()
+        // Slow to say where its wheel is, the Seestar answers after the sheet has closed.
+        seestar.slow["filterwheel/0/position"] = 1_000
 
         tap("IR")
         tap("LP")

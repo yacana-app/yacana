@@ -11,6 +11,8 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpMethod
 import io.ktor.http.content.OutgoingContent
 import io.ktor.http.headersOf
+import kotlinx.coroutines.delay
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * A Seestar S50 Pro in memory, with the devices and values that spike S3 read from the real one,
@@ -100,6 +102,9 @@ class FakeSeestar {
         synchronized(puts) { values[member] = value }
     }
 
+    /** How long the answer to a member takes, in milliseconds, as the Seestar's busy wheel: none unless a test says. */
+    val slow: MutableMap<String, Long> = ConcurrentHashMap()
+
     /** Every PUT it was sent, in order: the member and its parameters. */
     val puts = mutableListOf<Pair<String, Map<String, String>>>()
 
@@ -125,6 +130,7 @@ class FakeSeestar {
                         ?.map { it.substringBefore('=') to it.substringAfter('=') }
                         ?.filter { it.first != "ClientID" && it.first != "ClientTransactionID" }
                         .orEmpty()
+                slow[request.url.encodedPath.removePrefix("/api/v1/")]?.let { delay(it) }
                 respond(answer(request.method, request.url.encodedPath, form), headers = headersOf("Content-Type", "application/json"))
             },
         ) { alpacaDefaults() }
