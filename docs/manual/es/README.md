@@ -2,7 +2,7 @@
 
 <img src="images/yacana-banner.png" width="320" alt="Yacana">
 
-**Manual de usuario · versión 1.0.0**
+**Manual de usuario · versión 1.0.1**
 
 # Toda la noche, desde tu móvil
 
@@ -1671,6 +1671,6 @@ Las fotos del cielo no forman parte de la app. Las descargas de la web de N.I.N.
 
 ---
 
-Manual de usuario de Yacana, para la versión 1.0.0. Las pantallas son las capturas de referencia de la propia app; las fotos del cielo que aparecen en ellas son de la caché DSS de N.I.N.A., y el apilado de M 31 son 544 tomas de 20 s hechas con un Seestar S50 Pro y procesadas después.
+Manual de usuario de Yacana, para la versión 1.0.1. Las pantallas son las capturas de referencia de la propia app; las fotos del cielo que aparecen en ellas son de la caché DSS de N.I.N.A., y el apilado de M 31 son 544 tomas de 20 s hechas con un Seestar S50 Pro y procesadas después.
 
 ¿Has encontrado algo que está mal o que falta? Abre una incidencia en el [gestor de incidencias del proyecto](https://github.com/yacana-app/yacana/issues).
