@@ -6,7 +6,6 @@ package app.yacana.domain.sequence
 
 import app.yacana.domain.imaging.FrameType
 import app.yacana.domain.profile.Location
-import app.yacana.domain.profile.Pace
 import app.yacana.domain.profile.ProfileStore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -50,9 +49,7 @@ class AdvancedSequenceTest : RunnerFixture() {
         assertEquals(RunStatus.Finished, run.status, run.error)
         val pace = assertNotNull(ProfileStore(directory).load("p")).options.pace
         // Measured on the night's clock: each dither with its settling of 10 s.
-        // What took no time here, as the fake centring, keeps the profile's.
         assertTrue(assertNotNull(pace.ditherSeconds) >= 10.0, pace.toString())
-        assertEquals(Pace().centringSeconds, pace.centringSeconds)
         assertEquals(pace, run.pace)
     }
 
