@@ -38,6 +38,7 @@ import app.yacana.domain.imaging.FrameType
 import app.yacana.domain.imaging.HistoryFrame
 import app.yacana.domain.profile.DitherOptions
 import app.yacana.domain.profile.Location
+import app.yacana.domain.profile.Pace
 import app.yacana.domain.sequence.RunOverview
 import app.yacana.domain.sequence.RunStatus
 import app.yacana.domain.sequence.SequenceRun
@@ -103,9 +104,10 @@ fun RunningNight(
     zone: TimeZone,
     dither: DitherOptions,
     stack: StackCard? = null,
+    pace: Pace = Pace(),
     onStack: () -> Unit = {},
 ) {
-    val overview = run.overview(now, dither)
+    val overview = run.overview(now, dither, pace)
     TargetCard(overview, site, now)
     FrameCard(run, overview, activity, now)
     ProgressCard(overview, dawn, zone)

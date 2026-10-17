@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.yacana.domain.profile.DitherOptions
+import app.yacana.domain.profile.Pace
 import app.yacana.domain.sequence.Exposures
 import app.yacana.domain.sequence.Target
 import app.yacana.domain.sequence.duration
@@ -71,6 +72,7 @@ internal fun ExposuresSheet(
     row: Int,
     filters: List<String>,
     dither: DitherOptions,
+    pace: Pace,
     start: Instant?,
     dawn: Instant?,
     zone: TimeZone,
@@ -152,9 +154,9 @@ internal fun ExposuresSheet(
     }
     Label(stringResource(Res.string.exposures_count))
     var typed by remember { mutableStateOf(count) }
-    val taking = target.copy(exposures = rows(typed)).duration(dither)
+    val taking = target.copy(exposures = rows(typed)).duration(dither, pace)
     val end = start?.plus(taking)
-    val these = first.copy(exposureSeconds = seconds, count = typed).duration(dither) * target.panels.size.coerceAtLeast(1)
+    val these = first.copy(exposureSeconds = seconds, count = typed).duration(dither, pace) * target.panels.size.coerceAtLeast(1)
     val hint =
         listOfNotNull(
             "≈ ${shortDuration(these)}",

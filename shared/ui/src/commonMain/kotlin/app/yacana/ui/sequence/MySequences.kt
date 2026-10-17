@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import app.yacana.domain.equipment.EquipmentController
 import app.yacana.domain.profile.DitherOptions
+import app.yacana.domain.profile.Pace
 import app.yacana.domain.sequence.Block
 import app.yacana.domain.sequence.NightPlan
 import app.yacana.domain.sequence.RunStatus
@@ -101,6 +102,7 @@ fun MySequences(
     val run by runner.state.collectAsState()
     val profile = equipment.state.collectAsState().value.active
     val dither = profile?.options?.dither ?: DitherOptions()
+    val triggers by targets.triggers.collectAsState()
     var deleting by remember { mutableStateOf<String?>(null) }
 
     Box(Modifier.fillMaxSize()) {
@@ -108,12 +110,20 @@ fun MySequences(
             val now = clock.now()
             val minute = now.epochSeconds / SECONDS_PER_MINUTE
             val night = remember(profile?.location, minute) { profile?.location?.let { planNight(now, zone(), it) } }
-            val plan = NightPlan.of(list, now, night?.astronomicalDusk, night?.astronomicalDawn, dither)
+            val plan = NightPlan.of(
+                list,
+                now,
+                night?.astronomicalDusk,
+                night?.astronomicalDawn,
+                dither,
+                profile.pace(),
+                profile.foreseeing(triggers),
+            )
             Tonight(list, plan, run?.status == RunStatus.Running, zone()) { open(Screen.SequenceTonight) }
             Heading(stringResource(Res.string.my_saved))
             if (sequences.isEmpty()) Muted(stringResource(Res.string.my_saved_none), Modifier.padding(horizontal = 20.dp))
             sequences.forEach { sequence ->
-                SavedRow(sequence, dither, onOpen = {
+                SavedRow(sequence, dither, profile.pace(), onOpen = {
                     // In the plan, with its triggers or tonight's if it was saved without a focuser; or as an advanced night.
                     targets.open(sequence)
                     open(Screen.SequenceTonight)
@@ -172,7 +182,7 @@ private fun Tonight(list: List<Target>, plan: NightPlan, running: Boolean, zone:
 /** A saved sequence: its name, how many targets or panels, and how long; a tap opens it, holding it deletes it. */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun SavedRow(sequence: Sequence, dither: DitherOptions, onOpen: () -> Unit, onHold: () -> Unit) {
+private fun SavedRow(sequence: Sequence, dither: DitherOptions, pace: Pace, onOpen: () -> Unit, onHold: () -> Unit) {
     val targets = sequence.simpleTargets().orEmpty()
     val panels = targets.singleOrNull()?.panels?.size?.takeIf { it > 1 }
     // An advanced night counts the blocks of its targets' area.
@@ -180,7 +190,7 @@ private fun SavedRow(sequence: Sequence, dither: DitherOptions, onOpen: () -> Un
     val size =
         panels?.let { stringResource(Res.string.my_panels, it) }
             ?: pluralStringResource(Res.plurals.my_targets, count, count)
-    val time = targets.fold(Duration.ZERO) { sum, target -> sum + target.duration(dither) }
+    val time = targets.fold(Duration.ZERO) { sum, target -> sum + target.duration(dither, pace) }
     Row(
         Modifier
             .fillMaxWidth()

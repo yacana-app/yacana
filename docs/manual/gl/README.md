@@ -1075,7 +1075,7 @@ Os obxectivos veñen de Ceo: encadra un e toca **Engadir á secuencia** ([capít
 
 ### Plan desta noite
 
-A liña de tempo mostra cada obxectivo desde o seu comezo ata o seu final, e o amencer. Se o plan pasa do amencer astronómico, indica que obxectivo remataría e cando, e a hora final dese obxectivo cambia á cor de aviso. **Desfacer** desfai o último cambio, ata 50 cambios atrás.
+A liña de tempo mostra cada obxectivo desde o seu comezo ata o seu final, e o amencer. Se o plan pasa do amencer astronómico, indica que obxectivo remataría e cando, e a hora final dese obxectivo cambia á cor de aviso. **Desfacer** desfai o último cambio, ata 50 cambios atrás. Os tempos saen do que tardou o teu equipo na súa última noite: cada toma ademais da súa exposición, cada dither, cada autoenfoque e cada centrado. Cóntanse os autoenfoques cada tantos minutos e ao cambiar de filtro; os de temperatura ou HFR non se poden prever.
 
 ### A tarxeta dun obxectivo
 
@@ -1227,7 +1227,7 @@ Todo o que necesitas cabe nunha pantalla sen desprazarse:
 
 - **O obxectivo:** o seu nome, panel e filtro, e a súa altura cunha frecha que indica se sobe ou baixa.
 - **A toma:** un anel cos segundos que faltan, *Toma 35 de 120*, o filtro e a ganancia.
-- **Progreso:** a porcentaxe da secuencia e cando remata, fronte ao amencer astronómico.
+- **Progreso:** a porcentaxe da secuencia e cando remata, fronte ao amencer astronómico. Tras unhas poucas tomas, segue o que están tardando os pasos desta noite.
 - **Última toma:** a súa miniatura, se foi boa ou descartada, o seu HFR e estrelas, e a curva de HFR da noite. Co apilado en directo activado, mostra o apilado: tócao para abrilo en Imaxe.
 - **Seguinte:** o que vén, como o seguinte autoenfoque, o cambio ao seguinte obxectivo e o aparcado, coas súas horas.
 

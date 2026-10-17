@@ -7,6 +7,7 @@ package app.yacana.domain.sequence
 import app.yacana.alpaca.SwitchInfo
 import app.yacana.domain.imaging.FrameType
 import app.yacana.domain.profile.DitherOptions
+import app.yacana.domain.profile.Pace
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -137,12 +138,24 @@ class TonightTest {
         val dawn = Instant.parse("2026-10-07T03:12:00Z")
         val dither = DitherOptions(settleSeconds = 10.0)
 
-        val plan = NightPlan.of(listOf(m33), from = Instant.parse("2026-10-06T15:00:00Z"), dusk, dawn, dither)
+        val plan = NightPlan.of(listOf(m33), from = Instant.parse("2026-10-06T15:00:00Z"), dusk, dawn, dither, Pace(frameSeconds = 3.0))
 
         // 45 frames of 63 s, 14 dithers of 12 s, and a minute to centre.
         assertEquals(dusk, plan.start)
         assertEquals(dusk + 63.seconds * 45 + 12.seconds * 14 + 1.minutes, plan.targets.single().end)
         assertNull(plan.late)
+    }
+
+    @Test
+    fun thePlanTakesTheEquipmentsMeasuredPaceAndTheAutofocusItCanForesee() {
+        val dusk = Instant.parse("2026-10-06T19:47:00Z")
+        val target = m33.copy(exposures = listOf(Exposures(count = 30, exposureSeconds = 50.0, filter = "IR", ditherEvery = 3)))
+        val pace = Pace(frameSeconds = 10.0, ditherSeconds = 15.0, autofocusSeconds = 200.0, centringSeconds = 40.0)
+
+        val plan = NightPlan.of(listOf(target), dusk, dusk, null, DitherOptions(), pace, listOf(Trigger.AutofocusAfterTime(15.0)))
+
+        // 30 frames of 60 s and 9 dithers of 15 s are 32.25 minutes: two autofocus runs; and 40 s to centre.
+        assertEquals(dusk + 60.seconds * 30 + 15.seconds * 9 + 200.seconds * 2 + 40.seconds, plan.targets.single().end)
     }
 
     @Test

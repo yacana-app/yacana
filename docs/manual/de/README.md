@@ -1075,7 +1075,7 @@ Ziele kommen aus Himmel: Lege den Bildausschnitt für eines fest und tippe auf *
 
 ### Plan für heute Nacht
 
-Die Zeitleiste zeigt jedes Ziel von seinem Beginn bis zu seinem Ende und die Morgendämmerung. Läuft der Plan über die astronomische Morgendämmerung hinaus, sagt sie, welches Ziel wann enden würde, und die Endzeit dieses Ziels nimmt die Warnfarbe an. **Rückgängig** macht die letzte Änderung rückgängig, bis zu 50 Änderungen zurück.
+Die Zeitleiste zeigt jedes Ziel von seinem Beginn bis zu seinem Ende und die Morgendämmerung. Läuft der Plan über die astronomische Morgendämmerung hinaus, sagt sie, welches Ziel wann enden würde, und die Endzeit dieses Ziels nimmt die Warnfarbe an. **Rückgängig** macht die letzte Änderung rückgängig, bis zu 50 Änderungen zurück. Die Zeiten stammen aus dem, was deine Ausrüstung in ihrer letzten Nacht brauchte: jede Aufnahme über ihre Belichtung hinaus, jedes Dithering, jeder Autofokus und jedes Zentrieren. Autofokus alle so viele Minuten und beim Filterwechsel wird mitgezählt; der nach Temperatur oder HFR lässt sich nicht vorhersehen.
 
 ### Die Kachel eines Ziels
 
@@ -1227,7 +1227,7 @@ Alles, was du brauchst, passt ohne Scrollen auf einen Bildschirm:
 
 - **Das Ziel:** sein Name, Panel und Filter, und seine Höhe mit einem Pfeil für Auf- oder Untergang.
 - **Die Aufnahme:** ein Ring mit den verbleibenden Sekunden, *Aufnahme 35 von 120*, der Filter und das Gain.
-- **Fortschritt:** der Prozentsatz der Sequenz und wann sie endet, gemessen an der astronomischen Morgendämmerung.
+- **Fortschritt:** der Prozentsatz der Sequenz und wann sie endet, gemessen an der astronomischen Morgendämmerung. Nach ein paar Aufnahmen folgt es dem, was die Schritte heute Nacht brauchen.
 - **Letzte Aufnahme:** ihr Miniaturbild, ob sie gut oder verworfen war, ihr HFR und ihre Sterne, und die HFR-Kurve der Nacht. Bei eingeschaltetem Live-Stacking zeigt sie den Stack: Tippe darauf, um ihn unter Aufnahme zu öffnen.
 - **Nächstes:** was kommt, etwa der nächste Autofokus, der Wechsel zum nächsten Ziel und das Parken, mit ihren Uhrzeiten.
 

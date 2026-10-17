@@ -1075,7 +1075,7 @@ Os alvos vêm de Céu: enquadre um e toque em **Adicionar à sequência** ([cap�
 
 ### Plano desta noite
 
-A linha do tempo mostra cada alvo do início ao fim, e o amanhecer. Se o plano passar do amanhecer astronômico, ele diz qual alvo terminaria quando, e o horário de fim desse alvo fica na cor de aviso. **Desfazer** desfaz a última alteração, até 50 alterações para trás.
+A linha do tempo mostra cada alvo do início ao fim, e o amanhecer. Se o plano passar do amanhecer astronômico, ele diz qual alvo terminaria quando, e o horário de fim desse alvo fica na cor de aviso. **Desfazer** desfaz a última alteração, até 50 alterações para trás. Os tempos vêm do que o seu equipamento levou na última noite: cada imagem além da exposição, cada dithering, cada foco automático e cada centralização. Contam-se os focos automáticos a cada tantos minutos e na troca de filtro; os por temperatura ou HFR não podem ser previstos.
 
 ### O cartão de um alvo
 
@@ -1227,7 +1227,7 @@ Tudo o que você precisa cabe em uma tela, sem rolar:
 
 - **O alvo:** seu nome, painel e filtro, e sua altura com uma seta indicando se sobe ou desce.
 - **A imagem:** um anel com os segundos restantes, *Imagem 35 de 120*, o filtro e o ganho.
-- **Progresso:** a porcentagem da sequência e quando termina, em relação ao amanhecer astronômico.
+- **Progresso:** a porcentagem da sequência e quando termina, em relação ao amanhecer astronômico. Depois de algumas imagens, acompanha o que os passos desta noite estão levando.
 - **Última imagem:** sua miniatura, se foi boa ou descartada, seu HFR e estrelas, e a curva de HFR da noite. Com o empilhamento ao vivo ativado, mostra o empilhamento: toque nele para abri-lo em Imagem.
 - **Próximo:** o que vem, como o próximo autofoco, a mudança para o próximo alvo e o estacionamento, com seus horários.
 
