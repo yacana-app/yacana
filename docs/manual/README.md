@@ -897,7 +897,7 @@ The **⋮** at the top opens them:
 - **Frame type:** Light, dark, flat or bias. It goes into the file name and the FITS header.
 - **Target, for the file name:** The name of the folder and files, such as *M 31*. Without one, frames are named *Snapshot*.
 - **Save single frames:** Loops always save.
-- **Dither loops of lights every:** *Off*, *3* (as it starts), *5* or *10* frames. Between frames the mount gets a small nudge, as N.I.N.A.'s direct guider gives it: the field moves a few pixels (5 by default) around where the loop began, so that the sensor's pattern does not build up into streaks in the stack. Darks, flats and bias are never dithered. With a Seestar, whose guide pulses go astray, it jumps instead by small GoTos between the 9 points of a grid 27″ apart.
+- **Dither loops of lights every:** *Off*, *3* (as it starts), *5* or *10* frames. Between frames the mount gets a small nudge, as N.I.N.A.'s direct guider gives it: the field moves a few pixels (5 by default) around where the loop began, so that the sensor's pattern does not build up into streaks in the stack. Darks, flats and bias are never dithered. With a Seestar, whose guide pulses go astray, it jumps instead by small GoTos between the 9 points of a grid 27″ apart; after each round the grid shifts by 9″, for 81 places in all.
 - **Offset:** If the camera has one.
 - **Automatic stretch:** On by default, as N.I.N.A.'s. Off, two sliders set the **Shadows** and the **Midtones**.
 - **Mark the stars:** Draws a box and the HFR on the brightest stars, as N.I.N.A. does; **How many**, from 10 to 500.
