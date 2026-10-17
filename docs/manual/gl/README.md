@@ -2,7 +2,7 @@
 
 <img src="images/yacana-banner.png" width="320" alt="Yacana">
 
-**Manual de usuario · versión 1.0.2**
+**Manual de usuario · versión 1.0.3**
 
 # Toda a noite, desde o teu móbil
 
@@ -1671,6 +1671,6 @@ As fotos do ceo non forman parte da app. Descárgalas da web de N.I.N.A. ou imp�
 
 ---
 
-Manual de usuario de Yacana, para a versión 1.0.2. As pantallas son as capturas de referencia da propia app; as fotos do ceo que aparecen nelas son da caché DSS de N.I.N.A., e o apilado de M 31 son 544 tomas de 20 s feitas cun Seestar S50 Pro e procesadas despois.
+Manual de usuario de Yacana, para a versión 1.0.3. As pantallas son as capturas de referencia da propia app; as fotos do ceo que aparecen nelas son da caché DSS de N.I.N.A., e o apilado de M 31 son 544 tomas de 20 s feitas cun Seestar S50 Pro e procesadas despois.
 
 Atopaches algo incorrecto ou que falta? Abre unha incidencia no [xestor de incidencias do proxecto](https://github.com/yacana-app/yacana/issues).
