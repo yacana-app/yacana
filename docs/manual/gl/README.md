@@ -1115,7 +1115,7 @@ Os botóns de debaixo cámbianas:
   Se un autoenfoque falla, agardan ás seguintes exposicións.
 - **Darks:** Ao comezar, cando cambia a temperatura do sensor, ao rematar co bias, e cantos cada vez ([capítulo 23](#calibration)).
 - **Recentrado:** activado ou non, e canto pode desviarse o campo: 1′, 2′, 5′ ou 10′, cada un tamén en píxeles da cámara conectada. Nunca recentra por menos de 20 px, o que pode mover un dither; cunha cámara gran angular iso é máis ca calquera opción, e a folla avísao. Cun bo aliñamento polar recentra unha ou dúas veces por hora.
-- **Dither:** activado ou non, e cada 1, 3, 5 ou 10 tomas, para as tomas de luz de todos os obxectivos. Cada dither agarda a que a montura se asente.
+- **Dither:** activado ou non, e cada 1, 3, 5 ou 10 tomas, para as tomas de luz de todos os obxectivos. Cada dither agarda a que a montura se asente. Cun Seestar, ou unha montura sen pulsos de guiado, cada dither parte da resolución da última toma e vai ao obxectivo máis o seu punto da grella, así que tamén desfai a deriva, como fai a propia app do Seestar.
 - **Quentador**, se o equipo conectado ten un: acendido ou non durante a noite, e a súa potencia se é regulable. Gasta batería: apágao en noites secas e temperadas.
 
 Para outras regras, como agardar a que suba un obxectivo ou repetir ata unha hora, abre o plan no editor avanzado.

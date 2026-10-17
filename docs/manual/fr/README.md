@@ -1115,7 +1115,7 @@ Les boutons en dessous les modifient :
   Si un autofocus échoue, ces règles attendent les poses suivantes.
 - **Darks:** Au début, quand la température du capteur change, à la fin avec le bias, et combien à chaque fois ([chapitre 23](#calibration)).
 - **Recentrage:** activé ou non, et de combien le champ peut dériver : 1′, 2′, 5′ ou 10′, chacun aussi en pixels de la caméra connectée. Il ne recentre jamais pour moins de 20 px, ce que peut déplacer un dithering ; avec une caméra grand angle, c'est plus que tous les choix, et la feuille le signale. Avec une bonne mise en station, il recentre une ou deux fois par heure.
-- **Dithering:** activé ou non, et toutes les 1, 3, 5 ou 10 images, pour les lights de toutes les cibles. Chaque dithering attend que la monture se stabilise.
+- **Dithering:** activé ou non, et toutes les 1, 3, 5 ou 10 images, pour les lights de toutes les cibles. Chaque dithering attend que la monture se stabilise. Avec un Seestar, ou une monture sans impulsions de guidage, chaque dithering part de la résolution de la dernière image et va à la cible plus son point de la grille, il défait donc aussi la dérive, comme le fait l'application du Seestar.
 - **Résistance chauffante**, si l'équipement connecté en a une : allumée ou non pendant la nuit, et sa puissance si elle est réglable. Elle consomme de la batterie : éteignez-la par nuits sèches et douces.
 
 Pour d'autres règles, comme attendre qu'une cible se lève ou répéter jusqu'à une heure, ouvrez le plan dans l'éditeur avancé.

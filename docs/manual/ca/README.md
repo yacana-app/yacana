@@ -1115,7 +1115,7 @@ Els botons de sota les canvien:
   Si un autoenfocament falla, esperen les exposicions següents.
 - **Darks:** En començar, quan canvia la temperatura del sensor, en acabar amb el bias, i quantes cada vegada ([capítol 23](#calibration)).
 - **Recentratge:** activat o no, i quant es pot desviar el camp: 1′, 2′, 5′ o 10′, cadascun també en píxels de la càmera connectada. Mai no recentra per menys de 20 px, el que pot moure un dithering; amb una càmera gran angular això és més que qualsevol opció, i el full ho avisa. Amb una bona alineació polar recentra una o dues vegades per hora.
-- **Dithering:** activat o no, i cada 1, 3, 5 o 10 preses, per a les preses de llum de tots els objectius. Cada dithering espera que la muntura s'estabilitzi.
+- **Dithering:** activat o no, i cada 1, 3, 5 o 10 preses, per a les preses de llum de tots els objectius. Cada dithering espera que la muntura s'estabilitzi. Amb un Seestar, o una muntura sense polsos de guiatge, cada dithering parteix de la resolució de l'última presa i va a l'objectiu més el seu punt de la graella, així que també desfà la deriva, com fa la mateixa app del Seestar.
 - **Escalfador**, si l'equip connectat en té un: encès o no durant la nit, i la seva potència si es pot regular. Gasta bateria: apaga'l les nits seques i temperades.
 
 Per a altres regles, com esperar que pugi un objectiu o repetir fins a una hora, obre el pla a l'editor avançat.

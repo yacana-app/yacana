@@ -1115,7 +1115,7 @@ Azpiko botoiek aldatzen dituzte:
   Foku automatiko batek huts egiten badu, hurrengo esposizioen zain geratzen dira.
 - **Darkak:** Hastean, sentsorearen tenperatura aldatzen denean, amaitzean biasarekin, eta zenbat aldi bakoitzean ([23. kapitulua](#calibration)).
 - **Berriro zentratzea:** aktibatuta edo ez, eta eremua zenbat desbidera daitekeen: 1′, 2′, 5′ edo 10′, bakoitza konektatutako kameraren pixeletan ere bai. Ez du inoiz berriro zentratzen 20 px baino gutxiagogatik, dithering batek mugi dezakeena; angelu zabaleko kamera batekin hori edozein aukera baino gehiago da, eta orriak abisatzen du. Lerrokatze polar onarekin orduko behin edo bitan zentratzen du berriro.
-- **Dithering:** aktibatuta edo ez, eta 1, 3, 5 edo 10 argazkiz behin, helburu guztien light argazkietarako. Dithering bakoitzak muntaia egonkortu arte itxaroten du.
+- **Dithering:** aktibatuta edo ez, eta 1, 3, 5 edo 10 argazkiz behin, helburu guztien light argazkietarako. Dithering bakoitzak muntaia egonkortu arte itxaroten du. Seestar batekin, edo gidaketa-pultsurik gabeko muntaia batekin, dithering bakoitza azken argazkiaren ebazpenetik abiatzen da eta helburura gehi bere sareko puntura doa, beraz desbideratzea ere desegiten du, Seestar-en aplikazioak berak egiten duen bezala.
 - **Ihintz-berogailua**, konektatutako ekipoak badu: piztuta edo ez gauean zehar, eta bere potentzia erregulagarria bada. Bateria kontsumitzen du: itzali gau lehor eta epeletan.
 
 Beste arau batzuetarako, hala nola helburu bat igo arte itxarotea edo ordu batera arte errepikatzea, ireki plana editore aurreratuan.

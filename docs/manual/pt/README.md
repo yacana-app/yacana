@@ -1115,7 +1115,7 @@ Os botões por baixo alteram-nas:
   Se um autofoco falhar, esperam pelas exposições seguintes.
 - **Darks:** Ao começar, quando a temperatura do sensor muda, no fim com o bias, e quantos de cada vez ([capítulo 23](#calibration)).
 - **Recentragem:** ativada ou não, e quanto o campo se pode desviar: 1′, 2′, 5′ ou 10′, cada um também em píxeis da câmara ligada. Nunca recentra por menos de 20 px, o que um dithering pode mover; com uma câmara grande angular isso é mais do que qualquer opção, e a folha avisa. Com um bom alinhamento polar, recentra uma ou duas vezes por hora.
-- **Dithering:** ativado ou não, e a cada 1, 3, 5 ou 10 imagens, para os lights de todos os alvos. Cada dithering espera que a montagem estabilize.
+- **Dithering:** ativado ou não, e a cada 1, 3, 5 ou 10 imagens, para os lights de todos os alvos. Cada dithering espera que a montagem estabilize. Com um Seestar, ou uma montagem sem impulsos de guiagem, cada dithering parte da resolução da última imagem e vai ao alvo mais o seu ponto da grelha, por isso também desfaz o desvio, como faz a própria app do Seestar.
 - **Resistência anti-orvalho**, se o equipamento ligado tiver uma: ligada ou não durante a noite, e a sua potência se for regulável. Gasta bateria: desliga-a em noites secas e amenas.
 
 Para outras regras, como esperar que um alvo suba ou repetir até uma hora, abre o plano no editor avançado.

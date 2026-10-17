@@ -1115,7 +1115,7 @@ Buttons below change them:
   If an autofocus fails, they wait for the next exposures.
 - **Darks:** At the start, when the sensor's temperature changes, at the end with the bias, and how many each time ([chapter 23](#calibration)).
 - **Recentring:** on or off, and how far the field may drift: 1′, 2′, 5′ or 10′, each also in pixels of the connected camera. It never recentres for less than 20 px, about what a dither moves; with a wide-angle camera that is more than any choice, and the sheet says so. With a good polar alignment it recentres once or twice an hour.
-- **Dither:** on or off, and every 1, 3, 5 or 10 frames, for every target's lights. Each dither waits for the mount to settle.
+- **Dither:** on or off, and every 1, 3, 5 or 10 frames, for every target's lights. Each dither waits for the mount to settle. With a Seestar, or a mount without guide pulses, each dither starts from the plate solve of the last frame and goes to the target plus its grid point, so it also undoes the drift, as the Seestar's own app does.
 - **Dew heater**, when the connected equipment has one: on or off during the night, and its power for a heater that takes a value. It uses battery: turn it off on dry, warm nights.
 
 For other rules, such as waiting for a target to rise or repeating until a time, open the plan in the advanced editor.

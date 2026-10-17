@@ -22,6 +22,18 @@ import kotlin.time.Duration.Companion.seconds
 /** Where a dither put the field, in pixels east and north of where it began; [goTos] it took, none for guide pulses. */
 data class DitherOffset(val eastPixels: Double, val northPixels: Double, val goTos: Int = 0)
 
+/** This position moved by [offset], of pixels of [pixelScaleArcsec], east and north on the sky. */
+fun SkyPosition.moved(offset: DitherOffset, pixelScaleArcsec: Double): SkyPosition {
+    val eastDeg = offset.eastPixels * pixelScaleArcsec / ARCSEC_PER_DEGREE
+    val raHours = raHours + eastDeg / DEGREES_PER_HOUR / cos(decDeg * PI / HALF_TURN)
+    return SkyPosition(raHours.mod(HOURS), decDeg + offset.northPixels * pixelScaleArcsec / ARCSEC_PER_DEGREE)
+}
+
+private const val ARCSEC_PER_DEGREE = 3600.0
+private const val DEGREES_PER_HOUR = 15.0
+private const val HALF_TURN = 180.0
+private const val HOURS = 24.0
+
 /**
  * Dithering without a guider, as N.I.N.A.'s direct guider (its `DirectGuider` and
  * `DitherOffsetSelector`): each dither moves the field to an offset drawn around where it began,
@@ -36,6 +48,9 @@ class Dither(private val random: Random = Random) {
     /** Where the field began in the mount's coordinates, for dithers by GoTo; null until the first. */
     private var origin: SkyPosition? = null
 
+    /** Where the last dither meant to put the field, around where it began. */
+    val offset: DitherOffset get() = previous
+
     /** Where the field is now becomes the centre the next offsets are drawn around. */
     fun reset() {
         previous = DitherOffset(0.0, 0.0)
@@ -44,11 +59,12 @@ class Dither(private val random: Random = Random) {
 
     /**
      * Moves [mount] to a new offset for [options], with [pixelScaleArcsec] of the camera: by guide
-     * pulses, or by GoTo for a mount that dithers so ([MountMediator.dithersByPulses]); then the
-     * settle time. Returns the new offset.
+     * pulses, or by GoTo for a mount that dithers so ([MountMediator.dithersByPulses]), around
+     * [centre] when given; then the settle time. Returns the new offset.
      */
-    suspend fun move(mount: MountMediator, options: DitherOptions, pixelScaleArcsec: Double): DitherOffset {
-        val target = if (mount.dithersByPulses) pulse(mount, options, pixelScaleArcsec) else goTo(mount, options, pixelScaleArcsec)
+    suspend fun move(mount: MountMediator, options: DitherOptions, pixelScaleArcsec: Double, centre: SkyPosition? = null): DitherOffset {
+        val target =
+            if (mount.dithersByPulses) pulse(mount, options, pixelScaleArcsec) else goTo(mount, options, pixelScaleArcsec, centre)
         delay(options.settleSeconds.seconds)
         previous = target
         return target
@@ -72,15 +88,17 @@ class Dither(private val random: Random = Random) {
      * about 25″ undone, so N.I.N.A.'s small offsets would mostly not move it; one step of the grid
      * always does. Each GoTo goes to where the field began plus the point, so where one lands does
      * not add up with the next; one after which the mount says it has not moved tries another
-     * point, [GOTO_TRIES] at most.
+     * point, [GOTO_TRIES] at most. Given a [centre] in the mount's coordinates, as the sequence's
+     * target once the mount is synced on a plate solve, the grid is around it, so the drift since
+     * the last dither is undone too.
      */
-    private suspend fun goTo(mount: MountMediator, options: DitherOptions, pixelScaleArcsec: Double): DitherOffset {
+    private suspend fun goTo(mount: MountMediator, options: DitherOptions, pixelScaleArcsec: Double, centre: SkyPosition?): DitherOffset {
         val pixels = options.pixels.takeIf { it.isFinite() && it > 0 } ?: 0.0
         val step = maxOf(GRID_ARCSEC / pixelScaleArcsec, pixels)
         var here = mount.position()
         // A mount moved elsewhere since, as by a GoTo of its own, dithers around where it is now.
         val start =
-            origin?.takeIf {
+            centre ?: origin?.takeIf {
                 separationArcsec(it.moved(previous, pixelScaleArcsec), here) <= 2 * step * pixelScaleArcsec + GOTO_SLACK_ARCSEC
             }
                 ?: here.moved(DitherOffset(-previous.eastPixels, -previous.northPixels), pixelScaleArcsec)
@@ -111,13 +129,6 @@ class Dither(private val random: Random = Random) {
     internal fun nextCell(from: Cell, tried: Set<Cell>, raOnly: Boolean): Cell? {
         val cells = (-1..1).flatMap { east -> (-1..1).map { north -> Cell(east, north) } }
         return cells.filter { it != from && it !in tried && (!raOnly || it.north == from.north) }.randomOrNull(random)
-    }
-
-    /** This position moved by [offset], of pixels of [pixelScaleArcsec], east and north on the sky. */
-    private fun SkyPosition.moved(offset: DitherOffset, pixelScaleArcsec: Double): SkyPosition {
-        val eastDeg = offset.eastPixels * pixelScaleArcsec / ARCSEC_PER_DEGREE
-        val raHours = raHours + eastDeg / DEGREES_PER_HOUR / cos(decDeg * PI / HALF_TURN)
-        return SkyPosition(raHours.mod(HOURS), decDeg + offset.northPixels * pixelScaleArcsec / ARCSEC_PER_DEGREE)
     }
 
     /**
@@ -166,10 +177,6 @@ class Dither(private val random: Random = Random) {
     private companion object {
         /** Half the sidereal rate, in arcseconds per second, as a guide pulse moves. */
         const val GUIDE_RATE = 7.52
-        const val ARCSEC_PER_DEGREE = 3600.0
-        const val DEGREES_PER_HOUR = 15.0
-        const val HALF_TURN = 180.0
-        const val HOURS = 24.0
         const val TRIES = 100
 
         /** Offsets stay within three standard deviations of the centre. */

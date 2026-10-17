@@ -1115,7 +1115,7 @@ I pulsanti sotto le cambiano:
   Se un autofocus fallisce, aspettano le esposizioni successive.
 - **Dark:** All'inizio, quando cambia la temperatura del sensore, alla fine con il bias, e quanti ogni volta ([capitolo 23](#calibration)).
 - **Ricentraggio:** attivo o no, e di quanto può derivare il campo: 1′, 2′, 5′ o 10′, ognuno anche in pixel della fotocamera collegata. Non ricentra mai per meno di 20 px, quanto può spostare un dithering; con una fotocamera grandangolare è più di qualsiasi scelta, e il foglio lo segnala. Con un buon allineamento polare ricentra una o due volte all'ora.
-- **Dithering:** attivo o no, e ogni 1, 3, 5 o 10 pose, per le pose light di tutti i target. Ogni dithering aspetta che la montatura si stabilizzi.
+- **Dithering:** attivo o no, e ogni 1, 3, 5 o 10 pose, per le pose light di tutti i target. Ogni dithering aspetta che la montatura si stabilizzi. Con un Seestar, o una montatura senza impulsi di guida, ogni dithering parte dalla risoluzione dell'ultima posa e va al target più il suo punto della griglia, quindi annulla anche la deriva, come fa l'app stessa del Seestar.
 - **Fascia anticondensa**, se l'attrezzatura collegata ne ha una: accesa o no durante la notte, e la sua potenza se è regolabile. Consuma batteria: spegnila nelle notti secche e miti.
 
 Per altre regole, come aspettare che un target sorga o ripetere fino a un'ora, apri il piano nell'editor avanzato.

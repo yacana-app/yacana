@@ -1115,7 +1115,7 @@ Die Schaltflächen darunter ändern sie:
   Schlägt ein Autofokus fehl, warten sie auf die nächsten Belichtungen.
 - **Darks:** Am Anfang, wenn sich die Sensortemperatur ändert, am Ende mit dem Bias, und wie viele jedes Mal ([Kapitel 23](#calibration)).
 - **Neu zentrieren:** an oder aus, und wie weit das Feld driften darf: 1′, 2′, 5′ oder 10′, jeweils auch in Pixeln der verbundenen Kamera. Unter 20 px, etwa so viel, wie ein Dithering bewegt, zentriert es nie neu; bei einer Weitwinkelkamera ist das mehr als jede Auswahl, und das Blatt sagt es. Mit guter Polausrichtung zentriert es ein- oder zweimal pro Stunde neu.
-- **Dithering:** an oder aus, und alle 1, 3, 5 oder 10 Aufnahmen, für die Lights aller Ziele. Jedes Dithering wartet, bis die Montierung zur Ruhe kommt.
+- **Dithering:** an oder aus, und alle 1, 3, 5 oder 10 Aufnahmen, für die Lights aller Ziele. Jedes Dithering wartet, bis die Montierung zur Ruhe kommt. Bei einem Seestar oder einer Montierung ohne Guiding-Impulse geht jedes Dithering von der Plate-Solve-Lösung der letzten Aufnahme aus und fährt zum Ziel plus seinem Rasterpunkt, macht also auch die Drift rückgängig, wie es die eigene App des Seestar tut.
 - **Tauheizung**, wenn die verbundene Ausrüstung eine hat: an oder aus während der Nacht, und ihre Leistung, wenn sie regelbar ist. Sie verbraucht Akku: In trockenen, milden Nächten ausschalten.
 
 Für andere Regeln, etwa auf das Aufgehen eines Ziels warten oder bis zu einer Uhrzeit wiederholen, öffne den Plan im erweiterten Editor.

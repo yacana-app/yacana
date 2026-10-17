@@ -8,6 +8,8 @@ import app.yacana.domain.equipment.Connection
 import app.yacana.domain.equipment.EquipmentController
 import app.yacana.domain.equipment.LINK_HICCUP
 import app.yacana.domain.equipment.linkTrouble
+import app.yacana.domain.equipment.moved
+import app.yacana.domain.equipment.separationArcsec
 import app.yacana.domain.focus.Autofocus
 import app.yacana.domain.focus.AutofocusState
 import app.yacana.domain.focus.AutofocusTrigger
@@ -24,6 +26,7 @@ import app.yacana.domain.session.log
 import app.yacana.domain.sky.Ephemerides
 import app.yacana.domain.solver.Centring
 import app.yacana.domain.solver.CentringState
+import app.yacana.ports.SkyPosition
 import app.yacana.ports.Solution
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -416,7 +419,7 @@ class SequenceRunner(
             capture.takeInSequence(settings)
             val done = taken + index + 1
             change { it?.copy(done = it.done + (at to done)) }
-            if (step.ditherEvery > 0 && done % step.ditherEvery == 0 && done < step.count) dither(dither)
+            if (step.ditherEvery > 0 && done % step.ditherEvery == 0 && done < step.count) dither(dither, scope)
         }
         if (step.type == FrameType.Dark) sensorTemperature()?.let { darkTemperatures[settings.darkKey()] = it }
     }
@@ -449,7 +452,8 @@ class SequenceRunner(
 
     /**
      * Before a light frame, with a recentre trigger around it: the last light's solve, and centring
-     * again when it drifted further than the trigger allows, as N.I.N.A.'s Center After Drift.
+     * again when it drifted further than the trigger allows, as N.I.N.A.'s Center After Drift; for a
+     * mount that dithers by GoTo, from the target plus the grid point it was sent to.
      */
     private suspend fun recentre(scope: Scope) {
         val target = scope.target
@@ -459,23 +463,50 @@ class SequenceRunner(
         capture.sequenceSaved()
         val last = capture.state.value.last?.takeIf { it !== solved && it.capture.type == FrameType.Light } ?: return
         solved = last
-        val off = centring.driftArcmin(last, target.position)
+        val meant = if (steps.mount().dithersByPulses) target.position else target.position.moved(steps.dithers.offset, steps.pixelScale)
+        val off = centring.driftArcmin(last, meant)
         if (off != null && off > limit) {
             journal.log("sequence_recentre", "target" to target.name, "off" to off, "limit" to limit)
             goTo(GoToTarget(centre = true), target)
         }
     }
 
-    private suspend fun dither(options: DitherOptions) {
-        val at = steps.dither(options)
+    private suspend fun dither(options: DitherOptions, scope: Scope) {
+        val aim = aim(scope)
+        val at = steps.dither(options, aim?.first)
         journal.log(
             "sequence_dither",
             "east" to at.eastPixels,
             "north" to at.northPixels,
             "goTos" to at.goTos,
+            "aimed" to (aim != null),
+            "driftArcsec" to aim?.second,
             "pixels" to options.pixels,
             "settle" to options.settleSeconds,
         )
+    }
+
+    /**
+     * For a mount that dithers by GoTo, as a smart telescope, inside a target: the last light's
+     * plate solve, the mount synced on it, and the target in the mount's coordinates, for the dither
+     * to go to the target plus its grid point and so undo the drift since the last one, as the
+     * Seestar's own app does; with how far the light was from where the last dither meant it, in
+     * arcseconds. Null to dither blind: a mount that pulses, outside a target, or a light that does
+     * not solve.
+     */
+    private suspend fun aim(scope: Scope): Pair<SkyPosition, Double>? {
+        val target = scope.target
+        val mount = steps.mount()
+        if (target == null || mount.dithersByPulses) return null
+        capture.sequenceSaved()
+        val last = capture.state.value.last?.takeIf { it.capture.type == FrameType.Light }
+        // The dither undoes its drift: recentring does not judge it again.
+        if (last != null) solved = last
+        return last?.let { centring.solution(it) }?.let { solution ->
+            val drift = separationArcsec(solution.centre, target.position.moved(steps.dithers.offset, steps.pixelScale))
+            centring.sync(solution)
+            mount.toMount(target.position, clock.now()) to drift
+        }
     }
 
     /**
