@@ -6,6 +6,8 @@ package app.yacana.domain.sequence
 
 import app.yacana.domain.imaging.FrameType
 import app.yacana.domain.profile.Location
+import app.yacana.domain.profile.Pace
+import app.yacana.domain.profile.ProfileStore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -14,6 +16,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.io.files.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 /** The advanced sequencer: conditions, parallel blocks and the instructions N.I.N.A. has besides the simple editor's. */
@@ -35,6 +38,22 @@ class AdvancedSequenceTest : RunnerFixture() {
         assertEquals(6, saved(FrameType.Light).size)
         assertEquals(2, events.count { it.first == "sequence_round" })
         assertEquals(emptyMap(), run.rounds)
+    }
+
+    @Test
+    fun theNightKeepsItsMeasuredPaceInTheProfileForTheNextPlans() = runTest {
+        val lights = Exposures(count = 7, exposureSeconds = 10.0, ditherEvery = 2)
+        val m31 = Block("M 31", listOf(GoToTarget(centre = true), lights), target = m31)
+
+        val run = runner(clock = movingClock()).runToTheEnd(night(m31))
+
+        assertEquals(RunStatus.Finished, run.status, run.error)
+        val pace = assertNotNull(ProfileStore(directory).load("p")).options.pace
+        // Measured on the night's clock: each dither with its settling of 10 s.
+        // What took no time here, as the fake centring, keeps the profile's.
+        assertTrue(assertNotNull(pace.ditherSeconds) >= 10.0, pace.toString())
+        assertEquals(Pace().centringSeconds, pace.centringSeconds)
+        assertEquals(pace, run.pace)
     }
 
     @Test

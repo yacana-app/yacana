@@ -99,6 +99,7 @@ abstract class RunnerFixture {
         progress: Path? = null,
         clock: Clock = this@RunnerFixture.clock,
         location: Location? = null,
+        solver: PlateSolver = M31Solver(),
     ): SequenceRunner {
         val http = fakeHttp(StandardTestDispatcher(testScheduler), seestar)
         val platform =
@@ -131,7 +132,7 @@ abstract class RunnerFixture {
         equipment.state.first { it.connection is Connection.Connected }
         val capture =
             CaptureController(equipment, FakeEngine(), store, platform, backgroundScope, "Yacana test", clock, { TimeZone.UTC }, journal)
-        val solving = PlateSolving(equipment, capture, M31Solver(), backgroundScope, journal)
+        val solving = PlateSolving(equipment, capture, solver, backgroundScope, journal)
         val centring = Centring(equipment, capture, solving, backgroundScope, journal, clock, settle = Duration.ZERO)
         val autofocus = Autofocus(equipment, capture, backgroundScope, journal, clock)
         return SequenceRunner(equipment, capture, centring, autofocus, backgroundScope, journal, clock, Random(7), progress) {
@@ -175,6 +176,13 @@ private fun FakeAlpaca.dewHeater() {
         "switchstep" to "1",
         "getswitchvalue" to "0",
     ).forEach { (member, value) -> values["switch/0/$member"] = value }
+}
+
+/** ASTAP finding nothing in any frame, as under clouds. */
+internal class CloudedSolver : PlateSolver {
+    override fun installedDatabases() = setOf("D50")
+
+    override suspend fun solve(frame: Frame, headers: List<HeaderCard>, request: SolveRequest): Solution? = null
 }
 
 /** ASTAP finding every frame at M 31. */

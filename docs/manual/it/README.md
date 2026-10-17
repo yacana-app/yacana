@@ -1075,7 +1075,7 @@ Gli oggetti vengono da Cielo: inquadrane uno e tocca **Aggiungi alla sequenza** 
 
 ### Piano di stanotte
 
-La linea del tempo mostra ogni oggetto dal suo inizio alla sua fine, e l'alba. Se il piano va oltre l'alba astronomica, dice quale oggetto finirebbe e quando, e l'ora di fine di quell'oggetto passa al colore di avviso. **Ripristina** annulla l'ultima modifica, fino a 50 modifiche indietro.
+La linea del tempo mostra ogni oggetto dal suo inizio alla sua fine, e l'alba. Se il piano va oltre l'alba astronomica, dice quale oggetto finirebbe e quando, e l'ora di fine di quell'oggetto passa al colore di avviso. **Ripristina** annulla l'ultima modifica, fino a 50 modifiche indietro. I tempi vengono da quanto ha impiegato la tua attrezzatura nella sua ultima notte: ogni posa oltre la sua esposizione, ogni dithering, ogni autofocus e ogni centraggio. Si contano gli autofocus ogni tanti minuti e al cambio di filtro; quelli per temperatura o HFR non si possono prevedere.
 
 ### La scheda di un oggetto
 
@@ -1115,7 +1115,7 @@ I pulsanti sotto le cambiano:
   Se un autofocus fallisce, aspettano le esposizioni successive.
 - **Dark:** All'inizio, quando cambia la temperatura del sensore, alla fine con il bias, e quanti ogni volta ([capitolo 23](#calibration)).
 - **Ricentraggio:** attivo o no, e di quanto può derivare il campo: 1′, 2′, 5′ o 10′, ognuno anche in pixel della fotocamera collegata. Non ricentra mai per meno di 20 px, quanto può spostare un dithering; con una fotocamera grandangolare è più di qualsiasi scelta, e il foglio lo segnala. Con un buon allineamento polare ricentra una o due volte all'ora.
-- **Dithering:** attivo o no, e ogni 1, 3, 5 o 10 pose, per le pose light di tutti i target. Ogni dithering aspetta che la montatura si stabilizzi.
+- **Dithering:** attivo o no, e ogni 1, 3, 5 o 10 pose, per le pose light di tutti i target. Ogni dithering aspetta che la montatura si stabilizzi. Con un Seestar, o una montatura senza impulsi di guida, ogni dithering parte dalla risoluzione dell'ultima posa e va al target più il suo punto della griglia, quindi annulla anche la deriva, come fa l'app stessa del Seestar.
 - **Fascia anticondensa**, se l'attrezzatura collegata ne ha una: accesa o no durante la notte, e la sua potenza se è regolabile. Consuma batteria: spegnila nelle notti secche e miti.
 
 Per altre regole, come aspettare che un target sorga o ripetere fino a un'ora, apri il piano nell'editor avanzato.
@@ -1227,7 +1227,7 @@ Tutto ciò che ti serve sta in una schermata, senza scorrere:
 
 - **L'oggetto:** il suo nome, pannello e filtro, e la sua altezza con una freccia che indica se sale o scende.
 - **La posa:** un anello con i secondi rimanenti, *Posa 35 di 120*, il filtro e il guadagno.
-- **Avanzamento:** la percentuale della sequenza e quando finisce, rispetto all'alba astronomica.
+- **Avanzamento:** la percentuale della sequenza e quando finisce, rispetto all'alba astronomica. Dopo alcune pose, segue quanto stanno impiegando i passi di stanotte.
 - **Ultima posa:** la sua miniatura, se era buona o scartata, il suo HFR e le stelle, e la curva HFR della notte. Con lo stack dal vivo attivo, mostra lo stack: toccalo per aprirlo in Ripresa.
 - **Prossimo:** ciò che viene, come il prossimo autofocus, il cambio al prossimo oggetto e il parcheggio, con i loro orari.
 

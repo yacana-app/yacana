@@ -8,6 +8,8 @@ import app.yacana.domain.equipment.Connection
 import app.yacana.domain.equipment.EquipmentController
 import app.yacana.domain.equipment.LINK_HICCUP
 import app.yacana.domain.equipment.linkTrouble
+import app.yacana.domain.equipment.moved
+import app.yacana.domain.equipment.separationArcsec
 import app.yacana.domain.focus.Autofocus
 import app.yacana.domain.focus.AutofocusState
 import app.yacana.domain.focus.AutofocusTrigger
@@ -19,11 +21,13 @@ import app.yacana.domain.imaging.CapturedFrame
 import app.yacana.domain.imaging.FrameType
 import app.yacana.domain.imaging.MosaicPanel
 import app.yacana.domain.profile.DitherOptions
+import app.yacana.domain.profile.Pace
 import app.yacana.domain.session.Journal
 import app.yacana.domain.session.log
 import app.yacana.domain.sky.Ephemerides
 import app.yacana.domain.solver.Centring
 import app.yacana.domain.solver.CentringState
+import app.yacana.ports.SkyPosition
 import app.yacana.ports.Solution
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -43,6 +47,7 @@ import kotlin.random.Random
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Instant
 
 /** How a run of a sequence ended, or that it goes on, or waits in a safe pause. */
 enum class RunStatus { Running, Paused, Finished, Stopped, Failed }
@@ -59,6 +64,8 @@ data class SequenceRun(
     val done: Map<List<Int>, Int> = emptyMap(),
     val error: String? = null,
     val rounds: Map<List<Int>, Int> = emptyMap(),
+    /** How long tonight's steps took, once measured: the night's end follows it. */
+    val pace: Pace? = null,
 )
 
 /**
@@ -98,6 +105,12 @@ class SequenceRunner(
 
     /** The last light a recentre trigger solved, not to solve it again. */
     private var solved: CapturedFrame? = null
+
+    /** Tonight's pace as measured, kept in the profile at the end for the next nights' plans. */
+    private var meter: PaceMeter? = null
+
+    /** Whether an autofocus, a centring or darks came before the light being taken, so its time is not a frame's. */
+    private var interrupted = false
 
     /** Where the last centring left the frames pointing, for the live mosaic to place the panel. */
     private var centred: Solution? = null
@@ -172,9 +185,18 @@ class SequenceRunner(
         mutableState.updateAndGet(update)?.let { progress.keep(it, clock.now()) }
     }
 
-    @Suppress("TooGenericExceptionCaught") // Whatever failed is shown.
     private suspend fun run(sequence: Sequence, from: List<Int>? = null) {
         if (from == null) journal.log("sequence_started", "name" to sequence.name)
+        meter = PaceMeter(runCatching { steps.connected().profile.options.pace }.getOrDefault(Pace()))
+        try {
+            runToEnd(from)
+        } finally {
+            keepPace()
+        }
+    }
+
+    @Suppress("TooGenericExceptionCaught") // Whatever failed is shown.
+    private suspend fun runToEnd(from: List<Int>?) {
         val error =
             try {
                 block(emptyList(), Scope(), from)
@@ -361,14 +383,20 @@ class SequenceRunner(
             mount.goToAndWait(mount.toMount(target.position, clock.now()))
             return
         }
+        val started = clock.now()
         val end = centring.centreNow(target.position)
+        measured { centring(since(started)) }
+        interrupted = true
         centred = (end as? CentringState.Centred)?.solution
         if (end !is CentringState.Centred) journal.log("sequence_centring_failed", "target" to target.name, "end" to end.toString())
     }
 
     /** Runs autofocus; false, and written down, if it failed. */
     private suspend fun focus(): Boolean {
+        val started = clock.now()
         val end = autofocus.runNow()
+        measured { autofocus(since(started)) }
+        interrupted = true
         if (end !is AutofocusState.Done) journal.log("sequence_autofocus_failed", "end" to end.toString())
         return end is AutofocusState.Done
     }
@@ -408,15 +436,18 @@ class SequenceRunner(
         // Resumed after a safe pause, it goes on from the frames it took.
         val taken = state.value?.done?.get(at) ?: 0
         repeat(step.count - taken) { index ->
+            val started = clock.now()
+            interrupted = false
             if (asking) asking = askTriggers(scope.autofocus, filter)
             if (step.type == FrameType.Light) {
                 recentre(scope)
                 darksIfTemperature(scope, step, settings)
             }
             capture.takeInSequence(settings)
+            if (step.type == FrameType.Light && !interrupted) measured { frame(since(started) - settings.exposureSeconds) }
             val done = taken + index + 1
             change { it?.copy(done = it.done + (at to done)) }
-            if (step.ditherEvery > 0 && done % step.ditherEvery == 0 && done < step.count) dither(dither)
+            ditherIfDue(step, done, dither, scope)
         }
         if (step.type == FrameType.Dark) sensorTemperature()?.let { darkTemperatures[settings.darkKey()] = it }
     }
@@ -435,6 +466,7 @@ class SequenceRunner(
         val near = temperature != null && darkTemperatures[key]?.let { abs(it - temperature) < trigger.amount } == true
         if (wheel == null || temperature == null || near) return
         journal.log("sequence_darks", "temperature" to temperature, "count" to trigger.count, "seconds" to settings.exposureSeconds)
+        interrupted = true
         val darks = step.darks(trigger.count)
         steps.filter(wheel, darks)
         repeat(trigger.count) { capture.takeInSequence(settings.copy(type = FrameType.Dark)) }
@@ -444,12 +476,31 @@ class SequenceRunner(
 
     private fun sensorTemperature(): Double? = steps.connected().camera?.state?.value?.value?.ccdTemperature
 
+    /** Seconds since [start], by the runner's clock. */
+    private fun since(start: Instant): Double = (clock.now() - start).inWholeMilliseconds / MILLIS_PER_SECOND
+
+    /** Records a measure of tonight's pace, which the night's end follows from now on. */
+    private fun measured(record: PaceMeter.() -> Unit) {
+        val meter = meter ?: return
+        meter.record()
+        change { it?.copy(pace = meter.pace) }
+    }
+
+    /** What tonight measured, kept in the active profile for the next nights' plans. */
+    private fun keepPace() {
+        val pace = meter?.takeIf { it.measured }?.pace
+        meter = null
+        val profile = equipment.state.value.active ?: return
+        if (pace != null && pace != profile.options.pace) equipment.save(profile.copy(options = profile.options.copy(pace = pace)))
+    }
+
     /** What darks are for: a light's exposure, gain, offset and binning. */
     private fun CaptureSettings.darkKey() = listOf(exposureSeconds, gain, offset, binning)
 
     /**
      * Before a light frame, with a recentre trigger around it: the last light's solve, and centring
-     * again when it drifted further than the trigger allows, as N.I.N.A.'s Center After Drift.
+     * again when it drifted further than the trigger allows, as N.I.N.A.'s Center After Drift; for a
+     * mount that dithers by GoTo, from the target plus the grid point it was sent to.
      */
     private suspend fun recentre(scope: Scope) {
         val target = scope.target
@@ -459,23 +510,58 @@ class SequenceRunner(
         capture.sequenceSaved()
         val last = capture.state.value.last?.takeIf { it !== solved && it.capture.type == FrameType.Light } ?: return
         solved = last
-        val off = centring.driftArcmin(last, target.position)
+        val meant = if (steps.mount().dithersByPulses) target.position else target.position.moved(steps.dithers.offset, steps.pixelScale)
+        val off = centring.driftArcmin(last, meant)
         if (off != null && off > limit) {
             journal.log("sequence_recentre", "target" to target.name, "off" to off, "limit" to limit)
             goTo(GoToTarget(centre = true), target)
         }
     }
 
-    private suspend fun dither(options: DitherOptions) {
-        val at = steps.dither(options)
+    /** After every so many of [step]'s frames, [done] of them, but the last: a dither, and how long it took. */
+    private suspend fun ditherIfDue(step: Exposures, done: Int, options: DitherOptions, scope: Scope) {
+        if (step.ditherEvery <= 0 || done % step.ditherEvery != 0 || done >= step.count) return
+        val started = clock.now()
+        dither(options, scope)
+        measured { dither(since(started)) }
+    }
+
+    private suspend fun dither(options: DitherOptions, scope: Scope) {
+        val aim = aim(scope)
+        val at = steps.dither(options, aim?.first)
         journal.log(
             "sequence_dither",
             "east" to at.eastPixels,
             "north" to at.northPixels,
             "goTos" to at.goTos,
+            "aimed" to (aim != null),
+            "driftArcsec" to aim?.second,
             "pixels" to options.pixels,
             "settle" to options.settleSeconds,
         )
+    }
+
+    /**
+     * For a mount that dithers by GoTo, as a smart telescope, inside a target: the last light's
+     * plate solve, the mount synced on it, and the target in the mount's coordinates, for the dither
+     * to go to the target plus its grid point and so undo the drift since the last one, as the
+     * Seestar's own app does; with how far the light was from where the last dither meant it, in
+     * arcseconds. Null to dither blind: a mount that pulses, outside a target, or a light that does
+     * not solve.
+     */
+    private suspend fun aim(scope: Scope): Pair<SkyPosition, Double>? {
+        val target = scope.target
+        val mount = steps.mount()
+        if (target == null || mount.dithersByPulses) return null
+        capture.sequenceSaved()
+        val last = capture.state.value.last?.takeIf { it.capture.type == FrameType.Light }
+        // The dither undoes its drift: recentring does not judge it again.
+        if (last != null) solved = last
+        return last?.let { centring.solution(it) }?.let { solution ->
+            val drift = separationArcsec(solution.centre, target.position.moved(steps.dithers.offset, steps.pixelScale))
+            centring.sync(solution)
+            mount.toMount(target.position, clock.now()) to drift
+        }
     }
 
     /**
@@ -521,6 +607,8 @@ private val POLL = 1.seconds
 
 /** How often a wait for a target's altitude looks again. */
 private val ALTITUDE_POLL = 1.minutes
+
+private const val MILLIS_PER_SECOND = 1000.0
 
 private const val ALTITUDE_NEEDS_TARGET = "Waiting for the altitude needs a block with a target"
 

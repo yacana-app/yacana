@@ -1075,7 +1075,7 @@ Targets come from Sky: frame one and tap **Add to the sequence** ([chapter 16](#
 
 ### Tonight's plan
 
-The timeline shows each target from its start to its end, and the dawn. If the plan runs past astronomical dawn, it says which target would end when, and that target's end time turns to the warning colour. **Undo** undoes the last change, up to 50 changes back.
+The timeline shows each target from its start to its end, and the dawn. If the plan runs past astronomical dawn, it says which target would end when, and that target's end time turns to the warning colour. **Undo** undoes the last change, up to 50 changes back. The times come from what your equipment took on its last night: each frame beyond its exposure, each dither, each autofocus and each centring. Autofocus every so many minutes and at a change of filter is counted; on the temperature or the HFR it cannot be foreseen.
 
 ### A target's card
 
@@ -1115,7 +1115,7 @@ Buttons below change them:
   If an autofocus fails, they wait for the next exposures.
 - **Darks:** At the start, when the sensor's temperature changes, at the end with the bias, and how many each time ([chapter 23](#calibration)).
 - **Recentring:** on or off, and how far the field may drift: 1′, 2′, 5′ or 10′, each also in pixels of the connected camera. It never recentres for less than 20 px, about what a dither moves; with a wide-angle camera that is more than any choice, and the sheet says so. With a good polar alignment it recentres once or twice an hour.
-- **Dither:** on or off, and every 1, 3, 5 or 10 frames, for every target's lights. Each dither waits for the mount to settle.
+- **Dither:** on or off, and every 1, 3, 5 or 10 frames, for every target's lights. Each dither waits for the mount to settle. With a Seestar, or a mount without guide pulses, each dither starts from the plate solve of the last frame and goes to the target plus its grid point, so it also undoes the drift, as the Seestar's own app does.
 - **Dew heater**, when the connected equipment has one: on or off during the night, and its power for a heater that takes a value. It uses battery: turn it off on dry, warm nights.
 
 For other rules, such as waiting for a target to rise or repeating until a time, open the plan in the advanced editor.
@@ -1227,7 +1227,7 @@ Everything you need fits on one screen without scrolling:
 
 - **The target:** its name, panel and filter, and its altitude with an arrow for rising or setting.
 - **The frame:** a ring with the seconds left, *Frame 35 of 120*, the filter and the gain.
-- **Progress:** the sequence's percentage and when it ends, against astronomical dawn.
+- **Progress:** the sequence's percentage and when it ends, against astronomical dawn. After a few frames, it follows what tonight's steps are taking.
 - **Last frame:** its thumbnail, whether it was good or discarded, its HFR and stars, and the night's HFR curve. With live stacking on, it shows the stack: tap it to open it in Imaging.
 - **Next:** what comes, such as the next autofocus, the change to the next target, and the park, with their times.
 

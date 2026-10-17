@@ -104,9 +104,10 @@ class Centring(
      * mount, as N.I.N.A.'s Center After Drift measures it; null if it does not solve.
      */
     suspend fun driftArcmin(frame: CapturedFrame, target: SkyPosition): Double? =
-        (solving.solve(frame, blind = false) as? SolveState.Solved)?.let {
-            separationArcsec(it.solution.centre, target) / ARCSEC_PER_ARCMIN
-        }
+        solution(frame)?.let { separationArcsec(it.centre, target) / ARCSEC_PER_ARCMIN }
+
+    /** The plate solve of [frame] near the mount; null if it does not solve. */
+    suspend fun solution(frame: CapturedFrame): Solution? = (solving.solve(frame, blind = false) as? SolveState.Solved)?.solution
 
     /** Centres coordinates typed in the mount's own system, as the mount screen shows them. */
     fun centreMountCoordinates(rightAscensionHours: Double, declinationDeg: Double) {

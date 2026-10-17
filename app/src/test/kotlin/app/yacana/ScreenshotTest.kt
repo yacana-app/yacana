@@ -405,9 +405,10 @@ class ScreenshotTest(private val case: Case) {
         val previews = if (scene.captured && !scene.stacked) 2 else 1
         compose.waitUntil(WAIT_MILLIS) { app.fakeFrame.previews >= previews }
         if (scene.stacked) compose.waitUntil(WAIT_MILLIS) { app.fakeStack.previews >= 1 }
-        // The mosaic's image is made off the screen's thread once its last panel is in, and the cache's
-        // photo over a frame is placed once the viewer rests: both are drawn as the screen's clock goes on.
-        if (scene.mosaic || scene.skyPhotos) {
+        // The mosaic's image is made off the screen's thread once its last panel is in, the cache's photo
+        // over a frame is placed once the viewer rests, and a captured frame is drawn once its preview is
+        // in: all are drawn as the screen's clock goes on. Recorded before, a portrait frame was left empty.
+        if (scene.mosaic || scene.skyPhotos || scene.captured) {
             repeat(SETTLE_STEPS) {
                 Thread.sleep(VIEWER_SETTLE_MILLIS)
                 compose.mainClock.advanceTimeBy(VIEWER_SETTLE_MILLIS)

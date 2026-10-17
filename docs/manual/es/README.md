@@ -1075,7 +1075,7 @@ Los objetivos vienen de Cielo: encuadra uno y toca **Añadir a la secuencia** ([
 
 ### Plan de esta noche
 
-La línea de tiempo muestra cada objetivo desde su inicio hasta su fin, y el amanecer. Si el plan pasa del amanecer astronómico, dice qué objetivo acabaría y cuándo, y la hora de fin de ese objetivo se pone del color de aviso. **Deshacer** deshace el último cambio, hasta 50 cambios atrás.
+La línea de tiempo muestra cada objetivo desde su inicio hasta su fin, y el amanecer. Si el plan pasa del amanecer astronómico, dice qué objetivo acabaría y cuándo, y la hora de fin de ese objetivo se pone del color de aviso. **Deshacer** deshace el último cambio, hasta 50 cambios atrás. Los tiempos salen de lo que tardó tu equipo en su última noche: cada toma además de su exposición, cada dither, cada autoenfoque y cada centrado. Se cuentan los autoenfoques cada tantos minutos y al cambiar de filtro; los de temperatura o HFR no se pueden prever.
 
 ### La tarjeta de un objetivo
 
@@ -1115,7 +1115,7 @@ Los botones de debajo las cambian:
   Si un autoenfoque falla, esperan a las siguientes exposiciones.
 - **Darks:** Al empezar, cuando cambia la temperatura del sensor, al terminar con el bias, y cuántos cada vez ([capítulo 23](#calibration)).
 - **Recentrado:** activado o no, y cuánto puede desviarse el campo: 1′, 2′, 5′ o 10′, cada uno también en píxeles de la cámara conectada. Nunca recentra por menos de 20 px, lo que puede mover un dither; con una cámara gran angular eso es más que cualquier opción, y la hoja lo avisa. Con buena alineación polar recentra una o dos veces por hora.
-- **Dither:** activado o no, y cada 1, 3, 5 o 10 tomas, para las tomas de luz de todos los objetivos. Cada dither espera a que la montura se asiente.
+- **Dither:** activado o no, y cada 1, 3, 5 o 10 tomas, para las tomas de luz de todos los objetivos. Cada dither espera a que la montura se asiente. Con un Seestar, o una montura sin pulsos de guiado, cada dither parte de la resolución de la última toma y va al objetivo más su punto de la rejilla, así que también deshace la deriva, como hace la propia app del Seestar.
 - **Calentador**, si el equipo conectado tiene uno: encendido o no durante la noche, y su potencia si es regulable. Gasta batería: apágalo en noches secas y templadas.
 
 Para otras reglas, como esperar a que suba un objetivo o repetir hasta una hora, abre el plan en el editor avanzado.
@@ -1227,7 +1227,7 @@ Todo lo que necesitas cabe en una pantalla sin desplazarte:
 
 - **El objetivo:** su nombre, panel y filtro, y su altura con una flecha que indica si sube o baja.
 - **La toma:** un anillo con los segundos que quedan, *Toma 35 de 120*, el filtro y la ganancia.
-- **Progreso:** el porcentaje de la secuencia y cuándo acaba, frente al amanecer astronómico.
+- **Progreso:** el porcentaje de la secuencia y cuándo acaba, frente al amanecer astronómico. Tras unas pocas tomas, sigue lo que están tardando los pasos de esta noche.
 - **Última toma:** su miniatura, si fue buena o descartada, su HFR y sus estrellas, y la curva de HFR de la noche. Con el apilado en vivo activado, muestra el apilado: tócalo para abrirlo en Imagen.
 - **Próximo:** lo que viene, como el siguiente autoenfoque, el cambio al siguiente objetivo y el aparcado, con sus horas.
 

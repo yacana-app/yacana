@@ -1075,7 +1075,7 @@ Les cibles viennent de Ciel : cadrez-en une et touchez **Ajouter à la séquenc
 
 ### Plan de ce soir
 
-La frise montre chaque cible de son début à sa fin, et l'aube. Si le plan déborde après l'aube astronomique, elle indique quelle cible finirait à quelle heure, et l'heure de fin de cette cible passe à la couleur d'avertissement. **Annuler** défait la dernière modification, jusqu'à 50 modifications en arrière.
+La frise montre chaque cible de son début à sa fin, et l'aube. Si le plan déborde après l'aube astronomique, elle indique quelle cible finirait à quelle heure, et l'heure de fin de cette cible passe à la couleur d'avertissement. **Annuler** défait la dernière modification, jusqu'à 50 modifications en arrière. Les durées viennent de ce que votre équipement a pris lors de sa dernière nuit : chaque image au-delà de son exposition, chaque dithering, chaque autofocus et chaque centrage. Les autofocus toutes les tant de minutes et au changement de filtre sont comptés ; ceux sur la température ou la HFR ne peuvent pas être prévus.
 
 ### La carte d'une cible
 
@@ -1115,7 +1115,7 @@ Les boutons en dessous les modifient :
   Si un autofocus échoue, ces règles attendent les poses suivantes.
 - **Darks:** Au début, quand la température du capteur change, à la fin avec le bias, et combien à chaque fois ([chapitre 23](#calibration)).
 - **Recentrage:** activé ou non, et de combien le champ peut dériver : 1′, 2′, 5′ ou 10′, chacun aussi en pixels de la caméra connectée. Il ne recentre jamais pour moins de 20 px, ce que peut déplacer un dithering ; avec une caméra grand angle, c'est plus que tous les choix, et la feuille le signale. Avec une bonne mise en station, il recentre une ou deux fois par heure.
-- **Dithering:** activé ou non, et toutes les 1, 3, 5 ou 10 images, pour les lights de toutes les cibles. Chaque dithering attend que la monture se stabilise.
+- **Dithering:** activé ou non, et toutes les 1, 3, 5 ou 10 images, pour les lights de toutes les cibles. Chaque dithering attend que la monture se stabilise. Avec un Seestar, ou une monture sans impulsions de guidage, chaque dithering part de la résolution de la dernière image et va à la cible plus son point de la grille, il défait donc aussi la dérive, comme le fait l'application du Seestar.
 - **Résistance chauffante**, si l'équipement connecté en a une : allumée ou non pendant la nuit, et sa puissance si elle est réglable. Elle consomme de la batterie : éteignez-la par nuits sèches et douces.
 
 Pour d'autres règles, comme attendre qu'une cible se lève ou répéter jusqu'à une heure, ouvrez le plan dans l'éditeur avancé.
@@ -1227,7 +1227,7 @@ Tout ce dont vous avez besoin tient sur un seul écran, sans faire défiler :
 
 - **La cible :** son nom, son panneau et son filtre, et sa hauteur avec une flèche indiquant si elle monte ou descend.
 - **L'image :** un anneau avec les secondes restantes, *Image 35 sur 120*, le filtre et le gain.
-- **Progression :** le pourcentage de la séquence et l'heure de fin, comparée à l'aube astronomique.
+- **Progression :** le pourcentage de la séquence et l'heure de fin, comparée à l'aube astronomique. Après quelques images, elle suit ce que prennent les étapes de la nuit.
 - **Dernière image :** sa vignette, si elle était bonne ou écartée, son HFR et ses étoiles, et la courbe du HFR de la nuit. Avec l'empilement en direct activé, elle montre l'empilement : touchez-la pour l'ouvrir dans Imagerie.
 - **Ensuite :** ce qui arrive, comme le prochain autofocus, le passage à la cible suivante et le parquage, avec leurs heures.
 

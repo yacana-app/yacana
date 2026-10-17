@@ -73,6 +73,8 @@ import app.yacana.ui.resources.night_sun_up
 import app.yacana.ui.resources.night_sunrise
 import app.yacana.ui.resources.night_sunset
 import app.yacana.ui.resources.weekdays
+import app.yacana.ui.sequence.foreseeing
+import app.yacana.ui.sequence.pace
 import app.yacana.ui.sequence.tonightSequence
 import app.yacana.ui.sky.planNight
 import kotlinx.coroutines.delay
@@ -136,7 +138,8 @@ fun NightScreen(services: AppServices, open: (Screen) -> Unit) {
     val night = remember(shown, site) { site?.let { Ephemerides.night(shown, it) } }
     val planned = remember(site, now.epochSeconds / SECONDS_PER_MINUTE) { site?.let { planNight(now, zone(), it) } }
     val dither = profile?.options?.dither ?: DitherOptions()
-    val plan = NightPlan.of(targets, now, planned?.astronomicalDusk, planned?.astronomicalDawn, dither)
+    val pace = profile.pace()
+    val plan = NightPlan.of(targets, now, planned?.astronomicalDusk, planned?.astronomicalDawn, dither, pace, profile.foreseeing(triggers))
     val current = run?.takeIf { going }
     // After the run, its summary, until its ✕.
     var closed by remember { mutableStateOf<SequenceRun?>(null) }
@@ -170,7 +173,7 @@ fun NightScreen(services: AppServices, open: (Screen) -> Unit) {
                 onDismiss = { guard?.dismiss() },
             ) {
                 current?.let {
-                    val overview = it.overview(now, dither)
+                    val overview = it.overview(now, dither, pace)
                     TargetCard(overview, site, now)
                     ProgressCard(overview, planned?.astronomicalDawn, zone())
                 }
@@ -189,7 +192,19 @@ fun NightScreen(services: AppServices, open: (Screen) -> Unit) {
 
                 guardState == GuardState.Watching -> {
                     val stack = rememberStackCard(services.capture.stacking, profile?.options?.stacking)
-                    RunningNight(current, capture.activity, frames, focus, site, planned?.astronomicalDawn, now, zone(), dither, stack) {
+                    RunningNight(
+                        current,
+                        capture.activity,
+                        frames,
+                        focus,
+                        site,
+                        planned?.astronomicalDawn,
+                        now,
+                        zone(),
+                        dither,
+                        stack,
+                        pace = pace,
+                    ) {
                         services.display.setShowStack(true)
                         open(Screen.Root(Section.Imaging))
                     }

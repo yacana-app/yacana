@@ -381,5 +381,5 @@ private fun Target.fillingTonight(profile: Profile?, clock: Clock, zone: TimeZon
     val night = Ephemerides.night(evening(now, zone), site)
     val dusk = night.astronomicalDusk
     val start = if (dusk != null && dusk > now) dusk else now
-    return fillingTheNight(start, night.astronomicalDawn, profile.options.dither)
+    return fillingTheNight(start, night.astronomicalDawn, profile.options.dither, profile.options.pace)
 }

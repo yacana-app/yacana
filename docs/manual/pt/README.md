@@ -1075,7 +1075,7 @@ Os alvos vêm de Céu: enquadre um e toque em **Adicionar à sequência** ([cap�
 
 ### Plano desta noite
 
-A linha temporal mostra cada alvo do seu início ao seu fim, e o amanhecer. Se o plano passar do amanhecer astronómico, diz que alvo acabaria e quando, e a hora de fim desse alvo passa para a cor de aviso. **Anular** desfaz a última alteração, até 50 alterações para trás.
+A linha temporal mostra cada alvo do seu início ao seu fim, e o amanhecer. Se o plano passar do amanhecer astronómico, diz que alvo acabaria e quando, e a hora de fim desse alvo passa para a cor de aviso. **Anular** desfaz a última alteração, até 50 alterações para trás. Os tempos vêm do que o teu equipamento demorou na sua última noite: cada imagem além da sua exposição, cada dithering, cada autofocagem e cada centragem. Contam-se as autofocagens a cada tantos minutos e na mudança de filtro; as por temperatura ou HFR não se podem prever.
 
 ### O cartão de um alvo
 
@@ -1115,7 +1115,7 @@ Os botões por baixo alteram-nas:
   Se um autofoco falhar, esperam pelas exposições seguintes.
 - **Darks:** Ao começar, quando a temperatura do sensor muda, no fim com o bias, e quantos de cada vez ([capítulo 23](#calibration)).
 - **Recentragem:** ativada ou não, e quanto o campo se pode desviar: 1′, 2′, 5′ ou 10′, cada um também em píxeis da câmara ligada. Nunca recentra por menos de 20 px, o que um dithering pode mover; com uma câmara grande angular isso é mais do que qualquer opção, e a folha avisa. Com um bom alinhamento polar, recentra uma ou duas vezes por hora.
-- **Dithering:** ativado ou não, e a cada 1, 3, 5 ou 10 imagens, para os lights de todos os alvos. Cada dithering espera que a montagem estabilize.
+- **Dithering:** ativado ou não, e a cada 1, 3, 5 ou 10 imagens, para os lights de todos os alvos. Cada dithering espera que a montagem estabilize. Com um Seestar, ou uma montagem sem impulsos de guiagem, cada dithering parte da resolução da última imagem e vai ao alvo mais o seu ponto da grelha, por isso também desfaz o desvio, como faz a própria app do Seestar.
 - **Resistência anti-orvalho**, se o equipamento ligado tiver uma: ligada ou não durante a noite, e a sua potência se for regulável. Gasta bateria: desliga-a em noites secas e amenas.
 
 Para outras regras, como esperar que um alvo suba ou repetir até uma hora, abre o plano no editor avançado.
@@ -1227,7 +1227,7 @@ Tudo o que precisa cabe num só ecrã, sem deslizar:
 
 - **O alvo:** o seu nome, painel e filtro, e a sua altura com uma seta que indica se sobe ou desce.
 - **A imagem:** um anel com os segundos que faltam, *Imagem 35 de 120*, o filtro e o ganho.
-- **Progresso:** a percentagem da sequência e quando acaba, face ao amanhecer astronómico.
+- **Progresso:** a percentagem da sequência e quando acaba, face ao amanhecer astronómico. Após algumas imagens, segue o que os passos desta noite estão a demorar.
 - **Última imagem:** a sua miniatura, se foi boa ou descartada, o seu HFR e estrelas, e a curva de HFR da noite. Com o empilhamento ao vivo ativado, mostra o empilhamento: toque nele para o abrir em Imagem.
 - **Seguinte:** o que vem a seguir, como o próximo autofoco, a mudança para o alvo seguinte e o estacionamento, com as suas horas.
 

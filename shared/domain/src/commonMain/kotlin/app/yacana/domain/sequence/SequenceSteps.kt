@@ -16,6 +16,7 @@ import app.yacana.domain.profile.DitherOptions
 import app.yacana.domain.profile.Location
 import app.yacana.domain.session.Journal
 import app.yacana.domain.session.log
+import app.yacana.ports.SkyPosition
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.math.abs
@@ -136,7 +137,8 @@ internal class SequenceSteps(private val equipment: EquipmentController, private
     val pixelScale: Double get() = connected().pixelScale()
 
     /** Dithers without a guider, as N.I.N.A.'s direct guider; returns where the field is now, around where it began. */
-    suspend fun dither(options: DitherOptions): DitherOffset = dithers.move(mount(), options, connected().pixelScale())
+    suspend fun dither(options: DitherOptions, centre: SkyPosition? = null): DitherOffset =
+        dithers.move(mount(), options, connected().pixelScale(), centre)
 
     private companion object {
         const val COOLED_WITHIN = 1.0

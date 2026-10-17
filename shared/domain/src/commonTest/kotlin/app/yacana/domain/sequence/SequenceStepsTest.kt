@@ -102,7 +102,7 @@ class SequenceStepsTest : RunnerFixture() {
     }
 
     @Test
-    fun aSeestarDithersByAGoToBetweenThePointsOfAGridAroundWhereTheFieldBegan() = runTest {
+    fun aSeestarDithersFromEachLightsSolveToTheTargetPlusAPointOfTheGrid() = runTest {
         landing()
         val target = Block("M 31", listOf(GoToTarget(centre = false), Exposures(6, 10.0, ditherEvery = 1)), target = m31)
 
@@ -110,14 +110,33 @@ class SequenceStepsTest : RunnerFixture() {
 
         assertEquals(RunStatus.Finished, run.status, run.error)
         assertTrue(sent("telescope/0/pulseguide").isEmpty(), "its pulses go astray")
+        // Synced on each light's solve before its dither, as the Seestar's own app aims its dithers.
+        assertEquals(5, sent("telescope/0/synctocoordinates").size)
         val slews = slews()
-        val began = slews.first().let { SkyPosition(it.raHours, it.decDeg + 20.0 / 3600) }
-        val points = slews.drop(1).map { steps(it, began) }
-        // Whole steps of 27″ within one of where the GoTo to M 31 landed, as a Seestar does them: the slews' 20″ do not add up.
+        val points = slews.drop(1).map { steps(it, slews.first()) }
+        // Whole steps of 27″ around M 31 itself, not around where the slews landed 20″ north: the drift is undone.
         assertEquals(5, points.size)
         assertTrue(points.all { (east, north) -> east in setOf(-1.0, 0.0, 1.0) && north in setOf(-1.0, 0.0, 1.0) }, points.toString())
         assertTrue((listOf(0.0 to 0.0) + points).zipWithNext().all { (a, b) -> a != b }, "each moves: $points")
-        assertEquals(List(5) { "1" }, events.filter { it.first == "sequence_dither" }.map { it.second["goTos"].toString() })
+        val dithers = events.filter { it.first == "sequence_dither" }.map { it.second }
+        assertEquals(List(5) { "1" }, dithers.map { it["goTos"].toString() })
+        assertTrue(dithers.all { it["aimed"] == true })
+    }
+
+    @Test
+    fun aLightThatDoesNotSolveLeavesItsDitherBlind() = runTest {
+        landing()
+        val target = Block("M 31", listOf(GoToTarget(centre = false), Exposures(3, 10.0, ditherEvery = 1)), target = m31)
+
+        val run = runner(solver = CloudedSolver()).runToTheEnd(night(target))
+
+        assertEquals(RunStatus.Finished, run.status, run.error)
+        assertTrue(sent("telescope/0/synctocoordinates").isEmpty())
+        // Around where the GoTo to M 31 landed, 20″ north, as before.
+        val began = slews().first().let { SkyPosition(it.raHours, it.decDeg + 20.0 / 3600) }
+        val points = slews().drop(1).map { steps(it, began) }
+        assertTrue(points.all { (east, north) -> east in setOf(-1.0, 0.0, 1.0) && north in setOf(-1.0, 0.0, 1.0) }, points.toString())
+        assertTrue(events.filter { it.first == "sequence_dither" }.all { it.second["aimed"] == false })
     }
 
     @Test
