@@ -1075,7 +1075,7 @@ Targets come from Sky: frame one and tap **Add to the sequence** ([chapter 16](#
 
 ### Tonight's plan
 
-The timeline shows each target from its start to its end, and the dawn. If the plan runs past astronomical dawn, it says which target would end when, and that target's end time turns to the warning colour. **Undo** undoes the last change, up to 50 changes back.
+The timeline shows each target from its start to its end, and the dawn. If the plan runs past astronomical dawn, it says which target would end when, and that target's end time turns to the warning colour. **Undo** undoes the last change, up to 50 changes back. The times come from what your equipment took on its last night: each frame beyond its exposure, each dither, each autofocus and each centring. Autofocus every so many minutes and at a change of filter is counted; on the temperature or the HFR it cannot be foreseen.
 
 ### A target's card
 
@@ -1227,7 +1227,7 @@ Everything you need fits on one screen without scrolling:
 
 - **The target:** its name, panel and filter, and its altitude with an arrow for rising or setting.
 - **The frame:** a ring with the seconds left, *Frame 35 of 120*, the filter and the gain.
-- **Progress:** the sequence's percentage and when it ends, against astronomical dawn.
+- **Progress:** the sequence's percentage and when it ends, against astronomical dawn. After a few frames, it follows what tonight's steps are taking.
 - **Last frame:** its thumbnail, whether it was good or discarded, its HFR and stars, and the night's HFR curve. With live stacking on, it shows the stack: tap it to open it in Imaging.
 - **Next:** what comes, such as the next autofocus, the change to the next target, and the park, with their times.
 

@@ -1075,7 +1075,7 @@ Los objetivos vienen de Cielo: encuadra uno y toca **Añadir a la secuencia** ([
 
 ### Plan de esta noche
 
-La línea de tiempo muestra cada objetivo desde su inicio hasta su fin, y el amanecer. Si el plan pasa del amanecer astronómico, dice qué objetivo acabaría y cuándo, y la hora de fin de ese objetivo se pone del color de aviso. **Deshacer** deshace el último cambio, hasta 50 cambios atrás.
+La línea de tiempo muestra cada objetivo desde su inicio hasta su fin, y el amanecer. Si el plan pasa del amanecer astronómico, dice qué objetivo acabaría y cuándo, y la hora de fin de ese objetivo se pone del color de aviso. **Deshacer** deshace el último cambio, hasta 50 cambios atrás. Los tiempos salen de lo que tardó tu equipo en su última noche: cada toma además de su exposición, cada dither, cada autoenfoque y cada centrado. Se cuentan los autoenfoques cada tantos minutos y al cambiar de filtro; los de temperatura o HFR no se pueden prever.
 
 ### La tarjeta de un objetivo
 
@@ -1227,7 +1227,7 @@ Todo lo que necesitas cabe en una pantalla sin desplazarte:
 
 - **El objetivo:** su nombre, panel y filtro, y su altura con una flecha que indica si sube o baja.
 - **La toma:** un anillo con los segundos que quedan, *Toma 35 de 120*, el filtro y la ganancia.
-- **Progreso:** el porcentaje de la secuencia y cuándo acaba, frente al amanecer astronómico.
+- **Progreso:** el porcentaje de la secuencia y cuándo acaba, frente al amanecer astronómico. Tras unas pocas tomas, sigue lo que están tardando los pasos de esta noche.
 - **Última toma:** su miniatura, si fue buena o descartada, su HFR y sus estrellas, y la curva de HFR de la noche. Con el apilado en vivo activado, muestra el apilado: tócalo para abrirlo en Imagen.
 - **Próximo:** lo que viene, como el siguiente autoenfoque, el cambio al siguiente objetivo y el aparcado, con sus horas.
 

@@ -115,8 +115,16 @@ fun SequenceTonight(
     val minute = now.epochSeconds / SECONDS_PER_MINUTE
     val night = remember(site, minute) { site?.let { planNight(now, zone(), it) } }
     val dither = profile?.options?.dither ?: DitherOptions()
-    val plan = NightPlan.of(list, now, night?.astronomicalDusk, night?.astronomicalDawn, dither)
     val triggers by targets.triggers.collectAsState()
+    val plan = NightPlan.of(
+        list,
+        now,
+        night?.astronomicalDusk,
+        night?.astronomicalDawn,
+        dither,
+        profile.pace(),
+        profile.foreseeing(triggers),
+    )
     val darks by targets.darks.collectAsState()
     val advanced by targets.advanced.collectAsState()
     val ditherEvery by targets.dither.collectAsState()
@@ -250,6 +258,7 @@ fun SequenceTonight(
                 row,
                 filters,
                 dither,
+                profile.pace(),
                 plan.targets.getOrNull(index)?.start,
                 plan.dawn,
                 zone(),

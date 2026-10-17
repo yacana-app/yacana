@@ -171,6 +171,8 @@ data class ProfileOptions(
     val filePattern: String = FileNames.DEFAULT_PATTERN,
     /** How the sequence dithers without a guider. */
     val dither: DitherOptions = DitherOptions(),
+    /** How long the night's steps take with this equipment, as its last night measured. */
+    val pace: Pace = Pace(),
     /** What the session does on a lost link, a failed sequence or a low battery. */
     val safety: SafetyOptions = SafetyOptions(),
     /** Live stacking of the light frames. */
@@ -192,6 +194,21 @@ data class StackingOptions(val live: Boolean = false, val balanced: Boolean = tr
  */
 @Serializable
 data class SafetyOptions(val park: Boolean = true, val waitMinutes: Double = 2.0, val lowBatteryPercent: Int = 20)
+
+/**
+ * How long a night's steps take with this equipment beyond the exposures, for the plan and the
+ * running night's end: each light's download, saving and stars ([frameSeconds]), each dither with
+ * its settling ([ditherSeconds]; null until measured, then the move and the settle time), each
+ * autofocus and each centring. A night measures them and keeps them here; until then, a Seestar's
+ * of its first nights: a 30 s light took 34.7 s from start to start, an autofocus 3.5 minutes.
+ */
+@Serializable
+data class Pace(
+    val frameSeconds: Double = 4.7,
+    val ditherSeconds: Double? = null,
+    val autofocusSeconds: Double = 210.0,
+    val centringSeconds: Double = 60.0,
+)
 
 /**
  * Dithering without a guider, as N.I.N.A.'s direct guider and with its settings: each

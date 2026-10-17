@@ -1075,7 +1075,7 @@ Els objectius venen de Cel: enquadra'n un i toca **Afegeix a la seqüència** ([
 
 ### Pla d'aquesta nit
 
-La línia de temps mostra cada objectiu des del seu inici fins al seu final, i l'alba. Si el pla s'allarga més enllà de l'alba astronòmica, diu quin objectiu acabaria i a quina hora, i l'hora final d'aquest objectiu passa al color d'avís. **Desfés** desfà l'últim canvi, fins a 50 canvis enrere.
+La línia de temps mostra cada objectiu des del seu inici fins al seu final, i l'alba. Si el pla s'allarga més enllà de l'alba astronòmica, diu quin objectiu acabaria i a quina hora, i l'hora final d'aquest objectiu passa al color d'avís. **Desfés** desfà l'últim canvi, fins a 50 canvis enrere. Els temps surten del que va trigar el teu equip la darrera nit: cada presa a més de la seva exposició, cada dithering, cada autoenfocament i cada centratge. Es compten els autoenfocaments cada tants minuts i en canviar de filtre; els de temperatura o HFR no es poden preveure.
 
 ### La targeta d'un objectiu
 
@@ -1227,7 +1227,7 @@ Tot el que necessites cap en una sola pantalla sense desplaçar-te:
 
 - **L'objectiu:** el seu nom, panell i filtre, i la seva altura amb una fletxa que indica si puja o baixa.
 - **La presa:** un anell amb els segons que queden, *Presa 35 de 120*, el filtre i el guany.
-- **Progrés:** el percentatge de la seqüència i quan acaba, comparat amb l'alba astronòmica.
+- **Progrés:** el percentatge de la seqüència i quan acaba, comparat amb l'alba astronòmica. Després d'unes quantes preses, segueix el que estan trigant els passos d'aquesta nit.
 - **Última presa:** la seva miniatura, si ha estat bona o descartada, el seu HFR i les estrelles, i la corba d'HFR de la nit. Amb l'apilat en directe activat, mostra l'apilat: toca'l per obrir-lo a Imatge.
 - **Següent:** el que ve, com ara el proper autoenfocament, el canvi al següent objectiu i l'aparcament, amb les seves hores.
 

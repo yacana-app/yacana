@@ -1075,7 +1075,7 @@ Helburuak Zerua ataletik datoz: enkoadratu bat eta sakatu **Gehitu sekuentziari*
 
 ### Gaur gaueko plana
 
-Denbora-lerroak helburu bakoitza erakusten du hasieratik amaierara, eta egunsentia. Plana egunsenti astronomikoaz haratago badoa, zein helburu noiz amaituko litzatekeen esaten du, eta helburu horren amaiera-ordua abisu-kolorera aldatzen da. **Desegin** botoiak azken aldaketa desegiten du, 50 aldaketa atzera arte.
+Denbora-lerroak helburu bakoitza erakusten du hasieratik amaierara, eta egunsentia. Plana egunsenti astronomikoaz haratago badoa, zein helburu noiz amaituko litzatekeen esaten du, eta helburu horren amaiera-ordua abisu-kolorera aldatzen da. **Desegin** botoiak azken aldaketa desegiten du, 50 aldaketa atzera arte. Denborak zure ekipoak azken gauean behar izan zuenetik ateratzen dira: argazki bakoitza bere esposizioaz gain, dithering bakoitza, autofoku bakoitza eta zentratze bakoitza. Hainbat minututik behingo eta iragazki-aldaketako autofokuak zenbatzen dira; tenperaturagatikoak edo HFRgatikoak ezin dira aurreikusi.
 
 ### Helburu baten txartela
 
@@ -1227,7 +1227,7 @@ Behar duzun guztia pantaila bakarrean sartzen da, korritu gabe:
 
 - **Helburua:** haren izena, panela eta iragazkia, eta haren altuera, igotzen edo jaisten ari den adierazten duen gezi batekin.
 - **Argazkia:** geratzen diren segundoak dituen eraztun bat, *Argazkia 35 / 120*, iragazkia eta irabazia.
-- **Aurrerapena:** sekuentziaren ehunekoa eta noiz amaitzen den, egunsenti astronomikoarekin alderatuta.
+- **Aurrerapena:** sekuentziaren ehunekoa eta noiz amaitzen den, egunsenti astronomikoarekin alderatuta. Argazki gutxi batzuen ondoren, gaurko urratsek behar dutena jarraitzen du.
 - **Azken argazkia:** haren miniatura, ona ala baztertua izan den, haren HFRa eta izarrak, eta gaueko HFR kurba. Zuzeneko pilaketa aktibatuta, pilaketa erakusten du: sakatu Irudia atalean irekitzeko.
 - **Hurrengoa:** datorrena, hala nola hurrengo foku automatikoa, hurrengo helbururako aldaketa eta aparkatzea, beren orduekin.
 

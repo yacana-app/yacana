@@ -1075,7 +1075,7 @@ Les cibles viennent de Ciel : cadrez-en une et touchez **Ajouter à la séquenc
 
 ### Plan de ce soir
 
-La frise montre chaque cible de son début à sa fin, et l'aube. Si le plan déborde après l'aube astronomique, elle indique quelle cible finirait à quelle heure, et l'heure de fin de cette cible passe à la couleur d'avertissement. **Annuler** défait la dernière modification, jusqu'à 50 modifications en arrière.
+La frise montre chaque cible de son début à sa fin, et l'aube. Si le plan déborde après l'aube astronomique, elle indique quelle cible finirait à quelle heure, et l'heure de fin de cette cible passe à la couleur d'avertissement. **Annuler** défait la dernière modification, jusqu'à 50 modifications en arrière. Les durées viennent de ce que votre équipement a pris lors de sa dernière nuit : chaque image au-delà de son exposition, chaque dithering, chaque autofocus et chaque centrage. Les autofocus toutes les tant de minutes et au changement de filtre sont comptés ; ceux sur la température ou la HFR ne peuvent pas être prévus.
 
 ### La carte d'une cible
 
@@ -1227,7 +1227,7 @@ Tout ce dont vous avez besoin tient sur un seul écran, sans faire défiler :
 
 - **La cible :** son nom, son panneau et son filtre, et sa hauteur avec une flèche indiquant si elle monte ou descend.
 - **L'image :** un anneau avec les secondes restantes, *Image 35 sur 120*, le filtre et le gain.
-- **Progression :** le pourcentage de la séquence et l'heure de fin, comparée à l'aube astronomique.
+- **Progression :** le pourcentage de la séquence et l'heure de fin, comparée à l'aube astronomique. Après quelques images, elle suit ce que prennent les étapes de la nuit.
 - **Dernière image :** sa vignette, si elle était bonne ou écartée, son HFR et ses étoiles, et la courbe du HFR de la nuit. Avec l'empilement en direct activé, elle montre l'empilement : touchez-la pour l'ouvrir dans Imagerie.
 - **Ensuite :** ce qui arrive, comme le prochain autofocus, le passage à la cible suivante et le parquage, avec leurs heures.
 
