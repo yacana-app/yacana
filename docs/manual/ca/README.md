@@ -2,7 +2,7 @@
 
 <img src="images/yacana-banner.png" width="320" alt="Yacana">
 
-**Manual d'usuari · versió 1.0.2**
+**Manual d'usuari · versió 1.0.3**
 
 # Tota la nit, des del teu mòbil
 
@@ -1671,6 +1671,6 @@ Les fotos del cel no formen part de l'app. Les baixes del web de N.I.N.A. o les 
 
 ---
 
-Manual d'usuari de Yacana, per a la versió 1.0.2. Les pantalles són les captures de referència de la mateixa app; les fotos del cel que s'hi veuen són de la memòria cau DSS de N.I.N.A., i l'apilat de M 31 són 544 preses de 20 s fetes amb un Seestar S50 Pro i processades després.
+Manual d'usuari de Yacana, per a la versió 1.0.3. Les pantalles són les captures de referència de la mateixa app; les fotos del cel que s'hi veuen són de la memòria cau DSS de N.I.N.A., i l'apilat de M 31 són 544 preses de 20 s fetes amb un Seestar S50 Pro i processades després.
 
 Has trobat alguna cosa incorrecta o que hi falta? Obre una incidència al [gestor d'incidències del projecte](https://github.com/yacana-app/yacana/issues).
