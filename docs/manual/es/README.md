@@ -897,7 +897,7 @@ El **⋮** de arriba las abre:
 - **Tipo de toma:** Light, dark, flat o bias. Va en el nombre del archivo y en la cabecera FITS.
 - **Objetivo, para el nombre del archivo:** El nombre de la carpeta y de los archivos, como *M 31*. Sin él, las tomas se llaman *Snapshot*.
 - **Guardar las tomas sueltas:** El bucle siempre guarda.
-- **Dithering en bucles de lights, cada:** *No*, *3* (de inicio), *5* o *10* tomas. Entre tomas la montura recibe un pequeño empujón, como lo da el guiado directo de N.I.N.A.: el campo se mueve unos píxeles (5 por defecto) alrededor de donde empezó el bucle, para que el patrón del sensor no se acumule en rayas en el apilado. Los darks, flats y bias nunca hacen dithering. Con un Seestar, cuyos pulsos de guiado no van donde se mandan, salta en cambio con pequeños GoTo entre los 9 puntos de una rejilla separados 27″.
+- **Dithering en bucles de lights, cada:** *No*, *3* (de inicio), *5* o *10* tomas. Entre tomas la montura recibe un pequeño empujón, como lo da el guiado directo de N.I.N.A.: el campo se mueve unos píxeles (5 por defecto) alrededor de donde empezó el bucle, para que el patrón del sensor no se acumule en rayas en el apilado. Los darks, flats y bias nunca hacen dithering. Con un Seestar, cuyos pulsos de guiado no van donde se mandan, salta en cambio con pequeños GoTo entre los 9 puntos de una rejilla separados 27″; tras cada vuelta la rejilla se desplaza 9″, para 81 posiciones en total.
 - **Offset:** Si la cámara lo tiene.
 - **Estirado automático:** Activado por defecto, como el de N.I.N.A. Desactivado, dos deslizadores ajustan las **Sombras** y los **Tonos medios**.
 - **Marcar las estrellas:** Dibuja un recuadro y el HFR sobre las estrellas más brillantes, como hace N.I.N.A.; **Cuántas**, de 10 a 500.

@@ -13,11 +13,30 @@ import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.hypot
 import kotlin.math.ln
-import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.seconds
+
+/** The dither grid's 9 points. */
+private val CELLS = (-1..1).flatMap { east -> (-1..1).map { north -> Dither.Cell(east, north) } }
+
+/** How far each round shifts the grid, in thirds of a step: the centre first, then around it. */
+private val FINES =
+    listOf(
+        Dither.Cell(0, 0),
+        Dither.Cell(1, 0),
+        Dither.Cell(1, -1),
+        Dither.Cell(0, -1),
+        Dither.Cell(-1, -1),
+        Dither.Cell(-1, 0),
+        Dither.Cell(-1, 1),
+        Dither.Cell(0, 1),
+        Dither.Cell(1, 1),
+    )
+
+/** The shifts of each round; only east ones for a dither in right ascension alone. */
+private fun fines(raOnly: Boolean) = if (raOnly) FINES.filter { it.north == 0 } else FINES
 
 /** Where a dither put the field, in pixels east and north of where it began; [goTos] it took, none for guide pulses. */
 data class DitherOffset(val eastPixels: Double, val northPixels: Double, val goTos: Int = 0)
@@ -38,7 +57,7 @@ private const val HOURS = 24.0
  * Dithering without a guider, as N.I.N.A.'s direct guider (its `DirectGuider` and
  * `DitherOffsetSelector`): each dither moves the field to an offset drawn around where it began,
  * never wandering off from it, and the mount gets the guide pulses that take it there from the last
- * one; a mount that dithers by GoTo jumps between the points of a grid instead. The sequence
+ * one; a mount that dithers by GoTo jumps between the points of a grid of grids instead. The sequence
  * dithers so between exposures, and so does Imaging's loop; [reset] makes where the field is now
  * the new centre, as after a GoTo.
  */
@@ -48,6 +67,11 @@ class Dither(private val random: Random = Random) {
     /** Where the field began in the mount's coordinates, for dithers by GoTo; null until the first. */
     private var origin: SkyPosition? = null
 
+    /** The grid point the field is at, the round, which says where the grid is shifted to, and the points it visited in it. */
+    private var cell = Cell(0, 0)
+    private var round = 0
+    private val visited = mutableSetOf(Cell(0, 0))
+
     /** Where the last dither meant to put the field, around where it began. */
     val offset: DitherOffset get() = previous
 
@@ -55,6 +79,10 @@ class Dither(private val random: Random = Random) {
     fun reset() {
         previous = DitherOffset(0.0, 0.0)
         origin = null
+        cell = Cell(0, 0)
+        round = 0
+        visited.clear()
+        visited += cell
     }
 
     /**
@@ -83,14 +111,17 @@ class Dither(private val random: Random = Random) {
     }
 
     /**
-     * A dither by GoTo: to another of the 9 points of a 3 × 3 grid around where the field began,
-     * [GRID_ARCSEC] apart, or the dither's pixels if more. A Seestar leaves its GoTos of under
-     * about 25″ undone, so N.I.N.A.'s small offsets would mostly not move it; one step of the grid
-     * always does. Each GoTo goes to where the field began plus the point, so where one lands does
-     * not add up with the next; one after which the mount says it has not moved tries another
-     * point, [GOTO_TRIES] at most. Given a [centre] in the mount's coordinates, as the sequence's
-     * target once the mount is synced on a plate solve, the grid is around it, so the drift since
-     * the last dither is undone too.
+     * A dither by GoTo: to another point of a 3 × 3 grid around where the field began, [GRID_ARCSEC]
+     * apart, or the dither's pixels if more. A Seestar leaves its GoTos of under about 25″ undone,
+     * so N.I.N.A.'s small offsets would mostly not move it; one step of the grid always does. Each
+     * round visits the grid's 9 points; then the grid shifts by a third of its step to the next of
+     * [FINES], so 9 rounds put the field at 81 places, as evenly apart as they can be, in little
+     * more room than one grid: on a Seestar at home, 74 of the 81 were told apart, its right
+     * ascension going by whole seconds of time. Each GoTo goes to where the field began plus the
+     * point, so where one lands does not add up with the next; one after which the mount says it
+     * has not moved tries another point, [GOTO_TRIES] at most. Given a [centre] in the mount's
+     * coordinates, as the sequence's target once the mount is synced on a plate solve, the grid is
+     * around it, so the drift since the last dither is undone too.
      */
     private suspend fun goTo(mount: MountMediator, options: DitherOptions, pixelScaleArcsec: Double, centre: SkyPosition?): DitherOffset {
         val pixels = options.pixels.takeIf { it.isFinite() && it > 0 } ?: 0.0
@@ -103,19 +134,20 @@ class Dither(private val random: Random = Random) {
             }
                 ?: here.moved(DitherOffset(-previous.eastPixels, -previous.northPixels), pixelScaleArcsec)
         origin = start
-        val from =
-            Cell((previous.eastPixels / step).roundToInt().coerceIn(-1, 1), (previous.northPixels / step).roundToInt().coerceIn(-1, 1))
-        val tried = mutableSetOf(from)
+        val tried = mutableSetOf<Cell>()
         var moved: DitherOffset? = null
         var goTos = 0
         while (moved == null && goTos < GOTO_TRIES) {
-            val cell = nextCell(from, tried, options.raOnly) ?: break
-            tried += cell
+            val point = nextPoint(tried, options.raOnly) ?: break
+            tried += point.cell
             goTos++
-            val target = DitherOffset(cell.east * step, cell.north * step, goTos)
+            val target = point.offset(step, options.raOnly).copy(goTos = goTos)
             mount.goToAndWait(start.moved(target, pixelScaleArcsec))
             val now = mount.position()
-            if (separationArcsec(now, here) >= step * pixelScaleArcsec / 2) moved = target
+            if (separationArcsec(now, here) >= step * pixelScaleArcsec / 2) {
+                moved = target
+                visit(point)
+            }
             here = now
         }
         // Left where it was, the field's offset is the last one.
@@ -125,10 +157,42 @@ class Dither(private val random: Random = Random) {
     /** A point of the dither grid: -1, 0 or 1 steps east and north of where the field began. */
     internal data class Cell(val east: Int, val north: Int)
 
-    /** Another point of the grid than [from] and those in [tried], at random; in the same row with [raOnly]; null if none is left. */
-    internal fun nextCell(from: Cell, tried: Set<Cell>, raOnly: Boolean): Cell? {
-        val cells = (-1..1).flatMap { east -> (-1..1).map { north -> Cell(east, north) } }
-        return cells.filter { it != from && it !in tried && (!raOnly || it.north == from.north) }.randomOrNull(random)
+    /** A [cell] of the grid as shifted in [round]. */
+    internal data class Point(val cell: Cell, val round: Int) {
+        /** Its offset, with grid steps of [step] pixels; the grid shifted only east with [raOnly]. */
+        fun offset(step: Double, raOnly: Boolean): DitherOffset {
+            val shifts = fines(raOnly)
+            val fine = shifts[round % shifts.size]
+            return DitherOffset((cell.east + fine.east / FINE_PARTS) * step, (cell.north + fine.north / FINE_PARTS) * step)
+        }
+    }
+
+    /**
+     * The next point, at random: one of the round's that it has not visited, but the one it is at
+     * and those [tried]; once all are visited, one of the next round's. In the same row with
+     * [raOnly]. Where it can, every axis that changes moves a whole step at least, past a
+     * Seestar's dead zone, as when the grid shifts at the start of a round. Null if none is left.
+     */
+    internal fun nextPoint(tried: Set<Cell>, raOnly: Boolean): Point? {
+        fun open(seen: Set<Cell>) = CELLS.filter { it != cell && it !in seen && it !in tried && (!raOnly || it.north == cell.north) }
+        val left = open(visited)
+        val inRound = if (left.isNotEmpty()) round else (round + 1) % fines(raOnly).size
+        val cells = left.ifEmpty { open(emptySet()) }
+        val now = Point(cell, round).offset(1.0, raOnly)
+        val whole =
+            cells.filter { candidate ->
+                val there = Point(candidate, inRound).offset(1.0, raOnly)
+                listOf(there.eastPixels - now.eastPixels, there.northPixels - now.northPixels).all { abs(it) < SAME || abs(it) >= 1 - SAME }
+            }
+        return whole.ifEmpty { cells }.randomOrNull(random)?.let { Point(it, inRound) }
+    }
+
+    /** The field is at [point] now. */
+    internal fun visit(point: Point) {
+        if (point.round != round) visited.clear()
+        round = point.round
+        cell = point.cell
+        visited += cell
     }
 
     /**
@@ -190,5 +254,11 @@ class Dither(private val random: Random = Random) {
 
         /** GoTos to dither before giving up, when the mount says one left it where it was. */
         const val GOTO_TRIES = 3
+
+        /** Thirds of a step: how far each round shifts the grid. */
+        const val FINE_PARTS = 3.0
+
+        /** Steps closer than this are the same. */
+        const val SAME = 1e-6
     }
 }
