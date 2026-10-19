@@ -2,7 +2,7 @@
 
 <img src="images/yacana-banner.png" width="320" alt="Yacana">
 
-**User manual · version 1.0.3**
+**User manual · version 1.0.4**
 
 # The whole night, from your phone
 
@@ -1673,6 +1673,6 @@ The sky photos are not part of the app. You download them from N.I.N.A.'s site o
 
 ---
 
-Yacana user manual, for version 1.0.3. The screens are the app's own reference screenshots; the sky photos in them are from N.I.N.A.'s DSS cache, and the stack of M 31 is 544 frames of 20 s taken with a Seestar S50 Pro and processed afterwards.
+Yacana user manual, for version 1.0.4. The screens are the app's own reference screenshots; the sky photos in them are from N.I.N.A.'s DSS cache, and the stack of M 31 is 544 frames of 20 s taken with a Seestar S50 Pro and processed afterwards.
 
 Found something that is wrong or missing? Open an issue on the [project's issue tracker](https://github.com/yacana-app/yacana/issues).

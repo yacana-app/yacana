@@ -2,7 +2,7 @@
 
 <img src="images/yacana-banner.png" width="320" alt="Yacana">
 
-**Benutzerhandbuch · Version 1.0.3**
+**Benutzerhandbuch · Version 1.0.4**
 
 # Die ganze Nacht, vom Handy aus
 
@@ -1673,6 +1673,6 @@ Die Himmelsfotos sind nicht Teil der App. Du lädst sie von der Website von N.I.
 
 ---
 
-Benutzerhandbuch für Yacana, für Version 1.0.3. Die Bildschirme sind die eigenen Referenz-Screenshots der App; die Himmelsfotos darin stammen aus dem DSS-Cache von N.I.N.A., und der Stack von M 31 besteht aus 544 Aufnahmen zu 20 s, aufgenommen mit einem Seestar S50 Pro und nachträglich bearbeitet.
+Benutzerhandbuch für Yacana, für Version 1.0.4. Die Bildschirme sind die eigenen Referenz-Screenshots der App; die Himmelsfotos darin stammen aus dem DSS-Cache von N.I.N.A., und der Stack von M 31 besteht aus 544 Aufnahmen zu 20 s, aufgenommen mit einem Seestar S50 Pro und nachträglich bearbeitet.
 
 Ist etwas falsch oder fehlt etwas? Eröffne ein Issue im [Issue-Tracker des Projekts](https://github.com/yacana-app/yacana/issues).

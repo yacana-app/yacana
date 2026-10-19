@@ -2,7 +2,7 @@
 
 <img src="images/yacana-banner.png" width="320" alt="Yacana">
 
-**Manual do utilizador · versão 1.0.3**
+**Manual do utilizador · versão 1.0.4**
 
 # A noite inteira, a partir do telemóvel
 
@@ -1673,6 +1673,6 @@ As fotos do céu não fazem parte da app. Transfere-as do site do N.I.N.A. ou im
 
 ---
 
-Manual do utilizador de Yacana, para a versão 1.0.3. Os ecrãs são as capturas de referência da própria app; as fotos do céu que mostram vêm da cache DSS do N.I.N.A., e o empilhamento de M 31 são 544 imagens de 20 s tiradas com um Seestar S50 Pro e processadas depois.
+Manual do utilizador de Yacana, para a versão 1.0.4. Os ecrãs são as capturas de referência da própria app; as fotos do céu que mostram vêm da cache DSS do N.I.N.A., e o empilhamento de M 31 são 544 imagens de 20 s tiradas com um Seestar S50 Pro e processadas depois.
 
 Encontrou algo errado ou em falta? Comunique-o no [registo de problemas do projeto](https://github.com/yacana-app/yacana/issues).

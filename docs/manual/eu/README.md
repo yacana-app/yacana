@@ -2,7 +2,7 @@
 
 <img src="images/yacana-banner.png" width="320" alt="Yacana">
 
-**Erabiltzailearen eskuliburua · 1.0.3 bertsioa**
+**Erabiltzailearen eskuliburua · 1.0.4 bertsioa**
 
 # Gau osoa, zure mugikorretik
 
@@ -1673,6 +1673,6 @@ Zeruko argazkiak ez dira aplikazioaren parte. N.I.N.A.-ren webgunetik deskargatz
 
 ---
 
-Yacanaren erabiltzailearen eskuliburua, 1.0.3 bertsiorako. Pantailak aplikazioaren beraren erreferentziako pantaila-argazkiak dira; haietako zeruko argazkiak N.I.N.A.-ren DSS cachekoak dira, eta M 31ren pilaketa Seestar S50 Pro batekin ateratako 20 s-ko 544 argazkik osatzen dute, gero prozesatuta.
+Yacanaren erabiltzailearen eskuliburua, 1.0.4 bertsiorako. Pantailak aplikazioaren beraren erreferentziako pantaila-argazkiak dira; haietako zeruko argazkiak N.I.N.A.-ren DSS cachekoak dira, eta M 31ren pilaketa Seestar S50 Pro batekin ateratako 20 s-ko 544 argazkik osatzen dute, gero prozesatuta.
 
 Zerbait oker edo falta dela ikusi duzu? Ireki gai bat [proiektuaren arazoen jarraipen-sisteman](https://github.com/yacana-app/yacana/issues).
