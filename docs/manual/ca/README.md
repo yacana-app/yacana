@@ -876,7 +876,7 @@ Imatge fa preses a mà: preses soltes per comprovar l'enfocament i l'enquadramen
 ### Els ajustos de la presa
 
 - **Exposició:** 10, 20, 30, 60 o 300 s, les que permeti la càmera, o **Una altra** amb el teclat numèric, dins del rang de la càmera.
-- **Guany:** Amb el teclat numèric, dins del rang de la càmera, o els guanys amb nom de la càmera. Comença a 200 si la càmera ho admet, com fa l'app del mateix Seestar, i les preses de la seqüència sense guany propi fan servir aquest.
+- **Guany:** Amb el teclat numèric, dins del rang de la càmera, o els guanys amb nom de la càmera. És el guany del perfil, el mateix que a *Configuració › Càmera*: es desa, i el fan servir totes les preses, també les de la seqüència, els flats, els darks i els bias. Comença a 200, com fa l'app del mateix Seestar. Després de canviar-lo, fes darks i bias nous amb el nou guany; els flats mestres continuen servint.
 - **Binning:** 1×1, 2×2… només si la càmera fa binning.
 - **Filtre:** Amb una roda de filtres: el filtre posat i els altres als quals pots canviar. Les preses per resoldre, centrar, alinear o enfocar no passen mai per **Dark**: abans la roda passa a IR. Amb Dark, la presa no mostra HFR ni estrelles, que serien soroll.
 
@@ -1006,7 +1006,7 @@ Les preses de calibratge eliminen el que hi afegeixen el sensor i l'òptica. Yac
 Obre'l amb la plantilla **Flats** a Seqüència. Calcula sol l'exposició i fa els flats de cada filtre a una brillantor objectiu. La llum és aquest mòbil, o el panell de flats si n'hi ha un de connectat.
 
 1. Comprova l'**ADU objectiu**, 30.000 ± 5 % per defecte, amb el màxim de la càmera indicat. Fixa la **Brillantor del panell** si en fas servir un.
-2. Tria les **Preses per filtre** (20, 30 o 50) i els **Filtres**.
+2. Tria les **Preses per filtre** (20, 30 o 50) i els **Filtres**. El **Guany** de sota és el del perfil, que fan servir els flats i els seus bias; es canvia a *Configuració › Càmera* o a Imatge.
 3. Toca **Comença els flats**. Amb aquest mòbil com a llum, tens 30 s per posar-lo de cara avall sobre el telescopi, amb la pantalla tapant la lent i un full de paper blanc entremig. Un xiulet comença els flats i la pantalla es posa blanca a tota brillantor, també en mode vermell; un altre xiulet els acaba. Per posar-los en pausa, toca dos cops la pantalla blanca; **Continua** deixa uns altres 30 s.
 4. Cada filtre mostra *cercant el temps…*, després la seva exposició i quantes se n'han fet, amb la mitjana de l'última presa en ADU. **Pausa** i **Mantén premut per aturar** són a baix. En acabar, amb el filtre Dark del Seestar, fa 10 bias: el seu nivell queda a cada flat mestre, perquè l'apilat en directe hi divideixi encara que no hi hagi darks.
 
@@ -1381,12 +1381,14 @@ Cada opció diu què fa. Els ajustos marcats *per perfil* es guarden al perfil d
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Configuració: quadre de cerca i totes les files"><br><sub><b>Configuració.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Configuració, Càmera: guany 200, el que fan servir totes les preses"><br><sub><b>Càmera.</b> Un guany per a totes les preses.</sub></td>
 </tr></table>
 
 | Fila | Què conté | Capítol |
 | --- | --- | --- |
 | **Perfil i ubicació** | Nom, òptica, lloc, límits, horitzó, base d'estrelles, altres perfils, exportació i importació | [5](#profile) |
 | **Imatges i fitxers** | La carpeta i el patró de noms de fitxer (per perfil) | [30](#files) |
+| **Càmera** | El guany que fan servir totes les preses (per perfil) | [20](#imaging) |
 | **Plate solving** | Les opcions d'ASTAP, el centratge i les bases d'estrelles (per perfil) | [18](#solving), [6](#field) |
 | **Autoenfocament** | Pas, punts, exposició, ajust, backlash, R², intents (per perfil) | [19](#autofocus) |
 | **Seguretat** | Aturada segura, l'espera quan es perd la connexió, bateria baixa (per perfil) | [28](#safety) |

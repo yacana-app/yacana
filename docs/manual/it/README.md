@@ -876,7 +876,7 @@ Ripresa scatta pose a mano: pose singole per controllare il fuoco e l'inquadratu
 ### Le impostazioni della posa
 
 - **Esposizione:** 10, 20, 30, 60 o 300 s, quelle che la camera consente, oppure **Altro** sul tastierino, entro l'intervallo della camera.
-- **Guadagno:** Sul tastierino, entro l'intervallo della camera, oppure i guadagni con nome della camera. Parte da 200 se la camera lo accetta, come fa l'app dello stesso Seestar, e gli scatti della sequenza senza un guadagno proprio usano questo.
+- **Guadagno:** Sul tastierino, entro l'intervallo della camera, oppure i guadagni con nome della camera. È il guadagno del profilo, lo stesso di *Impostazioni › Camera*: resta salvato, e lo usano tutti gli scatti, anche quelli della sequenza, i flat, i dark e i bias. Parte da 200, come fa l'app dello stesso Seestar. Dopo averlo cambiato, rifai dark e bias al nuovo guadagno; i master flat restano validi.
 - **Binning:** 1×1, 2×2… solo se la camera fa il binning.
 - **Filtro:** Con una ruota portafiltri: il filtro inserito e gli altri a cui passare. Gli scatti per risolvere, centrare, allineare o mettere a fuoco non passano mai per **Dark**: prima la ruota passa a IR. Con Dark, lo scatto non mostra HFR né stelle, che sarebbero rumore.
 
@@ -1006,7 +1006,7 @@ Le pose di calibrazione tolgono ciò che aggiungono il sensore e l'ottica. Yacan
 Aprilo con il modello **Flat** in Sequenza. Calcola da solo l'esposizione e scatta i flat di ogni filtro a una luminosità obiettivo. La luce è questo telefono, o il pannello per flat se ce n'è uno collegato.
 
 1. Controlla gli **ADU obiettivo**, 30.000 ± 5 % come predefinito, con il massimo della camera indicato. Imposta la **Luminosità del pannello** se ne usi uno.
-2. Scegli le **Pose per filtro** (20, 30 o 50) e i **Filtri**.
+2. Scegli le **Pose per filtro** (20, 30 o 50) e i **Filtri**. Il **Guadagno** sotto è quello del profilo, che usano i flat e i loro bias; si cambia in *Impostazioni › Camera* o in Ripresa.
 3. Tocca **Avvia i flat**. Con questo telefono come luce, hai 30 s per appoggiarlo a faccia in giù sul telescopio, con lo schermo sopra l'obiettivo e un foglio di carta bianca in mezzo. Un bip avvia i flat e lo schermo diventa bianco alla massima luminosità, anche in modalità rossa; un altro bip li termina. Per metterli in pausa, tocca due volte lo schermo bianco; **Riprendi** lascia altri 30 s.
 4. Ogni filtro mostra *ricerca dell'esposizione…*, poi la sua esposizione e quante pose sono fatte, con la media dell'ultima posa in ADU. **Pausa** e **Tieni premuto per fermare** sono in basso. Alla fine, con il filtro Dark del Seestar, scatta 10 bias: il loro livello resta in ogni master flat, perché lo stack dal vivo lo divida anche senza dark.
 
@@ -1381,12 +1381,14 @@ Ogni opzione dice cosa fa. Le impostazioni segnate *per profilo* si conservano n
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Impostazioni: casella di ricerca e tutte le righe"><br><sub><b>Impostazioni.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Impostazioni, Camera: guadagno 200, quello che usano tutti gli scatti"><br><sub><b>Camera.</b> Un solo guadagno per tutti gli scatti.</sub></td>
 </tr></table>
 
 | Riga | Cosa contiene | Capitolo |
 | --- | --- | --- |
 | **Profilo e posizione** | Nome, ottica, luogo, limiti, orizzonte, database stellare, altri profili, esportazione e importazione | [5](#profile) |
 | **Immagini e file** | La cartella, e lo schema dei nomi dei file (per profilo) | [30](#files) |
+| **Camera** | Il guadagno che usano tutti gli scatti (per profilo) | [20](#imaging) |
 | **Plate solving** | Opzioni di ASTAP, centratura e database stellari (per profilo) | [18](#solving), [6](#field) |
 | **Autofocus** | Passo, punti, esposizione, interpolazione, backlash, R², tentativi (per profilo) | [19](#autofocus) |
 | **Sicurezza** | Arresto sicuro, attesa quando si perde il collegamento, batteria scarica (per profilo) | [28](#safety) |

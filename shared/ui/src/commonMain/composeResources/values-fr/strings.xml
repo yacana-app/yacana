@@ -1568,4 +1568,16 @@
         <item>S</item>
         <item>D</item>
     </string-array>
+    <string name="camera_settings">Caméra</string>
+    <string name="camera_settings_summary">Gain %1$s · toutes les images</string>
+    <string name="camera_gain_help">Toutes les images le prennent : les lights et les boucles d'Imagerie, la séquence, les flats, les bias et les darks.</string>
+    <string name="camera_gain_range_known">De %1$d à %2$d, la plage de la caméra</string>
+    <string name="camera_gain_range_unknown">La plage de la caméra s'affiche une fois connectée</string>
+    <string name="camera_gain_none">La caméra connectée n'a pas de gain à régler</string>
+    <string name="camera_gain_why">Plus bas laisse plus de marge avant que les étoiles brillantes ne brûlent en blanc ; plus haut baisse le bruit propre de la caméra, pour les objets faibles sans étoiles brillantes.</string>
+    <string name="camera_gain_after">Après l'avoir changé</string>
+    <string name="camera_gain_after_help">Les darks et les bias ne calibrent que les lights de leur propre gain : refaites-en au nouveau gain. Les master flats restent valables.</string>
+    <string name="camera_gain_note">Par profil ; il vient à %1$d. Changer le gain dans Imagerie le change aussi ici.</string>
+    <string name="imaging_gain_kept">Gardé pour toutes les images : la séquence, les flats, les bias et les darks le prennent aussi.</string>
+    <string name="flats_gain_where">%1$s · Réglages › Caméra</string>
 </resources>

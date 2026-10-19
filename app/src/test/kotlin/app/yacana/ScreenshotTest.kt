@@ -828,7 +828,7 @@ class ScreenshotTest(private val case: Case) {
                     // As "Equipment · safety monitor".
                     Scene("safety_monitor", content = { SafetyMonitorContent(true, "Alpaca cloud monitor", null) }),
                     // As "Flats · before starting", with the Seestar's wheel and no flat panel.
-                    Scene("flats_setup", content = { FlatsSetup(true, 65_535, listOf("Dark", "IR", "LP"), null) {} }),
+                    Scene("flats_setup", content = { FlatsSetup(true, 65_535, listOf("Dark", "IR", "LP"), null, "200") {} }),
                     // As "Flats": IR at 1.8 s, 18 of 30 kept; LP next.
                     Scene("flats_running", content = {
                         val options = FlatsOptions(FlatSource.Screen, 30_000, 30, listOf("IR", "LP"))
@@ -846,6 +846,7 @@ class ScreenshotTest(private val case: Case) {
                     ),
                     // As "Settings · safety".
                     Scene("safety_settings", screens = listOf(Screen.Settings, Screen.SafetySettings), profile = true),
+                    Scene("camera_settings", screens = listOf(Screen.Settings, Screen.CameraSettings), profile = true),
                     Scene("my_sequences", section = Section.Sequence, framed = true),
                     // As "Sequence · advanced editor": tonight's plan opened whole, its three areas.
                     Scene(

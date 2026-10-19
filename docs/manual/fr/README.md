@@ -876,7 +876,7 @@ Imagerie prend des images à la main : des images isolées pour vérifier la mi
 ### Les réglages de l'image
 
 - **Pose:** 10, 20, 30, 60 ou 300 s, parmi celles que permet la caméra, ou **Autre** au pavé, dans la plage de la caméra.
-- **Gain:** Au pavé, dans la plage de la caméra, ou parmi les gains nommés de la caméra. Il commence à 200 si la caméra l'accepte, comme le fait l'app du Seestar lui-même, et les poses de la séquence sans gain propre prennent celui-ci.
+- **Gain:** Au pavé, dans la plage de la caméra, ou parmi les gains nommés de la caméra. C'est le gain du profil, le même que dans *Réglages › Caméra* : il est gardé, et toutes les poses le prennent, aussi celles de la séquence, les flats, les darks et les bias. Il commence à 200, comme le fait l'app du Seestar lui-même. Après l'avoir changé, refaites des darks et des bias au nouveau gain ; les master flats restent valables.
 - **Binning:** 1×1, 2×2… seulement si la caméra fait du binning.
 - **Filtre:** Avec une roue à filtres : le filtre en place, et les autres pour en changer. Les poses pour résoudre, centrer, aligner ou faire la mise au point ne passent jamais par **Dark** : la roue passe d'abord sur IR. Avec Dark, la pose n'affiche ni HFR ni étoiles, qui ne seraient que du bruit.
 
@@ -1006,7 +1006,7 @@ Les images de calibration retirent ce qu'ajoutent le capteur et l'optique. Yacan
 Ouvrez-le avec le modèle **Flats** dans Séquence. Il trouve la pose de lui-même et prend les flats de chaque filtre à une luminosité cible. La lumière est ce téléphone, ou le panneau à flats s'il y en a un de connecté.
 
 1. Vérifiez l'**ADU cible**, 30 000 ± 5 % par défaut, avec le maximum de la caméra affiché. Réglez la **Luminosité du panneau** si vous en utilisez un.
-2. Choisissez les **Images par filtre** (20, 30 ou 50) et les **Filtres**.
+2. Choisissez les **Images par filtre** (20, 30 ou 50) et les **Filtres**. Le **Gain** en dessous est celui du profil, que prennent les flats et leurs bias ; il se change dans *Réglages › Caméra* ou dans Imagerie.
 3. Touchez **Lancer les flats**. Avec ce téléphone comme lumière, vous avez alors 30 s pour le poser écran vers le bas sur le télescope, l'écran couvrant l'objectif, avec une feuille de papier blanc entre les deux. Un bip lance les flats et l'écran devient blanc à pleine luminosité, même en mode rouge ; un autre bip les termine. Pour les mettre en pause, touchez deux fois l'écran blanc ; **Reprendre** laisse 30 s de plus.
 4. Chaque filtre affiche *recherche de la pose…*, puis sa pose et le nombre d'images faites, avec la moyenne en ADU de la dernière image. **Pause** et **Appui long pour arrêter** sont en bas. À la fin, derrière le filtre Dark du Seestar, il prend 10 bias : leur niveau est gardé dans chaque master flat, pour que l'empilement en direct divise par celui-ci même sans darks.
 
@@ -1381,12 +1381,14 @@ Chaque option dit ce qu'elle fait. Les réglages marqués *par profil* sont gard
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Réglages : zone de recherche et toutes les lignes"><br><sub><b>Réglages.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Réglages, Caméra : gain 200, celui que prennent toutes les images"><br><sub><b>Caméra.</b> Un seul gain pour toutes les images.</sub></td>
 </tr></table>
 
 | Ligne | Ce qu'elle contient | Chapitre |
 | --- | --- | --- |
 | **Profil et lieu** | Nom, optique, site, limites, horizon, base d'étoiles, autres profils, export et import | [5](#profile) |
 | **Images et fichiers** | Le dossier, et le modèle de nom de fichier (par profil) | [30](#files) |
+| **Caméra** | Le gain que prennent toutes les images (par profil) | [20](#imaging) |
 | **Plate solving** | Les options d'ASTAP, le centrage et les bases d'étoiles (par profil) | [18](#solving), [6](#field) |
 | **Autofocus** | Pas, points, pose, ajustement, jeu, R², essais (par profil) | [19](#autofocus) |
 | **Sécurité** | Arrêt de sécurité, attente quand la liaison est perdue, batterie faible (par profil) | [28](#safety) |

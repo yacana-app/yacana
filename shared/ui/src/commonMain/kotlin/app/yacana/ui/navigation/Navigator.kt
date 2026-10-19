@@ -84,6 +84,9 @@ sealed interface Screen {
     /** "Settings · safety": the session's safe pause, safe stop and low battery. */
     data object SafetySettings : Screen
 
+    /** "Settings · camera": the profile's gain, for every frame. */
+    data object CameraSettings : Screen
+
     /** "Night · diary": what happened tonight, opened from the night's summary. */
     data object NightDiary : Screen
 

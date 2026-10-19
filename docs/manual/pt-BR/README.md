@@ -876,7 +876,7 @@ A seção Imagem captura imagens manualmente: imagens avulsas para verificar o f
 ### As configurações da imagem
 
 - **Exposição:** 10, 20, 30, 60 ou 300 s, as que a câmera permitir, ou **Outra** no teclado numérico, dentro da faixa da câmera.
-- **Ganho:** No teclado numérico, dentro da faixa da câmera, ou os ganhos com nome da câmera. Começa em 200 se a câmera aceitar, como faz o app do próprio Seestar, e as capturas da sequência sem ganho próprio usam este.
+- **Ganho:** No teclado numérico, dentro da faixa da câmera, ou os ganhos com nome da câmera. É o ganho do perfil, o mesmo de *Configurações › Câmera*: fica salvo, e todas as capturas o usam, inclusive as da sequência, os flats, os darks e os bias. Começa em 200, como faz o app do próprio Seestar. Depois de mudá-lo, faça darks e bias novos com o novo ganho; os flats mestres continuam valendo.
 - **Binning:** 1×1, 2×2… só se a câmera fizer binning.
 - **Filtro:** Com uma roda de filtros: o filtro em uso e os outros para trocar. As capturas para resolver, centralizar, alinhar ou focar nunca passam por **Dark**: antes a roda passa para IR. Com Dark, a captura não mostra HFR nem estrelas, que seriam ruído.
 
@@ -1006,7 +1006,7 @@ As imagens de calibração removem o que o sensor e a óptica acrescentam. Yacan
 Abra-o com o modelo **Flats** em Sequência. Ele calcula a exposição sozinho e faz os flats de cada filtro com um brilho alvo. A luz é este celular, ou o painel de flats se houver um conectado.
 
 1. Confira o **ADU alvo**, 30.000 ± 5 % por padrão, com o máximo da câmera indicado. Defina o **Brilho do painel** se usar um.
-2. Escolha **Imagens por filtro** (20, 30 ou 50) e os **Filtros**.
+2. Escolha **Imagens por filtro** (20, 30 ou 50) e os **Filtros**. O **Ganho** abaixo é o do perfil, que os flats e seus bias usam; ele muda em *Configurações › Câmera* ou em Imagem.
 3. Toque em **Iniciar os flats**. Com este celular como luz, você tem 30 s para colocá-lo virado para baixo sobre o telescópio, com a tela cobrindo a objetiva e uma folha de papel branco no meio. Um bipe começa os flats e a tela fica branca no brilho máximo, também no modo vermelho; outro bipe os termina. Para pausá-los, toque duas vezes na tela branca; **Retomar** dá outros 30 s.
 4. Cada filtro mostra *procurando a exposição…*, depois sua exposição e quantos estão feitos, com a média da última imagem em ADU. **Pausar** e **Mantenha pressionado para parar** ficam na parte inferior. No fim, com o filtro Dark do Seestar, faz 10 bias: o nível deles fica em cada flat mestre, para que o empilhamento ao vivo divida por ele mesmo sem darks.
 
@@ -1381,12 +1381,14 @@ Cada opção diz o que faz. As configurações marcadas como *por perfil* ficam 
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Configurações: caixa de pesquisa e todas as linhas"><br><sub><b>Configurações.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Configurações, Câmera: ganho 200, o que todas as capturas usam"><br><sub><b>Câmera.</b> Um só ganho para todas as capturas.</sub></td>
 </tr></table>
 
 | Linha | O que contém | Capítulo |
 | --- | --- | --- |
 | **Perfil e localização** | Nome, óptica, local, limites, horizonte, base de estrelas, outros perfis, exportação e importação | [5](#profile) |
 | **Imagens e arquivos** | A pasta e o padrão de nomes de arquivo (por perfil) | [30](#files) |
+| **Câmera** | O ganho que todas as capturas usam (por perfil) | [20](#imaging) |
 | **Plate solving** | Opções do ASTAP, centralização e as bases de estrelas (por perfil) | [18](#solving), [6](#field) |
 | **Autofoco** | Passo, pontos, exposição, ajuste, folga, R², tentativas (por perfil) | [19](#autofocus) |
 | **Segurança** | Parada segura, a espera quando a conexão cai, bateria fraca (por perfil) | [28](#safety) |

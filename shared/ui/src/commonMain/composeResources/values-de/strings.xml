@@ -1553,4 +1553,16 @@
         <item>Sa</item>
         <item>So</item>
     </string-array>
+    <string name="camera_settings">Kamera</string>
+    <string name="camera_settings_summary">Gain %1$s · jede Aufnahme</string>
+    <string name="camera_gain_help">Jede Aufnahme nutzt ihn: Lights und Schleifen unter Aufnahme, die Sequenz, die Flats, die Bias und die Darks.</string>
+    <string name="camera_gain_range_known">Von %1$d bis %2$d, der Bereich der Kamera</string>
+    <string name="camera_gain_range_unknown">Der Bereich der Kamera erscheint, sobald sie verbunden ist</string>
+    <string name="camera_gain_none">Die verbundene Kamera hat keinen Gain zum Einstellen</string>
+    <string name="camera_gain_why">Niedriger lässt mehr Spielraum, bevor helle Sterne weiß ausbrennen; höher senkt das Eigenrauschen der Kamera, für lichtschwache Objekte ohne helle Sterne.</string>
+    <string name="camera_gain_after">Nach einer Änderung</string>
+    <string name="camera_gain_after_help">Darks und Bias kalibrieren nur Lights mit ihrem eigenen Gain: Nimm beim neuen Gain neue auf. Die Master-Flats gelten weiter.</string>
+    <string name="camera_gain_note">Je Profil; ab Werk %1$d. Wenn du den Gain unter Aufnahme änderst, ändert er sich auch hier.</string>
+    <string name="imaging_gain_kept">Gilt für jede Aufnahme: Die Sequenz, die Flats, die Bias und die Darks nutzen ihn auch.</string>
+    <string name="flats_gain_where">%1$s · Einstellungen › Kamera</string>
 </resources>

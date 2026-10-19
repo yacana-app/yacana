@@ -131,6 +131,7 @@ class ProfileTest {
         assertEquals("Seestar S50 Pro", decoded.profile.name)
         assertEquals(DeviceRef("http://10.0.0.1:32323", 0, "abc", "Telescope"), decoded.profile.devices.mount)
         assertEquals(listOf(HorizonPoint(180.0, 12.5)), decoded.profile.options.horizon)
+        assertEquals(DEFAULT_GAIN, decoded.profile.options.gain, "a profile from before the gain was kept takes 200")
     }
 
     @Test

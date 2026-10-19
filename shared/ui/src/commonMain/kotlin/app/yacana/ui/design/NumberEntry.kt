@@ -45,7 +45,8 @@ import app.yacana.ui.YacanaIcons
  * A number typed on the app's [NumberPad], as in the designs' exposure editor: the value large,
  * with its [unit], what is allowed ([hint]), and a save button. [initial] shows until the first
  * key replaces it. [decimal] is the decimal separator, or null for whole numbers; the value
- * passed to [valid], [onSave] and [onChange], which hears each key, uses a point.
+ * passed to [valid], [onSave] and [onChange], which hears each key, uses a point. A [note] goes
+ * between the value and the keypad.
  */
 @Composable
 @Suppress("LongParameterList") // Each label comes from the caller's strings.
@@ -58,6 +59,7 @@ fun NumberEntry(
     decimal: Char?,
     valid: (Double) -> Boolean,
     onChange: (Double?) -> Unit = {},
+    note: String? = null,
     onSave: (Double) -> Unit,
 ) {
     var text by remember(initial) { mutableStateOf(initial) }
@@ -81,6 +83,7 @@ fun NumberEntry(
             color = if (ok || text.isEmpty()) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.error,
         )
     }
+    note?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant) }
     NumberPad(
         onKey = { key ->
             val base = if (replace) "" else text

@@ -876,7 +876,7 @@ Imaxe fai tomas a man: tomas soltas para comprobar o enfoque e o encadramento, o
 ### Os axustes da toma
 
 - **Exposición:** 10, 20, 30, 60 ou 300 s, os que permita a cámara, ou **Outro** no teclado numérico, dentro do rango da cámara.
-- **Ganancia:** No teclado numérico, dentro do rango da cámara, ou as ganancias con nome da cámara. Comeza en 200 se a cámara o admite, como fai a app do propio Seestar, e as tomas da secuencia sen ganancia propia usan esta.
+- **Ganancia:** No teclado numérico, dentro do rango da cámara, ou as ganancias con nome da cámara. É a ganancia do perfil, a mesma que en *Axustes › Cámara*: gárdase, e úsana todas as tomas, tamén as da secuencia, os flats, os darks e os bias. Comeza en 200, como fai a app do propio Seestar. Despois de cambiala, fai darks e bias novos coa nova ganancia; os flats mestres seguen valendo.
 - **Binning:** 1×1, 2×2… só se a cámara fai binning.
 - **Filtro:** Cunha roda de filtros: o filtro posto, e os outros aos que cambiar. As tomas para resolver, centrar, aliñar ou enfocar nunca pasan por **Dark**: antes a roda pasa a IR. Con Dark, a toma non mostra HFR nin estrelas, que serían ruído.
 
@@ -1006,7 +1006,7 @@ As tomas de calibración eliminan o que engaden o sensor e a óptica. Yacana fai
 Ábreo co modelo **Flats** en Secuencia. Calcula el só a exposición e fai os flats de cada filtro cun brillo obxectivo. A luz é este móbil, ou o panel de flats se hai un conectado.
 
 1. Comproba o **ADU obxectivo**, 30.000 ± 5 % por defecto, co máximo da cámara á vista. Fixa o **Brillo do panel** se usas un.
-2. Escolle as **Tomas por filtro** (20, 30 ou 50) e os **Filtros**.
+2. Escolle as **Tomas por filtro** (20, 30 ou 50) e os **Filtros**. A **Ganancia** de debaixo é a do perfil, que usan os flats e os seus bias; cámbiase en *Axustes › Cámara* ou en Imaxe.
 3. Toca **Comezar os flats**. Con este móbil como luz, tes 30 s para poñelo boca abaixo sobre o telescopio, coa pantalla tapando a lente e unha folla de papel branco no medio. Un pitido comeza os flats e a pantalla ponse en branco a todo brillo, tamén en modo vermello; outro pitido remátaos. Para pausalos, toca dúas veces a pantalla branca; **Seguir** deixa outros 30 s.
 4. Cada filtro mostra *buscando o tempo…*, despois a súa exposición e cantos están feitos, coa media da última toma en ADU. **Pausar** e **Mantén para parar** están na parte inferior. Ao rematar, co filtro Dark do Seestar, fai 10 bias: o seu nivel queda en cada flat mestre, para que o apilado en directo divida por el aínda que non haxa darks.
 
@@ -1381,12 +1381,14 @@ Cada opción indica o que fai. Os axustes marcados *por perfil* gárdanse no per
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Axustes: caixa de busca e todas as filas"><br><sub><b>Axustes.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Axustes, Cámara: ganancia 200, a que usan todas as tomas"><br><sub><b>Cámara.</b> Unha ganancia para todas as tomas.</sub></td>
 </tr></table>
 
 | Fila | Que contén | Capítulo |
 | --- | --- | --- |
 | **Perfil e localización** | Nome, óptica, sitio, límites, horizonte, base de estrelas, outros perfís, exportar e importar | [5](#profile) |
 | **Imaxes e ficheiros** | O cartafol e o patrón de nomes de ficheiro (por perfil) | [30](#files) |
+| **Cámara** | A ganancia que usan todas as tomas (por perfil) | [20](#imaging) |
 | **Plate solving** | As opcións de ASTAP, o centrado e as bases de estrelas (por perfil) | [18](#solving), [6](#field) |
 | **Autoenfoque** | Paso, puntos, exposición, axuste, folga, R², intentos (por perfil) | [19](#autofocus) |
 | **Seguridade** | Parada segura, a espera cando se perde a conexión, batería baixa (por perfil) | [28](#safety) |

@@ -876,7 +876,7 @@ Irudia atalak argazkiak eskuz ateratzen ditu: bakarkako argazkiak fokua eta enko
 ### Argazkiaren ezarpenak
 
 - **Esposizioa:** 10, 20, 30, 60 edo 300 s, kamerak onartzen dituenak, edo **Beste bat** teklatuan, kameraren tartearen barruan.
-- **Irabazia:** Teklatuan, kameraren tartearen barruan, edo kameraren izendun irabaziak. 200etik hasten da kamerak onartzen badu, Seestarren beraren aplikazioak egiten duen bezala, eta irabazi propiorik gabeko sekuentziako argazkiek hau erabiltzen dute.
+- **Irabazia:** Teklatuan, kameraren tartearen barruan, edo kameraren izendun irabaziak. Profilaren irabazia da, *Ezarpenak › Kamera* ataleko bera: gorde egiten da, eta argazki guztiek erabiltzen dute, baita sekuentziakoek, flatek, darkek eta biasek ere. 200etik hasten da, Seestarren beraren aplikazioak egiten duen bezala. Aldatu ondoren, atera dark eta bias berriak irabazi berriarekin; master flatek balio dute oraindik.
 - **Binning:** 1×1, 2×2… kamerak binning-a egiten badu bakarrik.
 - **Iragazkia:** Iragazki-gurpil batekin: jarrita dagoen iragazkia, eta aldatzeko beste iragazkiak. Ebazteko, zentratzeko, lerrokatzeko edo fokatzeko argazkiak ez dira inoiz **Dark**-etik pasatzen: aurretik gurpila IR-ra pasatzen da. Dark-ekin, argazkiak ez du HFR-rik ez izarrik erakusten, zarata liratekeelako.
 
@@ -1006,7 +1006,7 @@ Kalibrazio-argazkiek sentsoreak eta optikak gehitzen dutena kentzen dute. Yacana
 Ireki Sekuentzia ataleko **Flatak** txantiloiarekin. Esposizioa bere kabuz kalkulatzen du, eta iragazki bakoitzaren flatak helburuko distira batean ateratzen ditu. Argia mugikor hau da, edo flat-panela, bat konektatuta badago.
 
 1. Egiaztatu **Helburuko ADU**, 30.000 ± 5 % lehenetsita, kameraren maximoa erakutsita. Ezarri **Panelaren distira**, bat erabiltzen baduzu.
-2. Aukeratu **Argazkiak iragazki bakoitzeko** (20, 30 edo 50) eta **Iragazkiak**.
+2. Aukeratu **Argazkiak iragazki bakoitzeko** (20, 30 edo 50) eta **Iragazkiak**. Azpiko **Irabazia** profilarena da, flatek eta haien biasek erabiltzen dutena; *Ezarpenak › Kamera* atalean edo Irudia atalean aldatzen da.
 3. Sakatu **Hasi flatak**. Mugikor hau argi gisa, 30 s dituzu ahoz behera teleskopioaren gainean jartzeko, pantailak lentea estaltzen duela eta paper zuri orri bat tartean. Txistu batek flatak hasten ditu eta pantaila zuri jartzen da distira osoan, modu gorrian ere bai; beste txistu batek amaitzen ditu. Pausatzeko, sakatu bi aldiz pantaila zuria; **Jarraitu** botoiak beste 30 s ematen ditu.
 4. Iragazki bakoitzak *esposizioa bilatzen…* erakusten du, eta gero bere esposizioa eta zenbat egin diren, azken argazkiaren batez bestekoarekin ADUtan. **Pausatu** eta **Eduki sakatuta gelditzeko** behealdean daude. Amaieran, Seestarren Dark iragazkiarekin, 10 bias ateratzen ditu: haien maila master flat bakoitzean geratzen da, zuzeneko pilaketak horrekin zatitu dezan darkik ez badago ere.
 
@@ -1381,12 +1381,14 @@ Aukera bakoitzak zer egiten duen esaten du. *Profil bakoitzeko* markatutako ezar
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Ezarpenak: bilaketa-koadroa eta errenkada guztiak"><br><sub><b>Ezarpenak.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Ezarpenak, Kamera: 200 irabazia, argazki guztiek erabiltzen dutena"><br><sub><b>Kamera.</b> Irabazi bat argazki guztietarako.</sub></td>
 </tr></table>
 
 | Errenkada | Zer dauka | Kapitulua |
 | --- | --- | --- |
 | **Profila eta kokapena** | Izena, optika, lekua, mugak, horizontea, izarren datu-basea, beste profilak, esportatu eta inportatu | [5](#profile) |
 | **Irudiak eta fitxategiak** | Karpeta, eta fitxategi-izenen eredua (profil bakoitzeko) | [30](#files) |
+| **Kamera** | Argazki guztiek erabiltzen duten irabazia (profil bakoitzeko) | [20](#imaging) |
 | **Plate solving** | ASTAPen aukerak, zentratzea eta izarren datu-baseak (profil bakoitzeko) | [18](#solving), [6](#field) |
 | **Foku automatikoa** | Urratsa, puntuak, esposizioa, doikuntza, huts-tartea, R², saiakerak (profil bakoitzeko) | [19](#autofocus) |
 | **Segurtasuna** | Gelditze segurua, lotura galtzean itxarotea, bateria baxua (profil bakoitzeko) | [28](#safety) |

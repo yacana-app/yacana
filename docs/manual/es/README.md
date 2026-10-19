@@ -876,7 +876,7 @@ Imagen hace tomas a mano: tomas sueltas para comprobar el enfoque y el encuadre,
 ### Los ajustes de la toma
 
 - **Exposición:** 10, 20, 30, 60 o 300 s, los que admita la cámara, u **Otro** en el teclado numérico, dentro del rango de la cámara.
-- **Ganancia:** En el teclado numérico, dentro del rango de la cámara, o las ganancias con nombre de la cámara. Empieza en 200 si la cámara lo admite, como hace la app del propio Seestar, y las tomas de la secuencia sin ganancia propia usan esta.
+- **Ganancia:** En el teclado numérico, dentro del rango de la cámara, o las ganancias con nombre de la cámara. Es la ganancia del perfil, la misma que en *Ajustes › Cámara*: se guarda, y la usan todas las tomas, también las de la secuencia, los flats, los darks y los bias. Empieza en 200, como hace la app del propio Seestar. Después de cambiarla, haz darks y bias nuevos con la nueva ganancia; los flats maestros siguen valiendo.
 - **Binning:** 1×1, 2×2… solo si la cámara hace binning.
 - **Filtro:** Con una rueda de filtros: el filtro puesto y los demás a los que cambiar. Las tomas para resolver, centrar, alinear o enfocar nunca pasan por **Dark**: antes la rueda pasa a IR. Con Dark, la toma no muestra HFR ni estrellas, que serían ruido.
 
@@ -1006,7 +1006,7 @@ Las tomas de calibración quitan lo que añaden el sensor y la óptica. Yacana h
 Ábrelo con la plantilla **Flats** en Secuencia. Calcula la exposición por sí solo y hace los flats de cada filtro a un brillo objetivo. La luz es este móvil, o el panel de flats si hay uno conectado.
 
 1. Comprueba el **ADU objetivo**, 30.000 ± 5 % por defecto, con el máximo de la cámara a la vista. Ajusta el **Brillo del panel** si usas uno.
-2. Elige las **Tomas por filtro** (20, 30 o 50) y los **Filtros**.
+2. Elige las **Tomas por filtro** (20, 30 o 50) y los **Filtros**. La **Ganancia** de debajo es la del perfil, que usan los flats y sus bias; se cambia en *Ajustes › Cámara* o en Imagen.
 3. Toca **Empezar los flats**. Con este móvil como luz, tienes 30 s para ponerlo boca abajo sobre el telescopio, con la pantalla tapando la lente y una hoja de papel blanco en medio. Un pitido empieza los flats y la pantalla se pone en blanco a todo brillo, también en modo rojo; otro pitido los termina. Para pausarlos, toca dos veces la pantalla blanca; **Seguir** deja otros 30 s.
 4. Cada filtro muestra *buscando el tiempo…*, luego su exposición y cuántas lleva hechas, con la media de la última toma en ADU. **Pausar** y **Mantén para parar** están abajo. Al acabar, con el filtro Dark del Seestar, hace 10 bias: su nivel queda en cada flat maestro, para que el apilado en vivo divida por él aunque no haya darks.
 
@@ -1381,12 +1381,14 @@ Cada opción dice qué hace. Los ajustes marcados *por perfil* se guardan en el 
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Ajustes: buscador y todas las filas"><br><sub><b>Ajustes.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Ajustes, Cámara: ganancia 200, la que usan todas las tomas"><br><sub><b>Cámara.</b> Una ganancia para todas las tomas.</sub></td>
 </tr></table>
 
 | Fila | Qué contiene | Capítulo |
 | --- | --- | --- |
 | **Perfil y ubicación** | Nombre, óptica, sitio, límites, horizonte, base de estrellas, otros perfiles, exportar e importar | [5](#profile) |
 | **Imágenes y archivos** | La carpeta y el patrón de nombres de archivo (por perfil) | [30](#files) |
+| **Cámara** | La ganancia que usan todas las tomas (por perfil) | [20](#imaging) |
 | **Plate solving** | Las opciones de ASTAP, el centrado y las bases de estrellas (por perfil) | [18](#solving), [6](#field) |
 | **Autoenfoque** | Paso, puntos, exposición, ajuste, holgura, R², intentos (por perfil) | [19](#autofocus) |
 | **Seguridad** | Parada segura, la espera cuando se pierde la conexión, batería baja (por perfil) | [28](#safety) |

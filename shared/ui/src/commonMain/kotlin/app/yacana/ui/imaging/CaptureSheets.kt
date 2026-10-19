@@ -61,6 +61,7 @@ import app.yacana.domain.imaging.CaptureController
 import app.yacana.domain.imaging.CaptureSettings
 import app.yacana.domain.imaging.CapturedFrame
 import app.yacana.domain.imaging.FrameType
+import app.yacana.domain.profile.DEFAULT_GAIN
 import app.yacana.domain.profile.StackingOptions
 import app.yacana.ports.ColourStretch
 import app.yacana.ports.Region
@@ -81,6 +82,7 @@ import app.yacana.ui.equipment.decimalComma
 import app.yacana.ui.format.formatDecimal
 import app.yacana.ui.navigation.Screen
 import app.yacana.ui.resources.Res
+import app.yacana.ui.resources.camera_gain_range_unknown
 import app.yacana.ui.resources.imaging_abort
 import app.yacana.ui.resources.imaging_auto_stretch
 import app.yacana.ui.resources.imaging_binning
@@ -99,6 +101,7 @@ import app.yacana.ui.resources.imaging_filter
 import app.yacana.ui.resources.imaging_fwhm
 import app.yacana.ui.resources.imaging_fwhm_arcsec
 import app.yacana.ui.resources.imaging_gain
+import app.yacana.ui.resources.imaging_gain_kept
 import app.yacana.ui.resources.imaging_gain_range
 import app.yacana.ui.resources.imaging_gain_value
 import app.yacana.ui.resources.imaging_go_to_equipment
@@ -188,35 +191,56 @@ internal fun ExposureChoice(capture: CaptureController, info: CameraInfo, close:
     }
 }
 
-/** A gain range on the keypad, or the camera's named gains. */
+/** A gain range on the keypad, or the camera's named gains: the profile's gain, for every frame. */
 @Composable
 internal fun GainChoice(capture: CaptureController, info: CameraInfo, close: () -> Unit) {
     val settings = capture.state.collectAsState().value.settings
     Text(stringResource(Res.string.imaging_gain), style = MaterialTheme.typography.titleMedium)
-    when (val gain = info.gain) {
+    GainEntry(info.gain, settings.gain, stringResource(Res.string.imaging_gain_kept)) { gain ->
+        capture.update(settings.copy(gain = gain))
+        close()
+    }
+}
+
+/**
+ * [gain] on the keypad within [control]'s range, or one of its named gains; with no camera to
+ * say ([control] null), any whole number. [note] says what the gain is for.
+ */
+@Composable
+internal fun GainEntry(control: GainControl?, gain: Int?, note: String?, onSave: (Int) -> Unit) {
+    when (control) {
         is GainControl.Range -> NumberEntry(
-            initial = (settings.gain ?: gain.min).toString(),
+            initial = (gain ?: control.min).toString(),
             unit = "",
-            hint = stringResource(Res.string.imaging_gain_range, gain.min, gain.max),
+            hint = stringResource(Res.string.imaging_gain_range, control.min, control.max),
             saveLabel = stringResource(Res.string.save),
             deleteLabel = stringResource(Res.string.number_delete),
             decimal = null,
-            valid = { it >= gain.min && it <= gain.max },
-        ) { value ->
-            capture.update(settings.copy(gain = value.toInt()))
-            close()
-        }
+            valid = { it >= control.min && it <= control.max },
+            note = note,
+        ) { onSave(it.toInt()) }
 
-        is GainControl.Named -> FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            gain.names.forEachIndexed { index, name ->
-                FilterChip(selected = settings.gain == index, onClick = {
-                    capture.update(settings.copy(gain = index))
-                    close()
-                }, label = { Text(name) })
+        is GainControl.Named -> {
+            note?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                control.names.forEachIndexed { index, name ->
+                    FilterChip(selected = gain == index, onClick = { onSave(index) }, label = { Text(name) })
+                }
             }
         }
 
         GainControl.None -> Unit
+
+        null -> NumberEntry(
+            initial = (gain ?: DEFAULT_GAIN).toString(),
+            unit = "",
+            hint = stringResource(Res.string.camera_gain_range_unknown),
+            saveLabel = stringResource(Res.string.save),
+            deleteLabel = stringResource(Res.string.number_delete),
+            decimal = null,
+            valid = { it >= 0 },
+            note = note,
+        ) { onSave(it.toInt()) }
     }
 }
 
