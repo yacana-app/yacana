@@ -1553,4 +1553,16 @@
         <item>lr</item>
         <item>ig</item>
     </string-array>
+    <string name="camera_settings">Kamera</string>
+    <string name="camera_settings_summary">Irabazia %1$s · argazki guztiak</string>
+    <string name="camera_gain_help">Argazki guztiek erabiltzen dute: Irudia ataleko lightek eta begiztek, sekuentziak, flatek, biasek eta darkek.</string>
+    <string name="camera_gain_range_known">%1$d eta %2$d artean, kameraren tartea</string>
+    <string name="camera_gain_range_unknown">Kameraren tartea konektatzean agertzen da</string>
+    <string name="camera_gain_none">Konektatutako kamerak ez du irabazirik aukeratzeko</string>
+    <string name="camera_gain_why">Baxuagoak tarte handiagoa uzten du izar distiratsuak zuri erre aurretik; altuagoak kameraren beraren zarata jaisten du, izar distiratsurik gabeko objektu ahuletarako.</string>
+    <string name="camera_gain_after">Aldatu ondoren</string>
+    <string name="camera_gain_after_help">Darkek eta biasek beren irabazi bereko lightak bakarrik kalibratzen dituzte: atera berriak irabazi berriarekin. Master flatek balio dute oraindik.</string>
+    <string name="camera_gain_note">Profilaren arabera; %1$d-ean dator. Irudia atalean irabazia aldatzeak hemen ere aldatzen du.</string>
+    <string name="imaging_gain_kept">Argazki guztietarako gordetzen da: sekuentziak, flatek, biasek eta darkek ere erabiltzen dute.</string>
+    <string name="flats_gain_where">%1$s · Ezarpenak › Kamera</string>
 </resources>

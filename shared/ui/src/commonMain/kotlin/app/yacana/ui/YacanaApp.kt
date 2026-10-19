@@ -83,6 +83,7 @@ import app.yacana.ui.resources.alert_mark
 import app.yacana.ui.resources.atlas_filters
 import app.yacana.ui.resources.autofocus
 import app.yacana.ui.resources.back
+import app.yacana.ui.resources.camera_settings
 import app.yacana.ui.resources.close
 import app.yacana.ui.resources.diary_title
 import app.yacana.ui.resources.display
@@ -119,6 +120,7 @@ import app.yacana.ui.sequence.advanced.AdvancedActions
 import app.yacana.ui.sequence.advanced.AdvancedCatalogue
 import app.yacana.ui.sequence.advanced.AdvancedScreen
 import app.yacana.ui.settings.AboutScreen
+import app.yacana.ui.settings.CameraSettingsScreen
 import app.yacana.ui.settings.DisplayScreen
 import app.yacana.ui.settings.ImageFilesScreen
 import app.yacana.ui.settings.LanguageScreen
@@ -395,6 +397,7 @@ fun YacanaApp(app: AppInfo, services: AppServices, navigator: Navigator = rememb
                                             }
                                         }
                                         entry<Screen.SafetySettings> { SafetySettingsScreen(services.equipment) }
+                                        entry<Screen.CameraSettings> { CameraSettingsScreen(services.equipment) }
                                         entry<Screen.NightDiary> { NightDiaryScreen(services) }
                                         entry<Screen.SequenceTonight> {
                                             SequenceTonight(
@@ -642,6 +645,7 @@ private fun title(screen: Screen): String = when (screen) {
     is Screen.Framing -> stringResource(Res.string.framing_title, screen.designation)
     Screen.SequenceTonight -> stringResource(Res.string.sequence_tonight)
     Screen.SafetySettings -> stringResource(Res.string.safety)
+    Screen.CameraSettings -> stringResource(Res.string.camera_settings)
     Screen.NightDiary -> stringResource(Res.string.diary_title)
     Screen.Flats -> stringResource(Res.string.flats_title)
     Screen.SkyMapSettings -> stringResource(Res.string.sky_settings)

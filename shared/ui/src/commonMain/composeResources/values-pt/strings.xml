@@ -1568,4 +1568,16 @@
         <item>S</item>
         <item>D</item>
     </string-array>
+    <string name="camera_settings">Câmara</string>
+    <string name="camera_settings_summary">Ganho %1$s · todas as imagens</string>
+    <string name="camera_gain_help">Usam-no todas as imagens: as lights e os ciclos de Imagem, a sequência, os flats, os bias e os darks.</string>
+    <string name="camera_gain_range_known">De %1$d a %2$d, a gama da câmara</string>
+    <string name="camera_gain_range_unknown">A gama da câmara aparece ao ligá-la</string>
+    <string name="camera_gain_none">A câmara ligada não tem ganho para escolher</string>
+    <string name="camera_gain_why">Mais baixo deixa mais margem antes de as estrelas brilhantes queimarem em branco; mais alto baixa o ruído próprio da câmara, para objetos ténues sem estrelas brilhantes.</string>
+    <string name="camera_gain_after">Depois de o mudar</string>
+    <string name="camera_gain_after_help">Os darks e os bias só calibram lights do seu mesmo ganho: faça novos com o novo ganho. Os flats mestres continuam a servir.</string>
+    <string name="camera_gain_note">Por perfil; vem a %1$d. Mudar o ganho em Imagem muda-o também aqui.</string>
+    <string name="imaging_gain_kept">Guardado para todas as imagens: a sequência, os flats, os bias e os darks também o usam.</string>
+    <string name="flats_gain_where">%1$s · Definições › Câmara</string>
 </resources>

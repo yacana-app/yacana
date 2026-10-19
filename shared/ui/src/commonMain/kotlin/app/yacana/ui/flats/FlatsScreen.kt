@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import app.yacana.alpaca.GainControl
 import app.yacana.domain.equipment.Connection
 import app.yacana.domain.equipment.EquipmentController
 import app.yacana.domain.flats.FilterFlats
@@ -74,6 +75,7 @@ import app.yacana.ui.resources.flats_filter_finding
 import app.yacana.ui.resources.flats_filter_pending
 import app.yacana.ui.resources.flats_filters
 import app.yacana.ui.resources.flats_finish
+import app.yacana.ui.resources.flats_gain_where
 import app.yacana.ui.resources.flats_last
 import app.yacana.ui.resources.flats_mean
 import app.yacana.ui.resources.flats_no_equipment
@@ -87,6 +89,7 @@ import app.yacana.ui.resources.flats_stopped
 import app.yacana.ui.resources.flats_target_value
 import app.yacana.ui.resources.flats_too_bright
 import app.yacana.ui.resources.flats_too_dark
+import app.yacana.ui.resources.imaging_gain
 import app.yacana.ui.resources.type_bias
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.StringResource
@@ -114,6 +117,10 @@ fun FlatsScreen(
     val connection by equipment.state.collectAsState()
     val connected = (connection.connection as? Connection.Connected)?.equipment
     val current = state
+    // The profile's gain, which the flats and their bias and darks take, by its name on a camera of named gains.
+    val gain = capture.state.collectAsState().value.settings.gain?.let { gain ->
+        (connected?.camera?.info?.gain as? GainControl.Named)?.names?.getOrNull(gain) ?: gain.toString()
+    }
     // What starts once the phone lies on the telescope: the flats, or their resumption.
     var countdown by remember { mutableStateOf<(() -> Unit)?>(null) }
     val screen = current?.options?.source == FlatSource.Screen
@@ -139,6 +146,7 @@ fun FlatsScreen(
             connected?.camera?.info?.maxAdu,
             connected?.filterWheel?.names.orEmpty(),
             connected?.flatPanel?.maxBrightness,
+            gain,
         ) { options ->
             val settings = capture.state.value.settings
             val start = { flats.start(options.copy(gain = settings.gain, offset = settings.offset)) }
@@ -165,7 +173,14 @@ fun FlatsScreen(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 @Suppress("LongMethod") // The design's cards, in order.
-fun FlatsSetup(connected: Boolean, maxAdu: Int?, names: List<String>, panelMaxBrightness: Int?, onStart: (FlatsOptions) -> Unit) {
+fun FlatsSetup(
+    connected: Boolean,
+    maxAdu: Int?,
+    names: List<String>,
+    panelMaxBrightness: Int?,
+    gain: String? = null,
+    onStart: (FlatsOptions) -> Unit,
+) {
     val light = names.filterNot { it.equals(DARK_FILTER, ignoreCase = true) }
     val panel = panelMaxBrightness != null
     val max = maxAdu ?: DEFAULT_MAX_ADU
@@ -197,6 +212,7 @@ fun FlatsSetup(connected: Boolean, maxAdu: Int?, names: List<String>, panelMaxBr
                 Row(Modifier.padding(top = 6.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     COUNTS.forEach { SettingChip(it.toString(), { count = it }, selected = count == it) }
                 }
+                gain?.let { Line(stringResource(Res.string.imaging_gain), stringResource(Res.string.flats_gain_where, it)) }
             }
             if (light.isNotEmpty()) {
                 SectionCard {

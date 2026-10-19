@@ -177,7 +177,15 @@ data class ProfileOptions(
     val safety: SafetyOptions = SafetyOptions(),
     /** Live stacking of the light frames. */
     val stacking: StackingOptions = StackingOptions(),
+    /**
+     * The camera's gain for every frame: Imaging's, the sequence's, the flats' and the darks' and
+     * bias'; for a camera of named gains, the index of one. One the camera does not take leaves its own.
+     */
+    val gain: Int = DEFAULT_GAIN,
 )
+
+/** The gain a profile starts with: the Seestar S50 Pro app's, 200, where its camera's read noise is under one electron. */
+const val DEFAULT_GAIN = 200
 
 /**
  * Live stacking: off at first, so that only who wants it pays its memory and

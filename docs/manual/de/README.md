@@ -876,7 +876,7 @@ Unter Aufnahme machst du Aufnahmen von Hand: Einzelaufnahmen, um Fokus und Bilda
 ### Die Einstellungen der Aufnahme
 
 - **Belichtung:** 10, 20, 30, 60 oder 300 s, soweit die Kamera sie erlaubt, oder **Andere** auf dem Ziffernfeld, innerhalb des Bereichs der Kamera.
-- **Gain:** Auf dem Ziffernfeld, innerhalb des Bereichs der Kamera, oder die benannten Gain-Werte der Kamera. Er beginnt bei 200, wenn die Kamera es zulässt, wie bei der App des Seestar selbst, und Aufnahmen der Sequenz ohne eigenen Gain nehmen diesen.
+- **Gain:** Auf dem Ziffernfeld, innerhalb des Bereichs der Kamera, oder die benannten Gain-Werte der Kamera. Es ist der Gain des Profils, derselbe wie unter *Einstellungen › Kamera*: Er bleibt gespeichert, und jede Aufnahme nimmt ihn, auch die der Sequenz, die Flats, die Darks und die Bias. Er beginnt bei 200, wie bei der App des Seestar selbst. Nach einer Änderung nimm neue Darks und Bias beim neuen Gain auf; die Master-Flats gelten weiter.
 - **Binning:** 1×1, 2×2… nur wenn die Kamera Binning beherrscht.
 - **Filter:** Mit einem Filterrad: der eingesetzte Filter und die anderen zum Wechseln. Aufnahmen zum Lösen, Zentrieren, Ausrichten oder Fokussieren gehen nie durch **Dark**: Das Rad wechselt vorher zu IR. Durch Dark zeigt die Aufnahme weder HFR noch Sterne, die nur Rauschen wären.
 
@@ -1006,7 +1006,7 @@ Kalibrieraufnahmen entfernen, was Sensor und Optik hinzufügen. Yacana nimmt Fla
 Öffne ihn mit der Vorlage **Flats** unter Sequenz. Er bestimmt die Belichtung selbst und nimmt die Flats jedes Filters bei einer Zielhelligkeit auf. Das Licht ist dieses Handy, oder das Flat-Panel, wenn eines verbunden ist.
 
 1. Prüfe die **Ziel-ADU**, standardmäßig 30.000 ± 5 %, mit dem angezeigten Maximum der Kamera. Stelle die **Panel-Helligkeit** ein, wenn du eines nutzt.
-2. Wähle **Aufnahmen pro Filter** (20, 30 oder 50) und die **Filter**.
+2. Wähle **Aufnahmen pro Filter** (20, 30 oder 50) und die **Filter**. Der **Gain** darunter ist der des Profils, den die Flats und ihre Bias nehmen; er ändert sich unter *Einstellungen › Kamera* oder unter Aufnahme.
 3. Tippe auf **Flats starten**. Mit diesem Handy als Licht hast du dann 30 s, um es mit dem Bildschirm nach unten auf das Teleskop zu legen, sodass er das Objektiv bedeckt, mit einem Blatt weißem Papier dazwischen. Ein Piepton startet die Flats, und der Bildschirm wird bei voller Helligkeit weiß, auch im Rotmodus; ein weiterer Piepton beendet sie. Zum Pausieren tippe zweimal auf den weißen Bildschirm; **Fortsetzen** lässt wieder 30 s.
 4. Jeder Filter zeigt *suche die Belichtung…*, dann seine Belichtung und wie viele fertig sind, mit dem Mittelwert der letzten Aufnahme in ADU. **Pause** und **Gedrückt halten zum Stoppen** sind unten. Am Ende nimmt er hinter dem Dark-Filter des Seestar 10 Bias auf: Ihr Niveau kommt in jedes Master-Flat, damit das Live-Stacking auch ohne Darks dadurch teilt.
 
@@ -1381,12 +1381,14 @@ Jede Option sagt, was sie tut. Die mit *je Profil* markierten Einstellungen werd
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Einstellungen: Suchfeld und alle Zeilen"><br><sub><b>Einstellungen.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Einstellungen, Kamera: Gain 200, den jede Aufnahme nimmt"><br><sub><b>Kamera.</b> Ein Gain für jede Aufnahme.</sub></td>
 </tr></table>
 
 | Zeile | Was sie enthält | Kapitel |
 | --- | --- | --- |
 | **Profil und Standort** | Name, Optik, Standort, Grenzen, Horizont, Sterndatenbank, andere Profile, Export und Import | [5](#profile) |
 | **Bilder und Dateien** | Der Ordner und das Dateinamensmuster (je Profil) | [30](#files) |
+| **Kamera** | Der Gain, den jede Aufnahme nimmt (je Profil) | [20](#imaging) |
 | **Plate Solving** | Die Optionen von ASTAP, das Zentrieren und die Sterndatenbanken (je Profil) | [18](#solving), [6](#field) |
 | **Autofokus** | Schrittweite, Punkte, Belichtung, Anpassung, Umkehrspiel, R², Versuche (je Profil) | [19](#autofocus) |
 | **Sicherheit** | Sicherer Stopp, die Wartezeit bei Verbindungsverlust, schwacher Akku (je Profil) | [28](#safety) |

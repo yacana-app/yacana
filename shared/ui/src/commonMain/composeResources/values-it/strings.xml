@@ -1568,4 +1568,16 @@
         <item>S</item>
         <item>D</item>
     </string-array>
+    <string name="camera_settings">Camera</string>
+    <string name="camera_settings_summary">Guadagno %1$s · ogni posa</string>
+    <string name="camera_gain_help">Lo usano tutte le pose: i light e i loop di Ripresa, la sequenza, i flat, i bias e i dark.</string>
+    <string name="camera_gain_range_known">Da %1$d a %2$d, l'intervallo della camera</string>
+    <string name="camera_gain_range_unknown">L'intervallo della camera compare una volta collegata</string>
+    <string name="camera_gain_none">La camera collegata non ha un guadagno da scegliere</string>
+    <string name="camera_gain_why">Più basso lascia più margine prima che le stelle luminose brucino in bianco; più alto abbassa il rumore proprio della camera, per oggetti deboli senza stelle luminose.</string>
+    <string name="camera_gain_after">Dopo averlo cambiato</string>
+    <string name="camera_gain_after_help">Dark e bias calibrano solo i light del loro stesso guadagno: rifalli al nuovo guadagno. I master flat restano validi.</string>
+    <string name="camera_gain_note">Per profilo; arriva a %1$d. Cambiare il guadagno in Ripresa lo cambia anche qui.</string>
+    <string name="imaging_gain_kept">Tenuto per ogni posa: anche la sequenza, i flat, i bias e i dark lo usano.</string>
+    <string name="flats_gain_where">%1$s · Impostazioni › Camera</string>
 </resources>

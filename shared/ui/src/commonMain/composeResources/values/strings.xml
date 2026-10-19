@@ -1555,4 +1555,16 @@
         <item>S</item>
         <item>S</item>
     </string-array>
+    <string name="camera_settings">Camera</string>
+    <string name="camera_settings_summary">Gain %1$s · every frame</string>
+    <string name="camera_gain_help">Every frame takes it: Imaging's lights and loops, the sequence, the flats, the bias and the darks.</string>
+    <string name="camera_gain_range_known">From %1$d to %2$d, the camera's range</string>
+    <string name="camera_gain_range_unknown">The camera's range shows once it is connected</string>
+    <string name="camera_gain_none">The connected camera has no gain to set</string>
+    <string name="camera_gain_why">Lower leaves more room before the bright stars burn white; higher lowers the camera's own noise, for faint objects with no bright stars.</string>
+    <string name="camera_gain_after">After changing it</string>
+    <string name="camera_gain_after_help">Darks and bias only calibrate lights of their own gain: take new ones at the new gain. The master flats still serve.</string>
+    <string name="camera_gain_note">By profile; it comes at %1$d. Changing the gain in Imaging changes it here too.</string>
+    <string name="imaging_gain_kept">Kept for every frame: the sequence, the flats, the bias and the darks take it too.</string>
+    <string name="flats_gain_where">%1$s · Settings › Camera</string>
 </resources>

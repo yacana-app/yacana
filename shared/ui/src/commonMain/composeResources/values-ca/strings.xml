@@ -1569,4 +1569,16 @@
         <item>ds</item>
         <item>dg</item>
     </string-array>
+    <string name="camera_settings">Càmera</string>
+    <string name="camera_settings_summary">Guany %1$s · totes les preses</string>
+    <string name="camera_gain_help">El fan servir totes les preses: les lights i els bucles d'Imatge, la seqüència, els flats, els bias i els darks.</string>
+    <string name="camera_gain_range_known">De %1$d a %2$d, el rang de la càmera</string>
+    <string name="camera_gain_range_unknown">El rang de la càmera apareix en connectar-la</string>
+    <string name="camera_gain_none">La càmera connectada no té cap guany per triar</string>
+    <string name="camera_gain_why">Més baix deixa més marge abans que les estrelles brillants es cremin en blanc; més alt abaixa el soroll propi de la càmera, per a objectes febles sense estrelles brillants.</string>
+    <string name="camera_gain_after">Després de canviar-lo</string>
+    <string name="camera_gain_after_help">Els darks i els bias només calibren lights del seu mateix guany: fes-ne de nous amb el nou. Els flats mestres continuen servint.</string>
+    <string name="camera_gain_note">Per perfil; ve a %1$d. Canviar el guany a Imatge també el canvia aquí.</string>
+    <string name="imaging_gain_kept">Es desa per a totes les preses: la seqüència, els flats, els bias i els darks també el fan servir.</string>
+    <string name="flats_gain_where">%1$s · Configuració › Càmera</string>
 </resources>

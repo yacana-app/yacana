@@ -876,7 +876,7 @@ Imaging takes frames by hand: single frames to check the focus and framing, or a
 ### The frame's settings
 
 - **Exposure:** 10, 20, 30, 60 or 300 s, those the camera allows, or **Other** on the keypad, within the camera's range.
-- **Gain:** On the keypad, within the camera's range, or the camera's named gains. It starts at 200 where the camera takes it, as the Seestar's own app takes its frames, and the sequence's frames without a gain of their own take this one.
+- **Gain:** On the keypad, within the camera's range, or the camera's named gains. It is the profile's gain, the same as in *Settings › Camera*: it is kept, and every frame takes it, the sequence's, the flats', the darks' and the bias' too. It starts at 200, as the Seestar's own app takes its frames. After changing it, take new darks and bias at the new gain; the master flats still serve.
 - **Binning:** 1×1, 2×2… only if the camera bins.
 - **Filter:** With a filter wheel: the filter in place, and the others to change to. Frames to solve, centre, align or focus never go through **Dark**: the wheel moves to IR first. Through Dark, the frame shows no HFR or stars, which would be noise.
 
@@ -1006,7 +1006,7 @@ Calibration frames remove what the sensor and the optics add. Yacana takes flats
 Open it with the **Flats** template in Sequence. It works out the exposure by itself and takes each filter's flats at a target brightness. The light is this phone, or the flat panel if one is connected.
 
 1. Check the **Target ADU**, 30,000 ± 5 % by default, with the camera's maximum shown. Set the **Panel brightness** if you use one.
-2. Choose **Frames per filter** (20, 30 or 50) and the **Filters**.
+2. Choose **Frames per filter** (20, 30 or 50) and the **Filters**. The **Gain** under them is the profile's, which the flats and their bias take; it changes in *Settings › Camera* or in Imaging.
 3. Tap **Start the flats**. With this phone as the light, you then have 30 s to lay it face down on the telescope, its screen over the lens, with a sheet of white paper in between. A beep starts the flats and the screen turns white at full brightness, also in red mode; another beep ends them. To pause them, double-tap the white screen; **Resume** leaves another 30 s.
 4. Each filter shows *finding the exposure…*, then its exposure and how many are done, with the last frame's mean in ADU. **Pause** and **Hold to stop** are at the bottom. At the end, behind the Seestar's Dark filter, it takes 10 bias: their level goes into each master flat, so that the live stack divides by it even without darks.
 
@@ -1381,12 +1381,14 @@ Each option says what it does. The settings marked *per profile* are kept in the
 
 <table><tr>
 <td valign="top" width="240"><img src="images/settings.webp" width="230" alt="Settings: search box and every row"><br><sub><b>Settings.</b></sub></td>
+<td valign="top" width="240"><img src="images/camera_settings.webp" width="230" alt="Settings, Camera: gain 200, which every frame takes"><br><sub><b>Camera.</b> One gain for every frame.</sub></td>
 </tr></table>
 
 | Row | What it holds | Chapter |
 | --- | --- | --- |
 | **Profile and location** | Name, optics, site, limits, horizon, star database, other profiles, export and import | [5](#profile) |
 | **Images and files** | The folder, and the file name pattern (per profile) | [30](#files) |
+| **Camera** | The gain every frame takes (per profile) | [20](#imaging) |
 | **Plate solving** | ASTAP's options, centring, and the star databases (per profile) | [18](#solving), [6](#field) |
 | **Autofocus** | Step, points, exposure, fitting, backlash, R², attempts (per profile) | [19](#autofocus) |
 | **Safety** | Safe stop, the wait when the link is lost, low battery (per profile) | [28](#safety) |

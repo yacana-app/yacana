@@ -264,6 +264,31 @@ class CaptureControllerTest {
     }
 
     @Test
+    fun theGainIsTheProfilesAndOneChosenInImagingIsKeptForEveryFrame() = runTest {
+        val capture = connected(ProfileOptions(sendTimeAndLocation = false, gain = 120))
+        assertEquals(120, capture.state.first { it.settings.gain != null }.settings.gain)
+
+        capture.update(capture.state.value.settings.copy(gain = 80))
+
+        assertEquals(80, equipment.state.value.active!!.options.gain, "kept in the profile, for the sequence and the flats too")
+        assertEquals(80, capture.state.first { it.settings.gain == 80 }.settings.gain)
+    }
+
+    @Test
+    fun aGainChangedInSettingsReachesImaging() = runTest {
+        val capture = connected()
+        capture.state.first { it.settings.gain == 200 }
+        val profile = equipment.state.value.active!!
+
+        equipment.save(profile.copy(options = profile.options.copy(gain = 150)))
+
+        assertEquals(150, capture.state.first { it.settings.gain == 150 }.settings.gain)
+        capture.capture()
+        capture.state.first { it.last != null && it.activity == CaptureActivity.Idle }
+        assertEquals(mapOf("Gain" to "150"), seestar.puts.last { it.first == "camera/0/gain" }.second)
+    }
+
+    @Test
     fun theJournalRecordsOnceHowLongAFrameTookToReachTheScreen() = runTest {
         val capture = connected()
 

@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import app.yacana.domain.equipment.EquipmentController
 import app.yacana.domain.profile.AutofocusOptions
+import app.yacana.domain.profile.DEFAULT_GAIN
 import app.yacana.domain.sky.NINA_CACHES
 import app.yacana.domain.sky.SkyCacheFiles
 import app.yacana.domain.sky.SkyCacheStore
@@ -55,10 +56,13 @@ import app.yacana.ui.resources.af_points
 import app.yacana.ui.resources.af_settings_summary
 import app.yacana.ui.resources.af_step
 import app.yacana.ui.resources.autofocus
+import app.yacana.ui.resources.camera_settings
+import app.yacana.ui.resources.camera_settings_summary
 import app.yacana.ui.resources.display
 import app.yacana.ui.resources.display_summary
 import app.yacana.ui.resources.image_files
 import app.yacana.ui.resources.image_files_summary
+import app.yacana.ui.resources.imaging_gain
 import app.yacana.ui.resources.language
 import app.yacana.ui.resources.language_system
 import app.yacana.ui.resources.log_export
@@ -135,6 +139,13 @@ fun SettingsScreen(
                 stringResource(Res.string.image_files_summary),
                 YacanaIcons.Imaging,
                 Screen.ImageFiles,
+            ),
+            Entry(
+                stringResource(Res.string.camera_settings),
+                stringResource(Res.string.camera_settings_summary, (profile?.options?.gain ?: DEFAULT_GAIN).toString()),
+                YacanaIcons.Camera,
+                Screen.CameraSettings,
+                listOf(stringResource(Res.string.imaging_gain)),
             ),
             Entry(
                 stringResource(Res.string.plate_solving),

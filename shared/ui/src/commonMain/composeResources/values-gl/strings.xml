@@ -1568,4 +1568,16 @@
         <item>S</item>
         <item>D</item>
     </string-array>
+    <string name="camera_settings">Cámara</string>
+    <string name="camera_settings_summary">Ganancia %1$s · todas as tomas</string>
+    <string name="camera_gain_help">Úsana todas as tomas: as lights e os bucles de Imaxe, a secuencia, os flats, os bias e os darks.</string>
+    <string name="camera_gain_range_known">De %1$d a %2$d, o rango da cámara</string>
+    <string name="camera_gain_range_unknown">O rango da cámara aparece ao conectala</string>
+    <string name="camera_gain_none">A cámara conectada non ten ganancia que escoller</string>
+    <string name="camera_gain_why">Máis baixa deixa máis marxe antes de que as estrelas brillantes se queimen en branco; máis alta baixa o ruído propio da cámara, para obxectos débiles sen estrelas brillantes.</string>
+    <string name="camera_gain_after">Despois de cambiala</string>
+    <string name="camera_gain_after_help">Os darks e os bias só calibran lights da súa mesma ganancia: fai outros novos coa nova. Os flats mestres seguen valendo.</string>
+    <string name="camera_gain_note">Por perfil; vén en %1$d. Cambiar a ganancia en Imaxe cámbiaa tamén aquí.</string>
+    <string name="imaging_gain_kept">Gárdase para todas as tomas: a secuencia, os flats, os bias e os darks tamén a usan.</string>
+    <string name="flats_gain_where">%1$s · Axustes › Cámara</string>
 </resources>

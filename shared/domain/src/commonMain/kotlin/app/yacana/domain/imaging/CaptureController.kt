@@ -18,6 +18,7 @@ import app.yacana.domain.equipment.EquipmentPlatform
 import app.yacana.domain.equipment.FilterWheelMediator
 import app.yacana.domain.equipment.LINK_HICCUP
 import app.yacana.domain.equipment.linkTrouble
+import app.yacana.domain.profile.DEFAULT_GAIN
 import app.yacana.domain.profile.Profile
 import app.yacana.domain.profile.ProfileOptions
 import app.yacana.domain.session.Journal
@@ -197,16 +198,24 @@ class CaptureController(
     val history = SessionHistory()
 
     init {
-        // The screen starts from the camera's own gain and offset, so it shows what a capture will use.
+        // The screen starts from the profile's gain and the camera's offset, so it shows what a capture
+        // will use, and follows the gain when Settings changes it.
         scope.launch {
             equipment.state
-                .map { (it.connection as? Connection.Connected)?.equipment?.camera }
+                .map { (it.connection as? Connection.Connected)?.equipment?.camera to it.active?.options?.gain }
                 .distinctUntilChanged()
-                .collect { camera -> if (camera != null) adoptCameraSettings(camera) }
+                .collect { (camera, gain) -> if (camera != null) adoptCameraSettings(camera, gain ?: DEFAULT_GAIN) }
         }
     }
 
-    fun update(settings: CaptureSettings) = mutableState.update { it.copy(settings = settings) }
+    /** Takes [settings] for the next frames; a gain chosen here is the profile's from now on, for every frame. */
+    fun update(settings: CaptureSettings) {
+        mutableState.update { it.copy(settings = settings) }
+        val profile = equipment.state.value.active
+        if (settings.gain != null && profile != null && settings.gain != profile.options.gain) {
+            equipment.save(profile.copy(options = profile.options.copy(gain = settings.gain)))
+        }
+    }
 
     /**
      * Changes the frame type. If the filter wheel has a filter named Dark, as the Seestar's has to
@@ -598,20 +607,24 @@ class CaptureController(
     }
 
     /**
-     * Fills in the gain and offset the user has not chosen: the gain 200 where the camera takes it, as
-     * the Seestar's own app takes its frames, not whatever another app left it at, else the camera's
-     * current ones.
+     * Takes the profile's [gain] where the camera takes it, not whatever another app left it at, else
+     * the camera's current one; and fills in the offset the user has not chosen with the camera's.
      */
-    private suspend fun adoptCameraSettings(camera: CameraMediator) {
-        val control = camera.info.gain
-        val gain =
-            when {
-                control is GainControl.Range && DEFAULT_GAIN in control.min..control.max -> DEFAULT_GAIN
-                control is GainControl.None -> null
-                else -> runCatchingDevice { camera.camera.gain() }
+    private suspend fun adoptCameraSettings(camera: CameraMediator, gain: Int) {
+        val chosen =
+            when (val control = camera.info.gain) {
+                is GainControl.Range -> gain.takeIf { it in control.min..control.max }
+                is GainControl.Named -> gain.takeIf { it in control.names.indices }
+                GainControl.None -> null
             }
+        if (chosen != null) {
+            mutableState.update { it.copy(settings = it.settings.copy(gain = chosen)) }
+        } else if (camera.info.gain !is GainControl.None) {
+            val own = runCatchingDevice { camera.camera.gain() }
+            mutableState.update { it.copy(settings = it.settings.copy(gain = own)) }
+        }
         val offset = if (camera.info.offset is GainControl.None) null else runCatchingDevice { camera.camera.offset() }
-        mutableState.update { it.copy(settings = it.settings.copy(gain = it.settings.gain ?: gain, offset = it.settings.offset ?: offset)) }
+        mutableState.update { it.copy(settings = it.settings.copy(offset = it.settings.offset ?: offset)) }
     }
 
     /** Gain, offset and binning, each only if the camera can take it; the subframe is the whole sensor. */
@@ -790,9 +803,6 @@ val Capture.unlit: Boolean get() = !type.needsLight || filter.equals(DARK_FILTER
 
 /** The Seestar's filter for lights, which a frame to solve or focus takes in place of the Dark one. */
 private const val LIGHT_FILTER = "IR"
-
-/** The gain frames start with when none was chosen and the camera takes it: the Seestar app's, 200. */
-const val DEFAULT_GAIN = 200
 
 @Suppress("TooGenericExceptionCaught") // An optional read: a failure only leaves the value out.
 private suspend fun <T> runCatchingDevice(block: suspend () -> T): T? = try {
